@@ -9,11 +9,11 @@
             <img href=""/>
             <div id="introContainer">
                 <span>
-                    <input type="text" id="firstName" name="firstName"/>
+                    <input type="text" name="firstName"/>
                     <p>First Name</p>
                 </span>
                 <span id="middleNameContainer" class="hidden">
-                    <input type="text" id="middleName" name="middleName"/>
+                    <input type="text" name="middleName"/>
                     <p>Middle Name</p>
                 </span>
                 <span>
@@ -23,5 +23,9 @@
                 <button onclick="display('middleName')">Toggle<br/>Middle Name</button>
             </div>
         </div>
+        <button onclick="save()">Save as JSON</button>
+        <button onclick="upload()">Upload file</button>
+        <input type="file" id="uploadInternal" accept=".json" hidden/>
     </body>
+    <script type="text/javascript" src="js/formUpload.js"></script>
 </html>
