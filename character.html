@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="css/form.css">
+        <script type="text/javascript" src="js/form.js"></script>
     </head>
     <body>
         <div id="mainContainer">
@@ -11,6 +12,15 @@
                     <input type="text" id="firstName" name="firstName"/>
                     <p>First Name</p>
                 </span>
+                <span id="middleNameContainer" class="hidden">
+                    <input type="text" id="middleName" name="middleName"/>
+                    <p>Middle Name</p>
+                </span>
+                <span>
+                    <input type="text" id="lastName" name="lastName"/>
+                    <p>Last Name</p>
+                </span>
+                <button onclick="display('middleName')">Toggle<br/>Middle Name</button>
             </div>
         </div>
     </body>

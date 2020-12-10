@@ -21,8 +21,14 @@ img {
     margin-left: 7em;
 }
 
+span {
+    display: inline-block;
+}
 
-p {
-    position: absolute;
-    margin-top: .5em;
+span > p {
+    margin-top: 0.2em;
+}
+
+.hidden {
+    display: none;
 }
