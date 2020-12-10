@@ -1,0 +1,28 @@
+input {
+    padding: .5em .2em;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+img {
+    width: 80px;
+    height: 100px;
+    position: absolute;
+}
+
+#mainContainer {
+    border: 1px black solid;
+    margin: 3em;
+    padding: 2em;
+}
+
+#introContainer {
+    margin-left: 7em;
+}
+
+
+p {
+    position: absolute;
+    margin-top: .5em;
+}
