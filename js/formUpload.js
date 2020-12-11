@@ -19,7 +19,9 @@ document.getElementById("uploadInternal").addEventListener('change', () => {
             Array.apply(null, e.options).forEach(e => {
                 arr.push(e.value)
             });
-            if (!arr.includes(json[e.name])) {
+            if (json[e.name] === undefined) {
+
+            } else if (!arr.includes(json[e.name])) {
                 console.log(e.name);
                 let selectNames = document.getElementsByName(e.name + "Other");
                 let names = document.getElementsByName(e.name);
@@ -47,12 +49,19 @@ document.getElementById("uploadInternal").addEventListener('change', () => {
     reader.readAsText(file);
 });
 
-document.getElementById("gender").addEventListener("change", () => {
-    if (document.getElementById("gender").value === "other") {
-        document.getElementById("genderContainer").classList.remove("hidden");
+function selectChange(id) {
+    if (document.getElementById(id).value === "other") {
+        document.getElementById(id + "Container").classList.remove("hidden");
     } else {
-        document.getElementById("genderContainer").classList.add("hidden");
+        document.getElementById(id + "Container").classList.add("hidden");
     }
+}
+
+document.getElementById("gender").addEventListener("change", (e) => {
+   selectChange(e.originalTarget.id);
+});
+document.getElementById("orientation").addEventListener("change", (e) => {
+   selectChange(e.originalTarget.id);
 });
 
 function calculateBMI() {

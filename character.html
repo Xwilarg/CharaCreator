@@ -27,6 +27,7 @@
                 <span>
                     Gender:
                     <select id="gender" name="gender">
+                        <option disabled selected value> -- select an option -- </option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                         <option value="other">Other</option>
@@ -54,6 +55,20 @@
             </span> kg
             <br/>
             BMI: <span id="bmi"></span> - <span id="bmiText"></span>
+            <hr/>
+            <h3>Sexuality</h3>
+            Orientation:
+            <select id="orientation" name="orientation">
+                <option disabled selected value> -- select an option -- </option>
+                <option value="heterosexual">Heterosexual</option>
+                <option value="homosexual">Homosexual</option>
+                <option value="bisexual">Bisexual</option>
+                <option value="asexual">Asexual</option>
+                <option value="other">Other</option>
+            </select>
+            <span id="orientationContainer" class="hidden">
+                <input type="text" name="orientationOther" placeholder="Sexual orientation"/>
+            </span>
         </div>
         <button onclick="save()">Save as JSON</button>
         <button onclick="upload()">Upload file</button>
