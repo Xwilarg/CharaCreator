@@ -1,8 +1,17 @@
 input {
-    padding: .5em .2em;
+    padding: .2em .2em;
     box-sizing: border-box;
     border: none;
     border-bottom: 1px solid black;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button { /* Chrome */
+   -webkit-appearance: none;
+   margin: 0;
+}
+input[type="number"] { /* Firefox*/
+   -moz-appearance: textfield;
 }
 
 img {
@@ -23,6 +32,7 @@ img {
 
 span {
     display: inline-block;
+    margin-bottom: .5em;
 }
 
 span > p {
@@ -35,4 +45,8 @@ span > p {
 
 .long {
     width: 30em;
+}
+
+.small {
+    width: 3.5em;
 }
