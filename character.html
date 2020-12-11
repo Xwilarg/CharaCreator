@@ -9,18 +9,32 @@
             <img href=""/>
             <div id="introContainer">
                 <span>
-                    <input type="text" name="firstName"/>
-                    <p>First Name</p>
+                    <input type="text" name="firstName" placeholder="First Name"/>
                 </span>
                 <span id="middleNameContainer" class="hidden">
-                    <input type="text" name="middleName"/>
-                    <p>Middle Name</p>
+                    <input type="text" name="middleName" placeholder="Middle Name"/>
                 </span>
                 <span>
-                    <input type="text" id="lastName" name="lastName"/>
-                    <p>Last Name</p>
+                    <input type="text" name="lastName" placeholder="Last Name"/>
                 </span>
                 <button onclick="display('middleName')">Toggle<br/>Middle Name</button>
+                <button onclick="display('alias')">Toggle<br/>Alias</button>
+                <br/>
+                <span id="aliasContainer" class="hidden">
+                    <input type="text" name="alias" placeholder="Is there any other way your character is called?" class="long"/>
+                </span>
+                <br/>
+                <span>
+                    Gender:
+                    <select id="gender" name="gender">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <span id="genderContainer" class="hidden">
+                        <input type="text" name="genderOther" placeholder="Specify your gender"/>
+                    </span>
+                </span>
             </div>
         </div>
         <button onclick="save()">Save as JSON</button>
