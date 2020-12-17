@@ -50,3 +50,9 @@ span > p {
 .small {
     width: 3.5em;
 }
+
+.hobby {
+    padding: 10px;
+    border: 1px black solid;
+    margin-bottom: 1em;
+}

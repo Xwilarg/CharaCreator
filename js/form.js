@@ -7,6 +7,15 @@ function display(id) {
     }
 }
 
+function remove(current) {
+    console.log(current);
+    current.parentNode.remove();
+}
+
+function addHobby() {
+    document.getElementById("hobbies").innerHTML += '<div class="hobby"><button onclick="remove(this)">Delete</button></div>';
+}
+
 function save() {
     let json = new Object();
     Array.prototype.slice.call(document.getElementsByTagName('input')).forEach(e => {
