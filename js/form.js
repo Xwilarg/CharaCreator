@@ -17,19 +17,7 @@ function addHobby() {
 }
 
 function save() {
-    let json = new Object();
-    Array.prototype.slice.call(document.getElementsByTagName('input')).forEach(e => {
-        if (!e.name.endsWith("Other") && e.name.length > 0) { // We ignore "other" input field since they are associated with a select
-            json[e.name] = e.value;
-        }
-    });
-    Array.prototype.slice.call(document.getElementsByTagName('select')).forEach(e => {
-        if (e.value === "other") { // "Other" answer, we check the input field
-            json[e.name] = document.getElementsByName(e.name + "Other")[0].value;
-        } else {
-            json[e.name] = e.value;
-        }
-    });
+    let json = saveCurrent();
     download("character.json", JSON.stringify(json));
 }
 
