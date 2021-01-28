@@ -1,3 +1,25 @@
+function clearCurrent() {
+    // Put all input to empty value
+    Array.prototype.slice.call(document.getElementsByTagName('input')).forEach(e => {
+        let names = document.getElementsByName(e.name);
+        if (names.length > 0) {
+            names[0].value = "";
+            let container = document.getElementById(e.name + "Container");
+            // We put the "hidden" attribute back
+            if (container !== null) {
+                container.classList.remove("wasHidden");
+                container.classList.add("hidden");
+            }
+        }
+    });
+    // Reset all select to default value
+    Array.prototype.slice.call(document.getElementsByTagName('select')).forEach(e => {
+        document.getElementsByName(e.name)[0].value = "";
+    });
+    calculateBMI();
+    calculateAge();
+}
+
 function saveCurrent() {
     let json = new Object();
     // We go through all inputs to see if we need to save thel
@@ -35,12 +57,11 @@ function loadCurrent(json) {
     Array.prototype.slice.call(document.getElementsByTagName('select')).forEach(e => {
         let arr = [];
         Array.apply(null, e.options).forEach(e => {
-            arr.push(e.value)
+            arr.push(e.value);
         });
         // We check for each elements in the select, in our JSON...
         if (json[e.name] === undefined) {
         } else if (!arr.includes(json[e.name])) { // If the element in our JSON isn't in the select, that means we must put it in the "other" option
-            console.log(e.name);
             let selectNames = document.getElementsByName(e.name + "Other");
             let names = document.getElementsByName(e.name);
             if (names.length > 0) {

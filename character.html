@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8"/>
         <link rel="stylesheet" type="text/css" href="css/form.css">
         <script type="text/javascript" src="js/saveLoad.js"></script>
         <script type="text/javascript" src="js/form.js"></script>
     </head>
     <body>
+        <div id="profileContainer">
+            <button id="chara1">Empty</button>
+            <button onclick="addProfile()">+</button>
+        </div>
         <div id="mainContainer">
             <img href=""/>
             <div id="introContainer">
@@ -76,9 +81,10 @@
                 <div id="hobbies"></div>
                 <button onclick="addHobby()">Add</button>
             </span>
+            <hr/>
+            <button onclick="save()">Save as JSON</button>
+            <button onclick="upload()">Upload file</button>
+            <input type="file" id="uploadInternal" accept=".json" hidden/>
         </div>
-        <button onclick="save()">Save as JSON</button>
-        <button onclick="upload()">Upload file</button>
-        <input type="file" id="uploadInternal" accept=".json" hidden/>
     </body>
 </html>

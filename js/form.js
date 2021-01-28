@@ -1,3 +1,14 @@
+let idCount = 1; // Tab count
+let currId = 0; // Current tab we are in
+
+// TAB MANAGEMENT
+
+function addProfile() {
+    clearCurrent();
+}
+
+// PROFILE MANAGEMENT
+
 function display(id) {
     let container = document.getElementById(id + "Container");
     if (container.classList.contains("hidden")) {
@@ -8,7 +19,6 @@ function display(id) {
 }
 
 function remove(current) {
-    console.log(current);
     current.parentNode.remove();
 }
 
@@ -47,21 +57,27 @@ function calculateBMI() {
     let w = document.getElementById("weight").value;
 
     let bmi = w / (h * h);
-    document.getElementById("bmi").innerHTML = bmi.toFixed(1);
-    if (bmi !== 0) {
-        let bmiText;
-        if (bmi < 18.5) bmiText = "Underweight (< 18.5)";
-        else if (bmi < 25) bmiText = "Normal (18.5 - 24.9)";
-        else if (bmi < 30) bmiText = "Overweight (25.0 - 29.9)";
-        else if (bmi < 35) bmiText = "Obese (30.0 - 34.9)";
-        else bmiText = "Extremly Obese (> 35.0)";
-        document.getElementById("bmiText").innerHTML = bmiText;
+    if (isNaN(bmi)) {
+        document.getElementById("bmi").innerHTML = "";
+        document.getElementById("bmiText").innerHTML = "";
+    } else {
+        document.getElementById("bmi").innerHTML = bmi.toFixed(1);
+        if (bmi !== 0) {
+            let bmiText;
+            if (bmi < 18.5) bmiText = "Underweight (< 18.5)";
+            else if (bmi < 25) bmiText = "Normal (18.5 - 24.9)";
+            else if (bmi < 30) bmiText = "Overweight (25.0 - 29.9)";
+            else if (bmi < 35) bmiText = "Obese (30.0 - 34.9)";
+            else bmiText = "Extremly Obese (> 35.0)";
+            document.getElementById("bmiText").innerHTML = bmiText;
+        }
     }
 }
 
 // Age is just current date - birthday date
 function calculateAge() {
-    document.getElementById("age").innerHTML = new Date(Date.now() - Date.parse(document.getElementById("birthdate").value)).getUTCFullYear() - 1970;
+    var age = new Date(Date.now() - Date.parse(document.getElementById("birthdate").value)).getUTCFullYear() - 1970;
+    document.getElementById("age").innerHTML = isNaN(age) ? "" : age;
 }
 
 // Button to upload a file, call "uploadInternal" (see below)

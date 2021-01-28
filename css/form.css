@@ -20,10 +20,17 @@ img {
     position: absolute;
 }
 
-#mainContainer {
+#mainContainer, #profileContainer {
     border: 1px black solid;
     margin: 3em;
+}
+
+#mainContainer {
     padding: 2em;
+}
+
+#profileContainer {
+    padding: .5em;
 }
 
 #introContainer {
