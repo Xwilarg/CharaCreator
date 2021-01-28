@@ -5,6 +5,19 @@ input {
     border-bottom: 1px solid black;
 }
 
+button {
+    background-color: transparent;
+    color: black;
+    border: 2px solid #555;
+    border-radius: 5px;
+    transition-duration: 0.4s;
+}
+
+button:hover {
+    background-color: #777;
+    color: white;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button { /* Chrome */
    -webkit-appearance: none;
@@ -22,6 +35,10 @@ img {
 
 html {
     background-color: #ddd;
+}
+
+html, input, textarea, button {
+    font-family: 'Verdana', sans-serif;
 }
 
 #profileContainer, #mainContainer {
