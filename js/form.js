@@ -1,20 +1,11 @@
-let idCount = 1; // Tab count
-let currId = 0; // Current tab we are in
-
-// TAB MANAGEMENT
-
-function addProfile() {
-    clearCurrent();
-}
-
-// PROFILE MANAGEMENT
-
 function display(id) {
     let container = document.getElementById(id + "Container");
     if (container.classList.contains("hidden")) {
         container.classList.remove("hidden");
+        container.classList.add("wasHidden");
     } else {
         container.classList.add("hidden");
+        container.classList.remove("wasHidden");
     }
 }
 
@@ -85,7 +76,7 @@ function upload() {
     document.getElementById("uploadInternal").click();
 }
 
-window.onload = function() {
+function formCtor() {
     // Upload a file from the user computer and put all the values on the page
     document.getElementById("uploadInternal").addEventListener('change', () => {
         let file = document.getElementById("uploadInternal").files[0];
