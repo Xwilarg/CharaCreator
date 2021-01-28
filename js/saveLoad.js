@@ -55,7 +55,7 @@ function saveLoadCtor() {
 
 function clearCurrent() {
     // Put all input to empty value
-    Array.prototype.slice.call(document.getElementsByTagName('input')).forEach(e => {
+    Array.prototype.slice.call(document.getElementById("mainData").getElementsByTagName('input')).forEach(e => {
         e.value = "";
         let container = document.getElementById(e.name + "Container");
         // We put the "hidden" attribute back
@@ -65,10 +65,10 @@ function clearCurrent() {
         }
     });
     // Reset all select to default value
-    Array.prototype.slice.call(document.getElementsByTagName('select')).forEach(e => {
+    Array.prototype.slice.call(document.getElementById("mainData").getElementsByTagName('select')).forEach(e => {
         e.value = "";
     });
-    Array.prototype.slice.call(document.getElementsByTagName('textarea')).forEach(e => {
+    Array.prototype.slice.call(document.getElementById("mainData").getElementsByTagName('textarea')).forEach(e => {
         e.value = "";
     });
     calculateBMI();
@@ -78,18 +78,18 @@ function clearCurrent() {
 function saveCurrent() {
     let json = new Object();
     // We go through all inputs to see if we need to save thel
-    Array.prototype.slice.call(document.getElementsByTagName('input')).forEach(e => {
+    Array.prototype.slice.call(document.getElementById("mainData").getElementsByTagName('input')).forEach(e => {
         if (!e.name.endsWith("Other") && e.name.length > 0) { // We ignore "other" input field since they are associated with a select
             json[e.name] = e.value;
         }
     });
-    Array.prototype.slice.call(document.getElementsByTagName('textarea')).forEach(e => {
+    Array.prototype.slice.call(document.getElementById("mainData").getElementsByTagName('textarea')).forEach(e => {
         if (!e.name.endsWith("Other") && e.name.length > 0) {
             json[e.name] = e.value;
         }
     });
     // Then we go through top down menus
-    Array.prototype.slice.call(document.getElementsByTagName('select')).forEach(e => {
+    Array.prototype.slice.call(document.getElementById("mainData").getElementsByTagName('select')).forEach(e => {
         if (e.value === "other") { // "Other" answer, we check the input field
             json[e.name] = document.getElementsByName(e.name + "Other")[0].value;
         } else {
@@ -101,7 +101,7 @@ function saveCurrent() {
 
 function loadCurrent(json) {
     // For each input in the document, we see if we have an element with the same name in our JSON
-    Array.prototype.slice.call(document.getElementsByTagName('input')).forEach(e => {
+    Array.prototype.slice.call(document.getElementById("mainData").getElementsByTagName('input')).forEach(e => {
         if (json[e.name] !== undefined) {
             e.value = json[e.name];
             let container = document.getElementById(e.name + "Container");
@@ -112,13 +112,13 @@ function loadCurrent(json) {
             }
         }
     });
-    Array.prototype.slice.call(document.getElementsByTagName('textarea')).forEach(e => {
+    Array.prototype.slice.call(document.getElementById("mainData").getElementsByTagName('textarea')).forEach(e => {
         if (json[e.name] !== undefined) {
             e.value = json[e.name];
         }
     });
     // Then we go through all select in the document
-    Array.prototype.slice.call(document.getElementsByTagName('select')).forEach(e => {
+    Array.prototype.slice.call(document.getElementById("mainData").getElementsByTagName('select')).forEach(e => {
         let arr = [];
         Array.apply(null, e.options).forEach(e => {
             arr.push(e.value);

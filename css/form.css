@@ -13,8 +13,21 @@ button {
     transition-duration: 0.4s;
 }
 
+.selected {
+    background-color: transparent;
+    color: black;
+    border: 2px solid #555;
+    border-radius: 5px;
+    transition-duration: 0.4s;
+}
+
 button:hover {
     background-color: #777;
+    color: white;
+}
+
+.selected:hover {
+    background-color: rgb(255, 85, 85);
     color: white;
 }
 
@@ -41,20 +54,17 @@ html, input, textarea, button {
     font-family: 'Verdana', sans-serif;
 }
 
-#profileContainer, #mainContainer, #saveContainer {
-    background-color: #fff;
+.objectContainer {
+    background-color: white;
     border-radius: 10px;
     border: 1px black solid;
-    margin: 3em;
+    margin: 2em;
     box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+    padding: 1em;
 }
 
-#mainContainer, #saveContainer {
-    padding: 2em;
-}
-
-#profileContainer {
-    padding: .5em;
+.backgroundContainer {
+    padding: .2em;
 }
 
 #introContainer {
