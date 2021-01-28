@@ -17,20 +17,30 @@ function addHobby() {
     document.getElementById("hobbies").innerHTML += '<div class="hobby"><button onclick="remove(this)">Delete</button></div>';
 }
 
-function save() {
-    let json = saveCurrent();
-    download("character.json", JSON.stringify(json));
+function getName(json) {
+    if (json.firstName == "" && json.lastName == "") {
+        return "Empty";
+    }
+    return json.lastName + " " + json.firstName;
 }
 
-// Download a file to the user's computer
-function download(filename, content) {
-    let file = document.createElement('a');
-    file.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
-    file.setAttribute('download', filename);
-    file.style.display = 'none';
-    document.body.appendChild(file);
-    file.click();
-    document.body.removeChild(file);
+function save() {
+    allProfiles[currId] = saveCurrent();
+    let names = [];
+    let zip = new JSZip();
+    for (const [_, val] of Object.entries(allProfiles)) {
+        let finalName = getName(val);
+        let id = 0;
+        while (names.includes(finalName)) {
+            id++;
+            finalName = getName(val) + " (" + id + ")"
+        }
+        names.push(finalName);
+        zip.file(finalName + ".json", JSON.stringify(val));
+    }
+    zip.generateAsync({type:"blob"}).then(function(content) {
+        saveAs(content, "CharaCreator.zip");
+    });
 }
 
 // Called when we modify the value in a <select> and select "other", we need to display the "Other" input field
@@ -79,14 +89,29 @@ function upload() {
 function formCtor() {
     // Upload a file from the user computer and put all the values on the page
     document.getElementById("uploadInternal").addEventListener('change', () => {
-        let file = document.getElementById("uploadInternal").files[0];
+        let file = document.getElementById("uploadInternal").files[0]; // Get user file
         if (!file) return;
         let reader = new FileReader();
         reader.onload = function(val) {
-            let json = JSON.parse(val.target.result);
-            loadCurrent(json);
+            let zip = new JSZip();
+            zip.loadAsync(val.target.result) // Unzip
+            .then(function() {
+                let isFirst = true;
+                Object.keys(zip.files).forEach(function (filename) {
+                    // Load all files
+                    zip.files[filename].async('string').then(function (fileData) {
+                        if (isFirst) {
+                            isFirst = false;
+                        } else {
+                            addProfile();
+                        }
+                        loadCurrent(JSON.parse(fileData));
+                    });
+                });
+                window.scrollTo(0, 0);
+            });
         };
-        reader.readAsText(file);
+        reader.readAsBinaryString(file);
     });
     // Add check when a select is changed
     Array.prototype.slice.call(document.getElementsByTagName("select")).forEach(elem => {

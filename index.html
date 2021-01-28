@@ -6,6 +6,8 @@
         <script type="text/javascript" src="js/saveLoad.js"></script>
         <script type="text/javascript" src="js/form.js"></script>
         <script type="text/javascript" src="js/characterInit.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.5.0/jszip.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     </head>
     <body>
         <div id="profileContainer">
@@ -87,10 +89,11 @@
             <hr/>
             <h3>Others</h3>
             <textarea name="otherInfos" placeholder="Any other information that didn't fit anywhere? Insert them here"></textarea>
-            <hr/>
-            <button onclick="save()">Save as JSON</button>
-            <button onclick="upload()">Upload file</button>
-            <input type="file" id="uploadInternal" accept=".json" hidden/>
+        </div>
+        <div id="saveContainer">
+            <button onclick="save()">Save and Download</button>
+            <button onclick="upload()">Upload</button>
+            <input type="file" id="uploadInternal" accept=".zip" hidden/>
         </div>
     </body>
 </html>
