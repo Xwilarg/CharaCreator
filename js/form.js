@@ -96,6 +96,7 @@ function formCtor() {
             let zip = new JSZip();
             zip.loadAsync(val.target.result) // Unzip
             .then(function() {
+                resetProfiles();
                 let isFirst = true;
                 Object.keys(zip.files).forEach(function (filename) {
                     // Load all files

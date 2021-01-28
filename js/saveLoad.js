@@ -3,6 +3,13 @@ let currId = 0; // Current tab we are in
 
 let allProfiles = {};
 
+function resetProfiles() {
+    document.getElementById("profileList").innerHTML = '<button id="chara0" onclick="loadTab(0)" class="selected">Empty</button>';
+    idCount = 1;
+    currId = 0;
+    allProfiles = {};
+}
+
 // When the user press the "+", add a new profile
 function addProfile() {
     allProfiles[currId] = saveCurrent(); // Save current profile
