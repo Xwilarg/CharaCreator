@@ -54,48 +54,47 @@ function saveLoadCtor() {
 }
 
 // Clear all inputs
-function clearCurrent() {
-    // Put all input to empty value
-    Array.prototype.slice.call(document.getElementById("mainSection").getElementsByTagName('input')).forEach(e => {
-        e.value = "";
-        let container = document.getElementById(e.name + "Container");
-        // We put the "hidden" attribute back
-        if (container !== null) {
-            container.classList.remove("wasHidden");
-            container.classList.add("hidden");
+function clearCurrent(nodes = document.getElementById("mainSection").childNodes) {
+    nodes.forEach(n => {
+        clearCurrent(n.childNodes);
+        switch (n.nodeName) {
+            case "INPUT": case "TEXTAREA":
+                n.value = "";
+                break;
+
+            case "SELECT":
+                n.value = "";
+                let container = document.getElementById(n.name + "Container");
+                // We put the "hidden" attribute back
+                if (container !== null) {
+                    container.classList.remove("wasHidden");
+                    container.classList.add("hidden");
+                }
+                break;
         }
-    });
-    // Reset all select to default value
-    Array.prototype.slice.call(document.getElementById("mainSection").getElementsByTagName('select')).forEach(e => {
-        e.value = "";
-    });
-    Array.prototype.slice.call(document.getElementById("mainSection").getElementsByTagName('textarea')).forEach(e => {
-        e.value = "";
     });
     calculateBMI();
     calculateAge();
 }
 
 // Convert all fields to a JSON
-function saveCurrent(sectionName = "mainSection") {
-    let json = new Object();
-    // We go through all inputs to see if we need to save them
-    Array.prototype.slice.call(document.getElementById(sectionName).getElementsByTagName('input')).forEach(e => {
-        if (!e.name.endsWith("Other") && e.name.length > 0) { // We ignore "other" input field since they are associated with a select
-            json[e.name] = e.value;
-        }
-    });
-    Array.prototype.slice.call(document.getElementById(sectionName).getElementsByTagName('textarea')).forEach(e => {
-        if (!e.name.endsWith("Other") && e.name.length > 0) {
-            json[e.name] = e.value;
-        }
-    });
-    // Then we go through top down menus
-    Array.prototype.slice.call(document.getElementById(sectionName).getElementsByTagName('select')).forEach(e => {
-        if (e.value === "other") { // "Other" answer, we check the input field
-            json[e.name] = document.getElementsByName(e.name + "Other")[0].value;
-        } else {
-            json[e.name] = e.value;
+function saveCurrent(nodes = document.getElementById("mainSection").childNodes, json = new Object()) {
+    nodes.forEach(n => {
+        saveCurrent(n.childNodes, json);
+        switch (n.nodeName) {
+            case "INPUT": case "TEXTAREA":
+                if (n.name.length > 0 && !n.name.endsWith("Other")) { // We ignore "other" input field since they are associated with a select
+                    json[n.name] = n.value;
+                }
+                break;
+
+            case "SELECT":
+                if (n.value === "other") { // "Other" answer, we check the input field
+                    json[n.name] = document.getElementsByName(n.name + "Other")[0].value;
+                } else {
+                    json[n.name] = n.value;
+                }
+                break;
         }
     });
     return json;
