@@ -13,8 +13,8 @@ function remove(current) {
     current.parentNode.remove();
 }
 
-function addHobby() {
-    document.getElementById("hobbies").innerHTML += '<div class="hobby"><button onclick="remove(this)">Delete</button></div>';
+function addLike() {
+    document.getElementById("likes").innerHTML += '<div class="like"><input type="text" name="likeNamePart" placeholder="Name"/><button onclick="remove(this)">Delete</button></div>';
 }
 
 function getName(json) {

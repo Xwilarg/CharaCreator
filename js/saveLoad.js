@@ -53,6 +53,7 @@ function saveLoadCtor() {
     document.getElementsByName("lastName")[0].addEventListener("change", onNameChange);
 }
 
+// Clear all inputs
 function clearCurrent() {
     // Put all input to empty value
     Array.prototype.slice.call(document.getElementById("mainSection").getElementsByTagName('input')).forEach(e => {
@@ -75,21 +76,22 @@ function clearCurrent() {
     calculateAge();
 }
 
-function saveCurrent() {
+// Convert all fields to a JSON
+function saveCurrent(sectionName = "mainSection") {
     let json = new Object();
-    // We go through all inputs to see if we need to save thel
-    Array.prototype.slice.call(document.getElementById("mainSection").getElementsByTagName('input')).forEach(e => {
+    // We go through all inputs to see if we need to save them
+    Array.prototype.slice.call(document.getElementById(sectionName).getElementsByTagName('input')).forEach(e => {
         if (!e.name.endsWith("Other") && e.name.length > 0) { // We ignore "other" input field since they are associated with a select
             json[e.name] = e.value;
         }
     });
-    Array.prototype.slice.call(document.getElementById("mainSection").getElementsByTagName('textarea')).forEach(e => {
+    Array.prototype.slice.call(document.getElementById(sectionName).getElementsByTagName('textarea')).forEach(e => {
         if (!e.name.endsWith("Other") && e.name.length > 0) {
             json[e.name] = e.value;
         }
     });
     // Then we go through top down menus
-    Array.prototype.slice.call(document.getElementById("mainSection").getElementsByTagName('select')).forEach(e => {
+    Array.prototype.slice.call(document.getElementById(sectionName).getElementsByTagName('select')).forEach(e => {
         if (e.value === "other") { // "Other" answer, we check the input field
             json[e.name] = document.getElementsByName(e.name + "Other")[0].value;
         } else {
@@ -99,6 +101,7 @@ function saveCurrent() {
     return json;
 }
 
+// Load all fields given a JSON
 function loadCurrent(json) {
     // For each input in the document, we see if we have an element with the same name in our JSON
     Array.prototype.slice.call(document.getElementById("mainSection").getElementsByTagName('input')).forEach(e => {
