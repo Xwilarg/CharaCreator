@@ -12,6 +12,7 @@ function displaySection(id) {
             document.getElementById("buttonComparatorSection").classList.add("selected");
             document.getElementById("mainSection").classList.add("hidden");
             document.getElementById("comparatorSection").classList.remove("hidden");
+            loadComparator();
             break;
     }
 }

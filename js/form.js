@@ -106,7 +106,9 @@ function formCtor() {
                         } else {
                             addProfile();
                         }
-                        loadCurrent(JSON.parse(fileData));
+                        let json = JSON.parse(fileData);
+                        allProfiles[currId] = json;
+                        loadCurrent(json);
                     });
                 });
                 window.scrollTo(0, 0);

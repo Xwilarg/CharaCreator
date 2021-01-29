@@ -54,19 +54,6 @@ html, input, textarea, button {
     font-family: 'Verdana', sans-serif;
 }
 
-.objectContainer {
-    background-color: white;
-    border-radius: 10px;
-    border: 1px black solid;
-    margin: 2em;
-    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
-    padding: 1em;
-}
-
-.backgroundContainer {
-    padding: .2em;
-}
-
 #introContainer {
     margin-left: 7em;
 }
@@ -105,4 +92,41 @@ textarea {
 
 .selected {
     border: red solid;
+}
+
+/* CONTAINERS */
+
+.objectContainer {
+    background-color: white;
+    border-radius: 10px;
+    border: 1px black solid;
+    margin: 2em;
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+    padding: 1em;
+}
+
+.backgroundContainer {
+    padding: .2em;
+}
+
+/* TABLE CSS */
+
+table {
+    border-collapse: collapse;
+    width: 50%;
+    margin: 2em;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+    color: black;
+}
+
+tbody tr {
+    background-color: #ddd;
 }
