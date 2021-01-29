@@ -101,47 +101,46 @@ function saveCurrent(nodes = document.getElementById("mainSection").childNodes, 
 }
 
 // Load all fields given a JSON
-function loadCurrent(json) {
-    // For each input in the document, we see if we have an element with the same name in our JSON
-    Array.prototype.slice.call(document.getElementById("mainSection").getElementsByTagName('input')).forEach(e => {
-        if (json[e.name] !== undefined) {
-            e.value = json[e.name];
-            let container = document.getElementById(e.name + "Container");
-            // If the input is originally hidden in the form, we remove the "hidden" attribute
-            if (container !== null && e.value !== "") {
-                container.classList.remove("hidden");
-                container.classList.add("wasHidden"); // We keep track of attributes that used to be hidden
-            }
-        }
-    });
-    Array.prototype.slice.call(document.getElementById("mainSection").getElementsByTagName('textarea')).forEach(e => {
-        if (json[e.name] !== undefined) {
-            e.value = json[e.name];
-        }
-    });
-    // Then we go through all select in the document
-    Array.prototype.slice.call(document.getElementById("mainSection").getElementsByTagName('select')).forEach(e => {
-        let arr = [];
-        Array.apply(null, e.options).forEach(e => {
-            arr.push(e.value);
-        });
-        // We check for each elements in the select, in our JSON...
-        if (json[e.name] === undefined) {
-        } else if (!arr.includes(json[e.name])) { // If the element in our JSON isn't in the select, that means we must put it in the "other" option
-            let selectNames = document.getElementsByName(e.name + "Other");
-            e.value = "other";
-            if (selectNames.length > 0) {
-                selectNames[0].value = json[e.name];
-                // We then fill the "other" input
-                let container = document.getElementById(e.name + "Container");
-                if (container !== null) {
-                    container.classList.remove("hidden");
-                    container.classList.add("wasHidden");
+function loadCurrent(json, nodes = document.getElementById("mainSection").childNodes) {
+    nodes.forEach(n => {
+        loadCurrent(json, n.childNodes);
+        switch (n.nodeName) {
+            case "INPUT": case "TEXTAREA":
+                if (json[n.name] !== undefined) {
+                    n.value = json[n.name];
+                    let container = document.getElementById(n.name + "Container");
+                    // If the input is originally hidden in the form, we remove the "hidden" attribute
+                    if (container !== null && n.value !== "") {
+                        container.classList.remove("hidden");
+                        container.classList.add("wasHidden"); // We keep track of attributes that used to be hidden
+                    }
                 }
-            }
-        }
-        else { // If the element is in the JSON, we just put the right value
-            e.value = json[e.name];
+                break;
+
+            case "SELECT":
+                let arr = [];
+                Array.apply(null, n.options).forEach(e => {
+                    arr.push(e.value);
+                });
+                // We check for each elements in the select, in our JSON...
+                if (json[n.name] === undefined) {
+                } else if (!arr.includes(json[n.name])) { // If the element in our JSON isn't in the select, that means we must put it in the "other" option
+                    let selectNames = document.getElementsByName(n.name + "Other");
+                    n.value = "other";
+                    if (selectNames.length > 0) {
+                        selectNames[0].value = json[n.name];
+                        // We then fill the "other" input
+                        let container = document.getElementById(n.name + "Container");
+                        if (container !== null) {
+                            container.classList.remove("hidden");
+                            container.classList.add("wasHidden");
+                        }
+                    }
+                }
+                else { // If the element is in the JSON, we just put the right value
+                    n.value = json[n.name];
+                }
+                break;
         }
     });
     calculateBMI();
