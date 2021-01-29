@@ -109,24 +109,6 @@ textarea {
     padding: .2em;
 }
 
-/* TABLE CSS */
-
-table {
-    border-collapse: collapse;
-    width: 50%;
+#comparationTable {
     margin: 2em;
-}
-
-th, td {
-    text-align: left;
-    padding: 8px;
-}
-
-tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-    color: black;
-}
-
-tbody tr {
-    background-color: #ddd;
 }

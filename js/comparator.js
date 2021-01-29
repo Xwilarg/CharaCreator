@@ -1,11 +1,19 @@
 function loadComparator() {
-    let str = "";
+    let data = [
+        ['Name', 'Age']
+    ];
     for (const [_, json] of Object.entries(allProfiles)) {
         // TABLE ELEMENTS: Name, Age
-        str += "<tr>";
-        str += "<th>" + json.lastName + " " + json.firstName + "</th>";
-        str += "<th>" + (new Date(Date.now() - Date.parse(json.birthdate)).getUTCFullYear() - 1970) + "</th>"
-        str += "</tr>";
+        let arr = [];
+        arr.push(json.lastName + " " + json.firstName);
+        arr.push(new Date(Date.now() - Date.parse(json.birthdate)).getUTCFullYear() - 1970);
+        data.push(arr);
     }
-    document.getElementById("mainTable").innerHTML = str;
+
+    new Handsontable(document.getElementById("comparationTable"), {
+        data: data,
+        rowHeaders: true,
+        colHeaders: true,
+        licenseKey: "non-commercial-and-evaluation"
+    });
 }
