@@ -10,6 +10,17 @@ function resetProfiles() {
     allProfiles = {};
 }
 
+// Order all tabs in alphabetic order
+function sortProfiles() {
+    Array.prototype.slice.call(document.getElementById("profileList").children, 0).sort(function(a, b) {
+        let aInner = a.innerHTML;
+        let bInner = b.innerHTML;
+        return aInner > bInner ? 1 : -1;
+    }).forEach(function(div) {
+        div.parentElement.appendChild(div);
+    });
+}
+
 // When the user press the "+", add a new profile
 function addProfile() {
     allProfiles[currId] = saveCurrent(); // Save current profile
@@ -109,6 +120,7 @@ function loadCurrent(json) {
     loadCurrentInternal(json, document.getElementById("mainSection").childNodes);
     calculateAll();
     onNameChange();
+    sortProfiles();
 }
 
 function loadCurrentInternal(json, nodes) {
