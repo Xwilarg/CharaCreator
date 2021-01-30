@@ -60,7 +60,11 @@ function clearCurrent() {
 
 function clearCurrentInternal(nodes) {
     nodes.forEach(n => {
-        clearCurrentInternal(n.childNodes);
+        if (n.nodeName === "DIV" && n.id.endsWith("Array")) {
+            n.innerHTML = "";
+        } else {
+            clearCurrentInternal(n.childNodes);
+        }
         switch (n.nodeName) {
             case "INPUT": case "TEXTAREA":
                 n.value = "";
@@ -125,7 +129,20 @@ function loadCurrent(json) {
 
 function loadCurrentInternal(json, nodes) {
     nodes.forEach(n => {
-        loadCurrentInternal(json, n.childNodes);
+        if (n.nodeName === "DIV" && n.id.endsWith("Array")) { // Array nodes must be saved as an array
+            switch (n.id) {
+                case "likesArray":
+                    let arr = json[n.id];
+                    if (arr === undefined || arr.length === 0) break;
+                    arr.forEach(function(e) {
+                        addLike();
+                        loadCurrentInternal(e, n.childNodes);
+                    });
+                    break;
+            }
+        } else {
+            loadCurrentInternal(json, n.childNodes);
+        }
         switch (n.nodeName) {
             case "INPUT": case "TEXTAREA":
                 if (n.type === "color") break;
