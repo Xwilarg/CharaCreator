@@ -11,9 +11,10 @@ function loadComparator() {
         let arr = [];
         arr.push(json.lastName + " " + json.firstName);
         arr.push(new Date(Date.now() - Date.parse(json.birthdate)).getUTCFullYear() - 1970);
-        arr.push((json.height / 100).toFixed(1));
+        arr.push(json.height);
         arr.push(json.weight);
-        arr.push((json.weight / ((json.height / 100) * (json.height / 100))).toFixed(2));
+        let bmi = (json.weight / ((json.height / 100) * (json.height / 100))).toFixed(2);
+        arr.push(isNaN(bmi) ? "" : bmi);
         data.push(arr);
     }
 
