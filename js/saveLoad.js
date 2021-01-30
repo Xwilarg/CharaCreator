@@ -17,6 +17,7 @@ function getNameFromJson(json) {
 function dontGroup() {
     document.getElementById("dontGroup").classList.add("selected");
     document.getElementById("groupFamilyName").classList.remove("selected");
+    document.getElementById("groupRace").classList.remove("selected");
 
     let str = "";
     for (const [id, json] of Object.entries(allProfiles)) {
@@ -31,6 +32,7 @@ function dontGroup() {
 function groupByFamilyName() {
     document.getElementById("dontGroup").classList.remove("selected");
     document.getElementById("groupFamilyName").classList.add("selected");
+    document.getElementById("groupRace").classList.remove("selected");
 
     let str = "";
     let names = {};
@@ -43,6 +45,30 @@ function groupByFamilyName() {
         ids.forEach(function(id) {
             let name = allProfiles[id].firstName;
             str += '<button id="chara' + id + '" onclick="loadTab(' + id + ')" class="' + (id.toString() === currId.toString() ? "selected" : "") + '">' + (name === "" ? "Empty" : name) + '</button>';
+        });
+        str += "</div>";
+    }
+    document.getElementById("profileList").innerHTML = str;
+
+    doesGroup = true;
+    sortGroupedProfiles();
+}
+
+function groupByRace() {
+    document.getElementById("dontGroup").classList.remove("selected");
+    document.getElementById("groupFamilyName").classList.remove("selected");
+    document.getElementById("groupRace").classList.add("selected");
+
+    let str = "";
+    let races = {};
+    for (const [id, json] of Object.entries(allProfiles)) {
+        if (races[json.race] === undefined) races[json.race] = [id];
+        else races[json.race].push(id);
+    }
+    for (const [race, ids] of Object.entries(races)) {
+        str += '<h4>' + race + '</h4><div id="' + race + '">';
+        ids.forEach(function(id) {
+            str += '<button id="chara' + id + '" onclick="loadTab(' + id + ')" class="' + (id.toString() === currId.toString() ? "selected" : "") + '">' + getNameFromJson(allProfiles[id]) + '</button>';
         });
         str += "</div>";
     }
