@@ -35,18 +35,6 @@ function loadTab(id) {
     loadCurrent(allProfiles[currId]);
 }
 
-// Update tab name with profile first/last names
-function onNameChange() {
-    let firstName = document.getElementsByName("firstName")[0].value;
-    let lastName = document.getElementsByName("lastName")[0].value;
-
-    if (firstName === "" && lastName === "") {
-        document.getElementById("chara" + currId).innerHTML = "Empty";
-    } else {
-        document.getElementById("chara" + currId).innerHTML = lastName + " " + firstName;
-    }
-}
-
 function saveLoadCtor() {
     // When the user change the first or last name of a profile
     document.getElementsByName("firstName")[0].addEventListener("change", onNameChange);
@@ -54,9 +42,14 @@ function saveLoadCtor() {
 }
 
 // Clear all inputs
-function clearCurrent(nodes = document.getElementById("mainSection").childNodes) {
+function clearCurrent() {
+    clearCurrentInternal(document.getElementById("mainSection").childNodes);
+    calculateAll();
+}
+
+function clearCurrentInternal(nodes) {
     nodes.forEach(n => {
-        clearCurrent(n.childNodes);
+        clearCurrentInternal(n.childNodes);
         switch (n.nodeName) {
             case "INPUT": case "TEXTAREA":
                 n.value = "";
@@ -73,8 +66,6 @@ function clearCurrent(nodes = document.getElementById("mainSection").childNodes)
                 break;
         }
     });
-    calculateBMI();
-    calculateAge();
 }
 
 // Convert all fields to a JSON
@@ -114,11 +105,18 @@ function saveCurrent(nodes = document.getElementById("mainSection").childNodes, 
 }
 
 // Load all fields given a JSON
-function loadCurrent(json, nodes = document.getElementById("mainSection").childNodes) {
+function loadCurrent(json) {
+    loadCurrentInternal(json, document.getElementById("mainSection").childNodes);
+    calculateAll();
+    onNameChange();
+}
+
+function loadCurrentInternal(json, nodes) {
     nodes.forEach(n => {
-        loadCurrent(json, n.childNodes);
+        loadCurrentInternal(json, n.childNodes);
         switch (n.nodeName) {
             case "INPUT": case "TEXTAREA":
+                if (n.type === "color") break;
                 if (json[n.name] !== undefined) {
                     n.value = json[n.name];
                     let container = document.getElementById(n.name + "Container");
@@ -156,7 +154,4 @@ function loadCurrent(json, nodes = document.getElementById("mainSection").childN
                 break;
         }
     });
-    calculateBMI();
-    calculateAge();
-    onNameChange();
 }

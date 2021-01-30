@@ -4,6 +4,7 @@
         <meta charset="utf-8"/>
         <link rel="stylesheet" type="text/css" href="css/form.css"/>
         <link href="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.css" rel="stylesheet"/>
+        <script type="text/javascript" src="js/autocalculation.js"></script>
         <script type="text/javascript" src="js/saveLoad.js"></script>
         <script type="text/javascript" src="js/form.js"></script>
         <script type="text/javascript" src="js/characterInit.js"></script>
@@ -70,12 +71,19 @@
                 <h3>Body type</h3>
                 <span>
                     <input type="number" id="height" name="height" placeholder="Height" class="small"/>
-                </span> m
+                </span> cm
                 <span>
                     <input type="number" id="weight" name="weight" placeholder="Weight" class="small"/>
                 </span> kg
                 <br/>
                 BMI: <span id="bmi"></span> - <span id="bmiText"></span>
+                <hr/>
+                <h3>Appearance</h3>
+                <span>
+                    Hair Color:
+                    <input type="text" class="colorText" id="hairColor" name="hairColor" placeholder="Hex value"/>
+                    <input type="color" class="colorPreview" id="hairColorPreview"/>
+                </span>
                 <hr/>
                 <h3>Sexuality</h3>
                 Orientation:

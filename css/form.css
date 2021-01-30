@@ -1,10 +1,3 @@
-input {
-    padding: .2em .2em;
-    box-sizing: border-box;
-    border: none;
-    border-bottom: 1px solid black;
-}
-
 button {
     background-color: transparent;
     color: black;
@@ -29,15 +22,6 @@ button:hover {
 .selected:hover {
     background-color: rgb(255, 85, 85);
     color: white;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button { /* Chrome */
-   -webkit-appearance: none;
-   margin: 0;
-}
-input[type="number"] { /* Firefox*/
-   -moz-appearance: textfield;
 }
 
 img {
@@ -109,6 +93,33 @@ textarea {
     padding: .2em;
 }
 
+/* COMPARAISON TABLE */
+
 #comparationTable {
     margin: 2em;
+}
+
+#comparationTable .ht_master:first-child tr:nth-of-type(even) > td {
+    background-color: rgb(240, 240, 240);
+}
+
+/* INPUT */
+
+input {
+    padding: .2em .2em;
+    box-sizing: border-box;
+    border: none;
+}
+
+input:not([type=color]) {
+    border-bottom: 1px solid black;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button { /* Chrome */
+   -webkit-appearance: none;
+   margin: 0;
+}
+input[type="number"] { /* Firefox*/
+   -moz-appearance: textfield;
 }
