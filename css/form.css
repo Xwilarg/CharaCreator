@@ -78,6 +78,14 @@ textarea {
     border: red solid;
 }
 
+#profileDisplay {
+    font-size: .9em;
+}
+
+h4 {
+    line-height: 0;
+}
+
 /* CONTAINERS */
 
 .objectContainer {

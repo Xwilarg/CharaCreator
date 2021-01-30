@@ -22,10 +22,16 @@
         <!-- #region main -->
         <div id="mainSection" class="objectContainer backgroundContainer">
             <div class="objectContainer">
-                <span id="profileList">
+                <div id="profileList">
                     <button id="chara0" onclick="loadTab(0)" class="selected">Empty</button>
-                </span>
+                </div>
                 <button onclick="addProfile()">+</button>
+                <hr/>
+                <p id="profileDisplay">
+                    Display Setting:<br/>
+                    <button id="dontGroup" class="selected" onclick="dontGroup()">Don't Group</button>
+                    <button id="groupFamilyName" onclick="groupByFamilyName()">Group by Family Name</button>
+                </p>
             </div>
             <div class="objectContainer">
                 <img href=""/>

@@ -3,6 +3,57 @@ let currId = 0; // Current tab we are in
 
 let allProfiles = {};
 
+// GROUP FUNCTIONS
+
+let doesGroup = false;
+
+function getNameFromJson(json) {
+    let firstName = json.firstName;
+    let lastName = json.lastName;
+
+    return firstName === "" && lastName === "" ? "Empty" : lastName + " " + firstName;
+}
+
+function dontGroup() {
+    document.getElementById("dontGroup").classList.add("selected");
+    document.getElementById("groupFamilyName").classList.remove("selected");
+
+    let str = "";
+    for (const [id, json] of Object.entries(allProfiles)) {
+        str += '<button id="chara' + id + '" onclick="loadTab(' + id + ')" class="' + (id.toString() === currId.toString() ? "selected" : "") + '">' + getNameFromJson(json) + '</button>';
+    }
+    document.getElementById("profileList").innerHTML = str;
+
+    doesGroup = false;
+    sortProfiles();
+}
+
+function groupByFamilyName() {
+    document.getElementById("dontGroup").classList.remove("selected");
+    document.getElementById("groupFamilyName").classList.add("selected");
+
+    let str = "";
+    let names = {};
+    for (const [id, json] of Object.entries(allProfiles)) {
+        if (names[json.lastName] === undefined) names[json.lastName] = [id];
+        else names[json.lastName].push(id);
+    }
+    for (const [lastName, ids] of Object.entries(names)) {
+        str += '<h4>' + lastName + '</h4><div id="' + lastName + '">';
+        ids.forEach(function(id) {
+            let name = allProfiles[id].firstName;
+            str += '<button id="chara' + id + '" onclick="loadTab(' + id + ')" class="' + (id.toString() === currId.toString() ? "selected" : "") + '">' + (name === "" ? "Empty" : name) + '</button>';
+        });
+        str += "</div>";
+    }
+    document.getElementById("profileList").innerHTML = str;
+
+    doesGroup = true;
+    sortGroupedProfiles();
+}
+
+// PROFILES FUNCTIONS
+
 function resetProfiles() {
     document.getElementById("profileList").innerHTML = '<button id="chara0" onclick="loadTab(0)" class="selected">Empty</button>';
     idCount = 1;
@@ -11,14 +62,22 @@ function resetProfiles() {
 }
 
 // Order all tabs in alphabetic order
-function sortProfiles() {
-    Array.prototype.slice.call(document.getElementById("profileList").children, 0).sort(function(a, b) {
+function sortProfiles(id = "profileList") {
+    Array.prototype.slice.call(document.getElementById(id).children, 0).sort(function(a, b) {
         let aInner = a.innerHTML;
         let bInner = b.innerHTML;
         return aInner > bInner ? 1 : -1;
     }).forEach(function(div) {
         div.parentElement.appendChild(div);
     });
+}
+
+function sortGroupedProfiles() {
+    Array.prototype.slice.call(document.getElementById("profileList").children, 0).forEach(function(e) {
+        if (e.tagName === "DIV") {
+            sortProfiles(e.id);
+        }
+    })
 }
 
 // When the user press the "+", add a new profile
@@ -127,7 +186,7 @@ function loadCurrent(json) {
     loadCurrentInternal(json, document.getElementById("mainSection").childNodes);
     calculateAll();
     onNameChange();
-    sortProfiles();
+    doesGroup === false ? sortProfiles() : sortGroupedProfiles();
 }
 
 function loadCurrentInternal(json, nodes) {
