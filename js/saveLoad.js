@@ -35,6 +35,13 @@ function addProfile() {
     clearCurrent();
 }
 
+onkeydown = function(e){
+    if (e.ctrlKey && (e.key == 's' || e.key == 'S')) {
+        e.preventDefault();
+        save();
+    }
+}
+
 function loadTab(id) {
     allProfiles[currId] = saveCurrent(); // Save current profile
     clearCurrent();
