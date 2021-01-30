@@ -80,22 +80,35 @@ function clearCurrent(nodes = document.getElementById("mainSection").childNodes)
 // Convert all fields to a JSON
 function saveCurrent(nodes = document.getElementById("mainSection").childNodes, json = new Object()) {
     nodes.forEach(n => {
-        saveCurrent(n.childNodes, json);
+        let arr = Object.prototype.toString.call(json) === '[object Array]' ? new Object() : undefined;
+        if (n.nodeName === "DIV" && n.id.endsWith("Array")) { // Array nodes must be saved as an array
+            json[n.id] = [];
+            saveCurrent(n.childNodes, json[n.id]);
+        } else {
+            saveCurrent(n.childNodes, json);
+        }
         switch (n.nodeName) {
             case "INPUT": case "TEXTAREA":
                 if (n.name.length > 0 && !n.name.endsWith("Other")) { // We ignore "other" input field since they are associated with a select
-                    json[n.name] = n.value;
+                    if (arr === undefined) json[n.name] = n.value;
+                    else arr[n.name] = n.value;
                 }
                 break;
 
             case "SELECT":
                 if (n.value === "other") { // "Other" answer, we check the input field
-                    json[n.name] = document.getElementsByName(n.name + "Other")[0].value;
+                    if (arr === undefined) json[n.name] = document.getElementsByName(n.name + "Other")[0].value;
+                    else arr[n.name] = document.getElementsByName(n.name + "Other")[0].value;
                 } else {
-                    json[n.name] = n.value;
+                    if (arr === undefined) json[n.name] = n.value;
+                    else arr[n.name] = n.value;
                 }
                 break;
         }
+        if (arr !== undefined && Object.values(arr).length > 0) {
+            json.push(arr);
+        }
+        arr = undefined;
     });
     return json;
 }

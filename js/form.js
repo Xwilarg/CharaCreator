@@ -14,7 +14,7 @@ function remove(current) {
 }
 
 function addLike() {
-    document.getElementById("likes").innerHTML += '<div class="like"><input type="text" name="likeNamePart" placeholder="Name"/><button onclick="remove(this)">Delete</button></div>';
+    document.getElementById("likesArray").innerHTML += '<div class="like"><input type="text" name="likeNamePart" placeholder="Name"/><button onclick="remove(this)">Delete</button></div>';
 }
 
 function getName(json) {
