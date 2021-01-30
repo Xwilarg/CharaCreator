@@ -14,7 +14,12 @@ function remove(current) {
 }
 
 function addLike() {
-    document.getElementById("likesArray").innerHTML += '<div class="like"><input type="text" name="likeNamePart" placeholder="Name"/><button onclick="remove(this)">Delete</button></div>';
+    let container = document.getElementById("likesArray");
+    let div = document.createElement('div');
+    div.classList.add("like");
+    div.innerHTML = '<input value="" type="text" name="likeNamePart" placeholder="Name"/><button onclick="remove(this)">Delete</button>';
+    // innerHtml += get rid of input value so we need to use appendChild instead
+    container.appendChild(div);
 }
 
 function getName(json) {
