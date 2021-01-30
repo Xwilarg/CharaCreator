@@ -49,9 +49,17 @@ function onNameChange() {
     let firstName = document.getElementsByName("firstName")[0].value;
     let lastName = document.getElementsByName("lastName")[0].value;
 
-    if (firstName === "" && lastName === "") {
-        document.getElementById("chara" + currId).innerHTML = "Empty";
+    if (doesGroup) {
+        if (firstName === "") {
+            document.getElementById("chara" + currId).innerHTML = "Empty";
+        } else {
+            document.getElementById("chara" + currId).innerHTML = firstName;
+        }
     } else {
-        document.getElementById("chara" + currId).innerHTML = lastName + " " + firstName;
+        if (firstName === "" && lastName === "") {
+            document.getElementById("chara" + currId).innerHTML = "Empty";
+        } else {
+            document.getElementById("chara" + currId).innerHTML = lastName + " " + firstName;
+        }
     }
 }
