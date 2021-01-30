@@ -66,11 +66,7 @@ function clearCurrentInternal(nodes) {
             clearCurrentInternal(n.childNodes);
         }
         switch (n.nodeName) {
-            case "INPUT": case "TEXTAREA":
-                n.value = "";
-                break;
-
-            case "SELECT":
+            case "INPUT": case "TEXTAREA": case "SELECT":
                 n.value = "";
                 let container = document.getElementById(n.name + "Container");
                 // We put the "hidden" attribute back
