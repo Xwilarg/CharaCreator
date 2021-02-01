@@ -1,9 +1,17 @@
-button {
+button, #github {
     background-color: transparent;
     color: black;
     border: 2px solid #555;
     border-radius: 5px;
     transition-duration: 0.4s;
+}
+
+#github {
+    float: right;
+    font-size: .8em;
+    padding: .2em .3em;
+    color: black;
+    text-decoration: none;
 }
 
 .selected {
@@ -14,7 +22,7 @@ button {
     transition-duration: 0.4s;
 }
 
-button:hover {
+button:hover, #github:hover {
     background-color: #777;
     color: white;
 }
