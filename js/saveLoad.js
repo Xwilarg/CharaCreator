@@ -5,7 +5,7 @@ let allProfiles = {};
 
 // GROUP FUNCTIONS
 
-let doesGroup = false;
+let doesGroup = 0;
 
 function getNameFromJson(json) {
     let firstName = json.firstName;
@@ -18,6 +18,7 @@ function dontGroup() {
     document.getElementById("dontGroup").classList.add("selected");
     document.getElementById("groupFamilyName").classList.remove("selected");
     document.getElementById("groupRace").classList.remove("selected");
+    document.getElementById("groupOrientation").classList.remove("selected");
 
     let str = "";
     for (const [id, json] of Object.entries(allProfiles)) {
@@ -25,7 +26,7 @@ function dontGroup() {
     }
     document.getElementById("profileList").innerHTML = str;
 
-    doesGroup = false;
+    doesGroup = 0;
     sortProfiles();
 }
 
@@ -33,6 +34,7 @@ function groupByFamilyName() {
     document.getElementById("dontGroup").classList.remove("selected");
     document.getElementById("groupFamilyName").classList.add("selected");
     document.getElementById("groupRace").classList.remove("selected");
+    document.getElementById("groupOrientation").classList.remove("selected");
 
     let str = "";
     let names = {};
@@ -50,7 +52,7 @@ function groupByFamilyName() {
     }
     document.getElementById("profileList").innerHTML = str;
 
-    doesGroup = true;
+    doesGroup = 1;
     sortGroupedProfiles();
 }
 
@@ -58,6 +60,7 @@ function groupByRace() {
     document.getElementById("dontGroup").classList.remove("selected");
     document.getElementById("groupFamilyName").classList.remove("selected");
     document.getElementById("groupRace").classList.add("selected");
+    document.getElementById("groupOrientation").classList.remove("selected");
 
     let str = "";
     let races = {};
@@ -74,7 +77,32 @@ function groupByRace() {
     }
     document.getElementById("profileList").innerHTML = str;
 
-    doesGroup = true;
+    doesGroup = 2;
+    sortGroupedProfiles();
+}
+
+function groupByOrientation() {
+    document.getElementById("dontGroup").classList.remove("selected");
+    document.getElementById("groupFamilyName").classList.remove("selected");
+    document.getElementById("groupRace").classList.remove("selected");
+    document.getElementById("groupOrientation").classList.add("selected");
+
+    let str = "";
+    let orientations = {};
+    for (const [id, json] of Object.entries(allProfiles)) {
+        if (orientations[json.orientation] === undefined) orientations[json.orientation] = [id];
+        else orientations[json.orientation].push(id);
+    }
+    for (const [orientation, ids] of Object.entries(orientations)) {
+        str += '<h4>' + (orientation.charAt(0).toUpperCase() + orientation.substr(1)) + '</h4><div id="' + orientation + '">';
+        ids.forEach(function(id) {
+            str += '<button id="chara' + id + '" onclick="loadTab(' + id + ')" class="' + (id.toString() === currId.toString() ? "selected" : "") + '">' + getNameFromJson(allProfiles[id]) + '</button>';
+        });
+        str += "</div>";
+    }
+    document.getElementById("profileList").innerHTML = str;
+
+    doesGroup = 3;
     sortGroupedProfiles();
 }
 
@@ -212,7 +240,7 @@ function loadCurrent(json) {
     loadCurrentInternal(json, document.getElementById("mainSection").childNodes);
     calculateAll();
     onNameChange();
-    doesGroup === false ? sortProfiles() : sortGroupedProfiles();
+    doesGroup > 0 ? sortProfiles() : sortGroupedProfiles();
 }
 
 function loadCurrentInternal(json, nodes) {

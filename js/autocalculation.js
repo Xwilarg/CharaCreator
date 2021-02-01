@@ -49,7 +49,7 @@ function onNameChange() {
     let firstName = document.getElementsByName("firstName")[0].value;
     let lastName = document.getElementsByName("lastName")[0].value;
 
-    if (doesGroup) {
+    if (doesGroup === 1) {
         if (firstName === "") {
             document.getElementById("chara" + currId).innerHTML = "Empty";
         } else {
