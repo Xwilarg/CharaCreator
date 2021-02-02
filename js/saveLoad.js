@@ -254,8 +254,8 @@ function clearCurrentInternal(nodes) {
 
 // Convert all fields to a JSON
 function saveCurrent(nodes = document.getElementById("mainSection").childNodes, json = new Object()) {
+    let arr = Object.prototype.toString.call(json) === '[object Array]' ? new Object() : undefined;
     nodes.forEach(n => {
-        let arr = Object.prototype.toString.call(json) === '[object Array]' ? new Object() : undefined;
         if (n.nodeName === "DIV" && n.id.endsWith("Array")) { // Array nodes must be saved as an array
             json[n.id] = [];
             saveCurrent(n.childNodes, json[n.id]);
@@ -280,11 +280,11 @@ function saveCurrent(nodes = document.getElementById("mainSection").childNodes, 
                 }
                 break;
         }
-        if (arr !== undefined && Object.values(arr).length > 0) {
-            json.push(arr);
-        }
-        arr = undefined;
     });
+    if (arr !== undefined && Object.values(arr).length > 0) {
+        json.push(arr);
+    }
+    arr = undefined;
     return json;
 }
 
