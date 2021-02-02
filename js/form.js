@@ -17,7 +17,7 @@ function addLike() {
     let container = document.getElementById("likesArray");
     let div = document.createElement('div');
     div.classList.add("like");
-    div.innerHTML = '<input value="" type="text" name="likeNamePart" placeholder="Name"/><button onclick="remove(this)">Delete</button>';
+    div.innerHTML = '<input value="" type="text" name="likeNamePart" placeholder="Name"/><br/><textarea value="" type="text" name="likeNameOtherPart" placeholder="How was this hobby discovered?\nWhat does your character like in it?"></textarea><br/><button onclick="remove(this)">Delete</button>';
     // innerHtml += get rid of input value so we need to use appendChild instead
     container.appendChild(div);
 }

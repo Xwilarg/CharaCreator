@@ -77,9 +77,15 @@ span > p {
     margin-bottom: 1em;
 }
 
+#likesArray {
+    display: flex;
+    flex-flow: wrap;
+}
+
 textarea {
     width: 100%;
     height: 10em;
+    font-size: .8em;
 }
 
 .selected {
