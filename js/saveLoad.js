@@ -290,14 +290,26 @@ function saveCurrent(nodes = document.getElementById("mainSection").childNodes, 
 
 // Load all fields given a JSON
 function loadCurrent(json) {
-    loadCurrentInternal(json, document.getElementById("mainSection").childNodes);
+    loadCurrentInternal(json);
     calculateAll();
     onNameChange();
     doesGroup > 0 ? sortProfiles() : sortGroupedProfiles();
 }
 
-function loadCurrentInternal(json, nodes) {
-    nodes.forEach(n => {
+function loadCurrentInternal(json) {
+    for (key in json) {
+        let nodes = document.getElementsByName(key); // TODO: Don't do that on whole document
+        let n;
+        if (nodes.length === 0) {
+            n = document.getElementById(key);
+            if (n === undefined) {
+                console.warn("Unknown node " + key);
+                continue;
+            }
+        }
+        else {
+            n = nodes[nodes.length - 1];
+        }
         if (n.nodeName === "DIV" && n.id.endsWith("Array")) { // Array nodes must be saved as an array
             switch (n.id) {
                 case "likesArray":
@@ -305,12 +317,10 @@ function loadCurrentInternal(json, nodes) {
                     if (arr === undefined || arr.length === 0) break;
                     arr.forEach(function(e) {
                         addLike();
-                        loadCurrentInternal(e, n.childNodes);
+                        loadCurrentInternal(e);
                     });
                     break;
             }
-        } else {
-            loadCurrentInternal(json, n.childNodes);
         }
         switch (n.nodeName) {
             case "INPUT": case "TEXTAREA":
@@ -351,5 +361,5 @@ function loadCurrentInternal(json, nodes) {
                 }
                 break;
         }
-    });
+    }
 }
