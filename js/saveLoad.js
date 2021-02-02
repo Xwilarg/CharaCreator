@@ -19,6 +19,7 @@ function dontGroup() {
     document.getElementById("groupFamilyName").classList.remove("selected");
     document.getElementById("groupRace").classList.remove("selected");
     document.getElementById("groupOrientation").classList.remove("selected");
+    document.getElementById("groupCompletion").classList.remove("selected");
 
     let str = "";
     for (const [id, json] of Object.entries(allProfiles)) {
@@ -35,6 +36,7 @@ function groupByFamilyName() {
     document.getElementById("groupFamilyName").classList.add("selected");
     document.getElementById("groupRace").classList.remove("selected");
     document.getElementById("groupOrientation").classList.remove("selected");
+    document.getElementById("groupCompletion").classList.remove("selected");
 
     let str = "";
     let names = {};
@@ -43,17 +45,18 @@ function groupByFamilyName() {
         else names[json.lastName].push(id);
     }
     for (const [lastName, ids] of Object.entries(names)) {
-        str += '<h4>' + lastName + '</h4><div id="' + lastName + '">';
+        str += '<nothing id="categoryGroupName' + lastName + '"><h4>' + lastName + '</h4><div id="GroupName' + lastName + '">';
         ids.forEach(function(id) {
             let name = allProfiles[id].firstName;
             str += '<button id="chara' + id + '" onclick="loadTab(' + id + ')" class="' + (id.toString() === currId.toString() ? "selected" : "") + '">' + (name === "" ? "Empty" : name) + '</button>';
         });
-        str += "</div>";
+        str += "</div></nothing>";
     }
     document.getElementById("profileList").innerHTML = str;
 
     doesGroup = 1;
     sortGroupedProfiles();
+    sortProfiles();
 }
 
 function groupByRace() {
@@ -61,6 +64,7 @@ function groupByRace() {
     document.getElementById("groupFamilyName").classList.remove("selected");
     document.getElementById("groupRace").classList.add("selected");
     document.getElementById("groupOrientation").classList.remove("selected");
+    document.getElementById("groupCompletion").classList.remove("selected");
 
     let str = "";
     let races = {};
@@ -69,16 +73,17 @@ function groupByRace() {
         else races[json.race].push(id);
     }
     for (const [race, ids] of Object.entries(races)) {
-        str += '<h4>' + race + '</h4><div id="' + race + '">';
+        str += '<nothing id="categoryGroupRace' + race + '"><h4>' + race + '</h4><div id="GroupRace' + race + '">';
         ids.forEach(function(id) {
             str += '<button id="chara' + id + '" onclick="loadTab(' + id + ')" class="' + (id.toString() === currId.toString() ? "selected" : "") + '">' + getNameFromJson(allProfiles[id]) + '</button>';
         });
-        str += "</div>";
+        str += "</div></nothing>";
     }
     document.getElementById("profileList").innerHTML = str;
 
     doesGroup = 2;
     sortGroupedProfiles();
+    sortProfiles();
 }
 
 function groupByOrientation() {
@@ -86,6 +91,7 @@ function groupByOrientation() {
     document.getElementById("groupFamilyName").classList.remove("selected");
     document.getElementById("groupRace").classList.remove("selected");
     document.getElementById("groupOrientation").classList.add("selected");
+    document.getElementById("groupCompletion").classList.remove("selected");
 
     let str = "";
     let orientations = {};
@@ -94,17 +100,64 @@ function groupByOrientation() {
         else orientations[json.orientation].push(id);
     }
     for (const [orientation, ids] of Object.entries(orientations)) {
-        str += '<h4>' + (orientation.charAt(0).toUpperCase() + orientation.substr(1)) + '</h4><div id="' + orientation + '">';
+        str += '<nothing id="categoryGroupOrientation' + orientation + '"><h4>' + (orientation.charAt(0).toUpperCase() + orientation.substr(1)) + '</h4><div id="GroupOrientation' + orientation + '">';
         ids.forEach(function(id) {
             str += '<button id="chara' + id + '" onclick="loadTab(' + id + ')" class="' + (id.toString() === currId.toString() ? "selected" : "") + '">' + getNameFromJson(allProfiles[id]) + '</button>';
         });
-        str += "</div>";
+        str += "</div></nothing>";
     }
     document.getElementById("profileList").innerHTML = str;
 
     doesGroup = 3;
     sortGroupedProfiles();
+    sortProfiles();
 }
+
+function groupByCompletion() {
+    document.getElementById("dontGroup").classList.remove("selected");
+    document.getElementById("groupFamilyName").classList.remove("selected");
+    document.getElementById("groupRace").classList.remove("selected");
+    document.getElementById("groupOrientation").classList.remove("selected");
+    document.getElementById("groupCompletion").classList.add("selected");
+
+    let str = "";
+    let completions = {};
+    for (const [id, json] of Object.entries(allProfiles)) {
+        let count = 0;
+        let max = 0;
+
+        for (key in json) {
+            let docElem = document.getElementById(key);
+            if (docElem === null || json[key] === "" || docElem.classList.contains("hidden"))
+                continue;
+            max++;
+            if (Object.prototype.toString.call(json[key]) === '[object Array]') {
+                if (json[key].length > 0) {
+                    count++;
+                }
+            } else if (json[key] !== "") {
+                count++;
+            }
+        }
+
+        let percent = (count * 100 / max).toFixed(2);
+        if (completions[percent] === undefined) completions[percent] = [id];
+        else completions[percent].push(id);
+    }
+    for (const [completion, ids] of Object.entries(completions)) {
+        str += '<nothing id="categoryGroupCompletion' + completion + '"><h4>' + (completion.charAt(0).toUpperCase() + completion.substr(1)) + '</h4><div id="GroupCompletion' + completion + '">';
+        ids.forEach(function(id) {
+            str += '<button id="chara' + id + '" onclick="loadTab(' + id + ')" class="' + (id.toString() === currId.toString() ? "selected" : "") + '">' + getNameFromJson(allProfiles[id]) + '</button>';
+        });
+        str += "</div></nothing>";
+    }
+    document.getElementById("profileList").innerHTML = str;
+
+    doesGroup = 4;
+    sortGroupedProfiles();
+    sortProfiles();
+}
+// TODO: Merge groupBy functions
 
 // PROFILES FUNCTIONS
 
@@ -128,8 +181,8 @@ function sortProfiles(id = "profileList") {
 
 function sortGroupedProfiles() {
     Array.prototype.slice.call(document.getElementById("profileList").children, 0).forEach(function(e) {
-        if (e.tagName === "DIV") {
-            sortProfiles(e.id);
+        if (e.tagName === "NOTHING") {
+            sortProfiles(e.id.substr(8));
         }
     })
 }
