@@ -7,7 +7,7 @@ function calculateAll() {
 }
 
 function calculateColorFromText(e) {
-    if (e === undefined) e = this;
+    if (e.value === undefined) e = e.target;
     document.getElementById(e.id + "Preview").value = e.value.startsWith("#") ? e.value : "#" + e.value;
 }
 
