@@ -15,6 +15,7 @@ function loadComparator() {
         arr.push(json.weight);
         let bmi = (json.weight / ((json.height / 100) * (json.height / 100))).toFixed(2);
         arr.push(isNaN(bmi) ? "" : bmi);
+        arr.push(json.shortDescription);
         data.push(arr);
     }
 
@@ -26,7 +27,7 @@ function loadComparator() {
         licenseKey: "non-commercial-and-evaluation",
         data: data,
         rowHeaders: true, // Row headers (1, 2, 3...)
-        colHeaders: ["Name", "Age", "Height", "Weight", "BMI"], // Column headers
+        colHeaders: ["Name", "Age", "Height", "Weight", "BMI", "Description"], // Column headers
         editor: false, // Can't edit cells
         dropdownMenu: true, // Drop down menu to display filters
         filters: true, // Enable filters

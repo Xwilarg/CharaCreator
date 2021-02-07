@@ -82,6 +82,10 @@ span > p {
     flex-flow: wrap;
 }
 
+.shortTextArea {
+    height: 4em;
+}
+
 textarea {
     width: 100%;
     height: 10em;
