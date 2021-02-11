@@ -20,7 +20,7 @@ function loadComparator() {
     }
 
     if (data.length === 0) {
-        data.push(["", "", "", "", ""]);
+        data.push(["", "", "", "", "", "", ""]);
     }
 
     comparatorTable = new Handsontable(document.getElementById("comparationTable"), {

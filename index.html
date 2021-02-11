@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8"/>
         <link rel="stylesheet" type="text/css" href="css/form.css"/>
+        <link rel="stylesheet" type="text/css" href="css/relationship.css"/>
         <link href="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.css" rel="stylesheet"/>
         <script type="text/javascript" src="js/autocalculation.js"></script>
         <script type="text/javascript" src="js/saveLoad.js"></script>
@@ -13,11 +14,14 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.5.0/jszip.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+        <script type="text/javascript" src="js/relationship.js"></script>
     </head>
     <body>
         <div class="objectContainer">
             <button id="buttonMainSection" onclick="displaySection('main')" class="selected">Profiles</button>
             <button id="buttonComparatorSection" onclick="displaySection('comparator')">Comparator</button>
+            <button id="buttonRelationshipSection" onclick="displaySection('relationship')">Relationship</button>
             <a id="github" target="_blank" href="https://github.com/Xwilarg/CharaCreator/">GitHub</a>
         </div>
         <!-- #region main -->
@@ -133,6 +137,20 @@
         <!-- #region comparator -->
         <div id="comparatorSection" class="objectContainer backgroundContainer hidden">
             <div id="comparationTable"></div>
+        </div>
+        <!-- #endregion -->
+        <!-- #region relationship -->
+        <div id="relationshipSection" class="objectContainer backgroundContainer hidden">
+            <div id="nodes">
+                <div id="network"></div>
+                <div id="loadingBar">
+                    <div id="outerBorder">
+                        <div id="border">
+                            <div id="bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- #endregion -->
     </body>
