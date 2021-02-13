@@ -23,10 +23,104 @@ function addLike() {
     <select value="" type="text" name="likeNamePart" id="likeNamePart` + likeId + `">
         <option disabled selected value> -- select an option -- </option>
         <option value="other">Other</option>
+        <optgroup label="Animal">
+            <option value="cat">Cat</option>
+            <option value="dog">Dog</option>
+            <option value="fish">Fish</option>
+            <option value="insect">Insect</option>
+            <option value="parrot">Parrot</option>
+            <option value="snake">Snake</option>
+        </optgroup>
+        <optgroup label="Art">
+            <option value="calligraphy">Calligraphy</option>
+            <option value="cinephile">Cinephile</option>
+            <option value="calligraphy">Dancing</option>
+            <option value="drawing">Drawing</option>
+            <option value="gardening">Gardening</option>
+            <option value="knitting">Knitting</option>
+            <option value="languageLearning">Language learning</option>
+            <option value="movieMaking">Moving making</option>
+            <option value="painting">Painting</option>
+            <option value="photography">Photography</option>
+            <option value="pottery">Pottery</option>
+            <option value="origami">Origami</option>
+            <option value="reading">Reading</option>
+            <option value="sewing">Sewing</option>
+            <option value="sculpting">Sculpting</option>
+            <option value="writing">Writing</option>
+            <option value="acting">Acting</option>
+        </optgroup>
+        <optgroup label="Collections">
+            <option value="philately">Philately</option>
+            <option value="numinastics">Numismatics</option>
+        </optgroup>
+        <optgroup label="Cooking">
+            <option value="cookingMolecular">Cooking (Molecular)</option>
+            <option value="cookingTraditional">Cooking (Traditional)</option>
+        </optgroup>
         <optgroup label="Esoteric">
             <option value="astrology">Astrology</option>
             <option value="occult">Occult</option>
             <option value="tarot">Tarot</option>
+        </optgroup>
+        <optgroup label="Instruments">
+            <option value="flute">Flute</option>
+            <option value="guitar">Guitar</option>
+            <option value="harmonica">Harmonica</option>
+            <option value="piano">Piano</option>
+            <option value="singing">Singing</option>
+            <option value="violon">Violon</option>
+        </optgroup>
+        <optgroup label="Music">
+            <option value="disco">Disco</option>
+            <option value="gospel">Gospel</option>
+            <option value="jazz">Jazz</option>
+            <option value="rock">Rock</option>
+            <option value="metal">Metal</option>
+        </optgroup>
+        <optgroup label="Science">
+            <option value="astronomy">Astronomy</option>
+            <option value="archeology">Archeology</option>
+            <option value="botany">Botany</option>
+            <option value="chemistry">Chemistry</option>
+            <option value="geology">Geology</option>
+            <option value="humanBiology">Human biology</option>
+            <option value="itSecurity">IT (Security)</option>
+            <option value="itSoftware">IT (Software)</option>
+            <option value="itVideoGames">IT (Video Games)</option>
+            <option value="itWeb">IT (Web)</option>
+            <option value="mechanics">Mechanics</option>
+            <option value="zoology">Zoology</option>
+        </optgroup>
+        <optgroup label="Sport">
+            <option value="airsoft">Airsoft</option>
+            <option value="archery">Archery</option>
+            <option value="boxing">Boxing</option>
+            <option value="baseball">Baseball</option>
+            <option value="fencing">Fencing</option>
+            <option value="fishing">Fishing</option>
+            <option value="football">Football</option>
+            <option value="horsebackRiding">Horseback riding</option>
+            <option value="rudby">Rudby</option>
+            <option value="running">Running</option>
+            <option value="swimming">Swimming</option>
+            <option value="tennis">Tennis</option>
+            <option value="volleyball">Volleyball</option>
+            <option value="weightTraining">Weight training</option>
+        </optgroup>
+        <optgroup label="Traditional games">
+            <option value="boardGames">Board games</option>
+            <option value="cardGames">Card games</option>
+            <option value="chess">Chess</option>
+            <option value="mahjong">Mahjong</option>
+            <option value="paperRPG">Paper role playing games</option>
+        </optgroup>
+        <optgroup label="Video games">
+            <option value="fps">FPS</option>
+            <option value="mmo">MMO</option>
+            <option value="rpg">RPG</option>
+            <option value="rts">RTS</option>
+            <option value="rythmGames">Rythm games</option>
         </optgroup>
     </select>
     <br/>
