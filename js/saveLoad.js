@@ -345,7 +345,7 @@ function loadCurrentInternal(json) {
                 });
                 // We check for each elements in the select, in our JSON...
                 if (json[n.name] === undefined) {
-                } else if (!arr.includes(json[n.name])) { // If the element in our JSON isn't in the select, that means we must put it in the "other" option
+                } else if (!arr.includes(json[n.name].toLowerCase())) { // If the element in our JSON isn't in the select, that means we must put it in the "other" option
                     let selectNames = Array.prototype.slice.call(document.getElementsByName(n.name + "Other")).filter(function(x) { return x.parentElement.id === n.id + "Container"})
                     n.value = "other";
                     if (selectNames.length > 0) {
@@ -359,7 +359,7 @@ function loadCurrentInternal(json) {
                     }
                 }
                 else { // If the element is in the JSON, we just put the right value
-                    n.value = json[n.name];
+                    n.value = json[n.name].toLowerCase();
                 }
                 break;
         }

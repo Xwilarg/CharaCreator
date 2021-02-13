@@ -23,6 +23,11 @@ function addLike() {
     <select value="" type="text" name="likeNamePart" id="likeNamePart` + likeId + `">
         <option disabled selected value> -- select an option -- </option>
         <option value="other">Other</option>
+        <optgroup label="Esoteric">
+            <option value="astrology">Astrology</option>
+            <option value="occult">Occult</option>
+            <option value="tarot">Tarot</option>
+        </optgroup>
     </select>
     <br/>
     <span id="likeNamePart` + likeId + `Container" class="hidden">
