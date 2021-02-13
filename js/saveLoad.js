@@ -272,8 +272,9 @@ function saveCurrent(nodes = document.getElementById("mainSection").childNodes, 
 
             case "SELECT":
                 if (n.value === "other") { // "Other" answer, we check the input field
-                    if (arr === undefined) json[n.name] = document.getElementsByName(n.name + "Other")[0].value;
-                    else arr[n.name] = document.getElementsByName(n.name + "Other")[0].value;
+                    let elem = Array.prototype.slice.call(document.getElementsByName(n.name + "Other")).filter(function(x) { return x.parentElement.id === n.id + "Container"})
+                    if (arr === undefined) json[n.name] = elem[0].value;
+                    else arr[n.name] = elem[0].value;
                 } else {
                     if (arr === undefined) json[n.name] = n.value;
                     else arr[n.name] = n.value;
