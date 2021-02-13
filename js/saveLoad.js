@@ -290,6 +290,7 @@ function saveCurrent(nodes = document.getElementById("mainSection").childNodes, 
 
 // Load all fields given a JSON
 function loadCurrent(json) {
+    clearCurrent();
     loadCurrentInternal(json);
     calculateAll();
     onNameChange();
@@ -344,12 +345,12 @@ function loadCurrentInternal(json) {
                 // We check for each elements in the select, in our JSON...
                 if (json[n.name] === undefined) {
                 } else if (!arr.includes(json[n.name])) { // If the element in our JSON isn't in the select, that means we must put it in the "other" option
-                    let selectNames = document.getElementsByName(n.name + "Other");
+                    let selectNames = Array.prototype.slice.call(document.getElementsByName(n.name + "Other")).filter(function(x) { return x.parentElement.id === n.id + "Container"})
                     n.value = "other";
                     if (selectNames.length > 0) {
                         selectNames[0].value = json[n.name];
                         // We then fill the "other" input
-                        let container = document.getElementById(n.name + "Container");
+                        let container = document.getElementById(n.id + "Container");
                         if (container !== null) {
                             container.classList.remove("hidden");
                             container.classList.add("wasHidden");

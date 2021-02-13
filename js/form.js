@@ -13,13 +13,31 @@ function remove(current) {
     current.parentNode.remove();
 }
 
+let likeId = 0;
 function addLike() {
     let container = document.getElementById("likesArray");
     let div = document.createElement('div');
     div.classList.add("like");
-    div.innerHTML = '<input value="" type="text" name="likeNamePart" placeholder="Name"/><br/><textarea value="" type="text" name="likeNameOtherPart" placeholder="How was this hobby discovered?\nWhat does your character like in it?"></textarea><br/><button onclick="remove(this)">Delete</button>';
+    likeId++;
+    div.innerHTML = `
+    <select value="" type="text" name="likeNamePart" id="likeNamePart` + likeId + `">
+        <option disabled selected value> -- select an option -- </option>
+        <option value="other">Other</option>
+    </select>
+    <br/>
+    <span id="likeNamePart` + likeId + `Container" class="hidden">
+        <input type="text" name="likeNamePartOther" placeholder="Name"/>
+    </span>
+    <br/>
+    <textarea value="" type="text" name="likeNameOtherPart" placeholder="How was this hobby discovered?\nWhat does your character like in it?"></textarea>
+    <br/>
+    <button onclick="remove(this)">Delete</button>
+    `
     // innerHtml += get rid of input value so we need to use appendChild instead
     container.appendChild(div);
+    document.getElementById("likeNamePart" + likeId).addEventListener("change", function (e) {
+        selectChange(e.originalTarget.id);
+    });
 }
 
 function getName(json) {
