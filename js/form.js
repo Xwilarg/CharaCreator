@@ -158,7 +158,7 @@ function save() {
             finalName = getName(val) + " (" + id + ")"
         }
         names.push(finalName);
-        zip.file(finalName + ".json", JSON.stringify(val));
+        zip.file("characters/" + finalName + ".json", JSON.stringify(val));
     }
     zip.generateAsync({type:"blob"}).then(function(content) {
         saveAs(content, "CharaCreator.zip");
@@ -193,6 +193,7 @@ function formCtor() {
                 let isFirst = true;
                 Object.keys(zip.files).forEach(function (filename) {
                     // Load all files
+                    if (filename === "characters/") return; // Folder
                     zip.files[filename].async('string').then(function (fileData) {
                         if (isFirst) {
                             isFirst = false;
