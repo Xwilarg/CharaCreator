@@ -194,16 +194,24 @@ function formCtor() {
                 Object.keys(zip.files).forEach(function (filename) {
                     // Load all files
                     if (filename === "characters/") return; // Folder
-                    zip.files[filename].async('string').then(function (fileData) {
-                        if (isFirst) {
-                            isFirst = false;
-                        } else {
-                            addProfile();
-                        }
-                        let json = JSON.parse(fileData);
-                        allProfiles[currId] = json;
-                        loadCurrent(json);
-                    });
+                    if (filename.startsWith("characters/")) {
+                        zip.files[filename].async('string').then(function (fileData) {
+                            if (isFirst) {
+                                isFirst = false;
+                            } else {
+                                addProfile();
+                            }
+                            let json = JSON.parse(fileData);
+                            allProfiles[currId] = json;
+                            loadCurrent(json);
+                        });
+                    }
+                    else if (filename === "settings.json") {
+
+                    }
+                    else {
+                        console.warn("Can't load " + filename);
+                    }
                 });
                 window.scrollTo(0, 0);
             });
