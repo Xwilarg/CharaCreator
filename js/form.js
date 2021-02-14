@@ -38,8 +38,8 @@ function addLike() {
             <option value="drawing">Drawing</option>
             <option value="gardening">Gardening</option>
             <option value="knitting">Knitting</option>
-            <option value="languageLearning">Language learning</option>
-            <option value="movieMaking">Moving making</option>
+            <option value="language_learning">Language learning</option>
+            <option value="movie_making">Moving making</option>
             <option value="painting">Painting</option>
             <option value="photography">Photography</option>
             <option value="pottery">Pottery</option>
@@ -55,8 +55,8 @@ function addLike() {
             <option value="numinastics">Numismatics</option>
         </optgroup>
         <optgroup label="Cooking">
-            <option value="cookingMolecular">Cooking (Molecular)</option>
-            <option value="cookingTraditional">Cooking (Traditional)</option>
+            <option value="cooking_molecular">Cooking (Molecular)</option>
+            <option value="cooking_traditional">Cooking (Traditional)</option>
         </optgroup>
         <optgroup label="Esoteric">
             <option value="astrology">Astrology</option>
@@ -85,10 +85,10 @@ function addLike() {
             <option value="chemistry">Chemistry</option>
             <option value="geology">Geology</option>
             <option value="humanBiology">Human biology</option>
-            <option value="itSecurity">IT (Security)</option>
-            <option value="itSoftware">IT (Software)</option>
-            <option value="itVideoGames">IT (Video Games)</option>
-            <option value="itWeb">IT (Web)</option>
+            <option value="it_security">IT (Security)</option>
+            <option value="it_software">IT (Software)</option>
+            <option value="it_videoGames">IT (Video Games)</option>
+            <option value="it_web">IT (Web)</option>
             <option value="mechanics">Mechanics</option>
             <option value="zoology">Zoology</option>
         </optgroup>
@@ -100,27 +100,27 @@ function addLike() {
             <option value="fencing">Fencing</option>
             <option value="fishing">Fishing</option>
             <option value="football">Football</option>
-            <option value="horsebackRiding">Horseback riding</option>
+            <option value="horseback_riding">Horseback riding</option>
             <option value="rudby">Rudby</option>
             <option value="running">Running</option>
             <option value="swimming">Swimming</option>
             <option value="tennis">Tennis</option>
             <option value="volleyball">Volleyball</option>
-            <option value="weightTraining">Weight training</option>
+            <option value="weight_training">Weight training</option>
         </optgroup>
         <optgroup label="Traditional games">
-            <option value="boardGames">Board games</option>
-            <option value="cardGames">Card games</option>
+            <option value="board_games">Board games</option>
+            <option value="card_games">Card games</option>
             <option value="chess">Chess</option>
             <option value="mahjong">Mahjong</option>
-            <option value="paperRPG">Paper role playing games</option>
+            <option value="paper_rpg">Paper role playing games</option>
         </optgroup>
         <optgroup label="Video games">
             <option value="fps">FPS</option>
             <option value="mmo">MMO</option>
             <option value="rpg">RPG</option>
             <option value="rts">RTS</option>
-            <option value="rythmGames">Rythm games</option>
+            <option value="rythm_games">Rythm games</option>
         </optgroup>
     </select>
     <br/>
