@@ -137,7 +137,16 @@
         <!-- #endregion -->
         <!-- #region comparator -->
         <div id="comparatorSection" class="objectContainer backgroundContainer hidden">
-            <div id="comparationTable"></div>
+            <div class="objectContainer">
+                <button id="buttonGeneralComparator" onclick="displayComparator('main')" class="selected">General</button>
+                <button id="buttonHobbyComparator" onclick="displayComparator('hobby')">Hobbies</button>
+            </div>
+            <div id="generalComparator" class="objectContainer">
+                <div id="generalComparationTable"></div>
+            </div>
+            <div id="hobbyComparator" class="objectContainer" class="hidden">
+                <div id="hobbyComparationTable"></div>
+            </div>
         </div>
         <!-- #endregion -->
         <!-- #region relationship -->
