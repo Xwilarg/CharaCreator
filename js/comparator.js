@@ -1,38 +1,42 @@
 let comparatorTable = undefined;
 let hobbyTable = undefined;
 
+let last = "main";
+
+function loadComparator() {
+    displayComparator(last);
+}
+
 function displayComparator(id) {
     document.getElementById("buttonGeneralComparator").classList.remove("selected");
     document.getElementById("buttonHobbyComparator").classList.remove("selected");
 
-    document.getElementById("generalComparator").classList.add("hidden");
-    document.getElementById("hobbyComparator").classList.add("hidden");
+    document.getElementById("generalComparationTable").classList.add("hidden");
+    document.getElementById("hobbyComparationTable").classList.add("hidden");
 
     switch (id) {
         case "main":
             document.getElementById("buttonGeneralComparator").classList.add("selected");
-            document.getElementById("generalComparator").classList.remove("hidden");
+            document.getElementById("generalComparationTable").classList.remove("hidden");
+            last = "main";
+            loadComparatorMain();
             break;
 
         case "hobby":
             document.getElementById("buttonHobbyComparator").classList.add("selected");
-            document.getElementById("hobbyComparator").classList.remove("hidden");
+            document.getElementById("hobbyComparationTable").classList.remove("hidden");
+            last = "hobby";
+            loadComparatorHobby();
             break;
     }
 }
 
-function loadComparator() {
-    // Remove previous instance of the tables if existing
+function loadComparatorMain() {
     if (comparatorTable !== undefined) {
         comparatorTable.destroy();
     }
 
-    if (hobbyTable !== undefined) {
-        hobbyTable.destroy();
-    }
-
     let dataGeneral = [];
-    let dataHobby = [];
 
     // GENERAL ELEMENTS: Name, Age, Height, Weight, BMI, Description
     for (const [_, json] of Object.entries(allProfiles)) {
@@ -46,6 +50,31 @@ function loadComparator() {
         arr.push(json.shortDescription);
         dataGeneral.push(arr);
     }
+
+    if (dataGeneral.length === 0) {
+        dataGeneral.push(["", "", "", "", "", ""]);
+    }
+
+    comparatorTable = new Handsontable(document.getElementById("generalComparationTable"), {
+        licenseKey: "non-commercial-and-evaluation",
+        data: dataGeneral,
+        rowHeaders: true, // Row headers (1, 2, 3...)
+        colHeaders: ["Name", "Age", "Height", "Weight", "BMI", "Description"], // Column headers
+        editor: false, // Can't edit cells
+        dropdownMenu: true, // Drop down menu to display filters
+        filters: true, // Enable filters
+        dropdownMenu: ['filter_by_condition', 'filter_by_value', 'filter_action_bar'], // Filter conditions
+        columnSorting: true, // Click a column to sort it
+        manualColumnMove: true // Drag and drop columns
+    });
+}
+
+function loadComparatorHobby() {
+    if (hobbyTable !== undefined) {
+        hobbyTable.destroy();
+    }
+
+    let dataHobby = [];
 
     // HOBBY ELEMENTS: Hobby name, all names
     let hobbies = {};
@@ -65,27 +94,9 @@ function loadComparator() {
         dataHobby.push([hobby, names.join(", ")]);
     }
 
-    // Create tables
-    if (dataGeneral.length === 0) {
-        dataGeneral.push(["", "", "", "", "", "", ""]);
-    }
-
     if (dataHobby.length === 0) {
         dataHobby.push(["", ""]);
     }
-
-    comparatorTable = new Handsontable(document.getElementById("generalComparationTable"), {
-        licenseKey: "non-commercial-and-evaluation",
-        data: dataGeneral,
-        rowHeaders: true, // Row headers (1, 2, 3...)
-        colHeaders: ["Name", "Age", "Height", "Weight", "BMI", "Description"], // Column headers
-        editor: false, // Can't edit cells
-        dropdownMenu: true, // Drop down menu to display filters
-        filters: true, // Enable filters
-        dropdownMenu: ['filter_by_condition', 'filter_by_value', 'filter_action_bar'], // Filter conditions
-        columnSorting: true, // Click a column to sort it
-        manualColumnMove: true // Drag and drop columns
-    });
 
     hobbyTable = new Handsontable(document.getElementById("hobbyComparationTable"), {
         licenseKey: "non-commercial-and-evaluation",
