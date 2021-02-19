@@ -1,5 +1,6 @@
 let comparatorTable = undefined;
 let hobbyTable = undefined;
+let fetishTable = undefined;
 
 let last = "main";
 
@@ -10,9 +11,11 @@ function loadComparator() {
 function displayComparator(id) {
     document.getElementById("buttonGeneralComparator").classList.remove("selected");
     document.getElementById("buttonHobbyComparator").classList.remove("selected");
+    document.getElementById("buttonFetishComparator").classList.remove("selected");
 
     document.getElementById("generalComparationTable").classList.add("hidden");
     document.getElementById("hobbyComparationTable").classList.add("hidden");
+    document.getElementById("fetishComparationTable").classList.add("hidden");
 
     switch (id) {
         case "main":
@@ -28,6 +31,13 @@ function displayComparator(id) {
             last = "hobby";
             loadComparatorHobby();
             break;
+
+        case "fetish":
+            document.getElementById("buttonFetishComparator").classList.add("selected");
+            document.getElementById("fetishComparationTable").classList.remove("hidden");
+            last = "fetish";
+            loadComparatorFetish();
+            break;
     }
 }
 
@@ -36,7 +46,7 @@ function loadComparatorMain() {
         comparatorTable.destroy();
     }
 
-    let dataGeneral = [];
+    let data = [];
 
     // GENERAL ELEMENTS: Name, Age, Height, Weight, BMI, Description
     for (const [_, json] of Object.entries(allProfiles)) {
@@ -48,16 +58,16 @@ function loadComparatorMain() {
         let bmi = (json.weight / ((json.height / 100) * (json.height / 100))).toFixed(2);
         arr.push(isNaN(bmi) ? "" : bmi);
         arr.push(json.shortDescription);
-        dataGeneral.push(arr);
+        data.push(arr);
     }
 
-    if (dataGeneral.length === 0) {
-        dataGeneral.push(["", "", "", "", "", ""]);
+    if (data.length === 0) {
+        data.push(["", "", "", "", "", ""]);
     }
 
     comparatorTable = new Handsontable(document.getElementById("generalComparationTable"), {
         licenseKey: "non-commercial-and-evaluation",
-        data: dataGeneral,
+        data: data,
         rowHeaders: true, // Row headers (1, 2, 3...)
         colHeaders: ["Name", "Age", "Height", "Weight", "BMI", "Description"], // Column headers
         editor: false, // Can't edit cells
@@ -74,7 +84,7 @@ function loadComparatorHobby() {
         hobbyTable.destroy();
     }
 
-    let dataHobby = [];
+    let data = [];
 
     // HOBBY ELEMENTS: Hobby name, all names
     let hobbies = {};
@@ -91,18 +101,60 @@ function loadComparatorHobby() {
     }
 
     for (const [hobby, names] of Object.entries(hobbies)) {
-        dataHobby.push([hobby, names.join(", ")]);
+        data.push([hobby, names.join(", ")]);
     }
 
-    if (dataHobby.length === 0) {
-        dataHobby.push(["", ""]);
+    if (data.length === 0) {
+        data.push(["", ""]);
     }
 
     hobbyTable = new Handsontable(document.getElementById("hobbyComparationTable"), {
         licenseKey: "non-commercial-and-evaluation",
-        data: dataHobby,
+        data: data,
         rowHeaders: true,
         colHeaders: ["Hobby", "Characters"],
+        editor: false,
+        dropdownMenu: true,
+        filters: true,
+        dropdownMenu: ['filter_by_condition', 'filter_by_value', 'filter_action_bar'],
+        columnSorting: true
+    });
+}
+
+function loadComparatorFetish() {
+    if (fetishTable !== undefined) {
+        fetishTable.destroy();
+    }
+
+    let data = [];
+
+    // FETISH ELEMENTS: Fetish name, all names
+    let fetishes = {};
+    for (const [_, json] of Object.entries(allProfiles)) {
+        if (json.fetishesArray !== undefined) {
+            json.fetishesArray.forEach(e => {
+                if (fetishes[e.fetishNamePart] === undefined) {
+                    fetishes[e.fetishNamePart] = [ getName(json) ];
+                } else {
+                    fetishes[e.fetishNamePart].push(getName(json));
+                }
+            });
+        }
+    }
+
+    for (const [hobby, names] of Object.entries(fetishes)) {
+        data.push([hobby, names.join(", ")]);
+    }
+
+    if (data.length === 0) {
+        data.push(["", ""]);
+    }
+
+    fetishTable = new Handsontable(document.getElementById("fetishComparationTable"), {
+        licenseKey: "non-commercial-and-evaluation",
+        data: data,
+        rowHeaders: true,
+        colHeaders: ["Fetish", "Characters"],
         editor: false,
         dropdownMenu: true,
         filters: true,

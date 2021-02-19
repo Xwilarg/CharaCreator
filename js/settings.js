@@ -5,13 +5,15 @@ let settings = {
 function onSettingModify(e) {
     settings[e.name] = e.checked;
     switch (e.name) {
-        case "nsfw":
+        case "nsfw": // NSFW sexuality related options
             if (e.checked) {
                 document.getElementById("nsfwEnabled").classList.remove("hidden");
                 document.getElementById("nsfwDisabled").classList.add("hidden");
+                document.getElementById("buttonFetishComparator").classList.remove("hidden");
             } else {
                 document.getElementById("nsfwEnabled").classList.add("hidden");
                 document.getElementById("nsfwDisabled").classList.remove("hidden");
+                document.getElementById("buttonFetishComparator").classList.add("hidden");
             }
             break;
     }
