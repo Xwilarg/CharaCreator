@@ -164,6 +164,7 @@ function addFetish() {
     div.innerHTML = `
     <select value="" type="text" name="fetishNamePart" id="fetishNamePart` + fetishId + `">
         <option disabled selected value> -- select an option -- </option>
+        <option value="autozoophilia">Animal roleplay</option>
         <option value="maschalagnia">Armpits</option>
         <option value="bondage">Bondage</option>
         <option value="lactophilia">Breast milk</option>
@@ -177,6 +178,7 @@ function addFetish() {
         <option value="sthenolagnia">Muscles</option>
         <option value="asphyxiophilia">Strangulation</option>
         <option value="transvestism">Transvestism</option>
+        <option value="uniform">Uniforms</option>
         <option value="urolagnia">Urination</option>
         <option value="voyeurism">Voyeurism</option>
         <option value="other">Other</option>
