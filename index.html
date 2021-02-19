@@ -5,6 +5,7 @@
         <link rel="stylesheet" type="text/css" href="css/form.css"/>
         <link rel="stylesheet" type="text/css" href="css/relationship.css"/>
         <link href="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.css" rel="stylesheet"/>
+        <script type="text/javascript" src="js/settings.js"></script>
         <script type="text/javascript" src="js/autocalculation.js"></script>
         <script type="text/javascript" src="js/saveLoad.js"></script>
         <script type="text/javascript" src="js/form.js"></script>
@@ -105,17 +106,22 @@
                 </span>
                 <hr/>
                 <h3>Sexuality</h3>
-                Orientation:
-                <select id="orientation" name="orientation">
-                    <option disabled selected value> -- select an option -- </option>
-                    <option value="heterosexual">Heterosexual</option>
-                    <option value="homosexual">Homosexual</option>
-                    <option value="bisexual">Bisexual</option>
-                    <option value="asexual">Asexual</option>
-                    <option value="other">Other</option>
-                </select>
-                <span id="orientationContainer" class="hidden">
-                    <input type="text" name="orientationOther" placeholder="Sexual orientation"/>
+                <span id="nsfwEnabled" class="hidden">
+                    Orientation:
+                    <select id="orientation" name="orientation">
+                        <option disabled selected value> -- select an option -- </option>
+                        <option value="heterosexual">Heterosexual</option>
+                        <option value="homosexual">Homosexual</option>
+                        <option value="bisexual">Bisexual</option>
+                        <option value="asexual">Asexual</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <span id="orientationContainer" class="hidden">
+                        <input type="text" name="orientationOther" placeholder="Sexual orientation"/>
+                    </span>
+                </span>
+                <span id="nsfwDisabled">
+                    NSFW need to be enabled in the settings
                 </span>
                 <hr/>
                 <h3>Center of Interests</h3>
@@ -163,6 +169,9 @@
         <!-- #endregion -->
         <!-- #region settings -->
         <div id="settingsSection" class="objectContainer backgroundContainer hidden">
+            <div id="settingsContainer">
+                Display NSFW fields: <input id="settings_nsfw" name="nsfw" type="checkbox"/>
+            </div>
         </div>
         <!-- #endregion -->
     </body>

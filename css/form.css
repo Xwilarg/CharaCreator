@@ -149,3 +149,7 @@ input::-webkit-inner-spin-button { /* Chrome */
 input[type="number"] { /* Firefox*/
    -moz-appearance: textfield;
 }
+
+#settingsContainer {
+    margin: 2em;
+}

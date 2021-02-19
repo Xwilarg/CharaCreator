@@ -176,6 +176,7 @@ function save() {
         names.push(finalName);
         zip.file("characters/" + finalName + ".json", JSON.stringify(val));
     }
+    zip.file("settings.json", JSON.stringify(settings));
     zip.generateAsync({type:"blob"}).then(function(content) {
         saveAs(content, "CharaCreator.zip");
     });
@@ -223,7 +224,14 @@ function formCtor() {
                         });
                     }
                     else if (filename === "settings.json") {
-
+                        zip.files[filename].async('string').then(function (fileData) {
+                            let json = JSON.parse(fileData);
+                            for (let elem in json) {
+                                let docElem = document.getElementById("settings_" + elem);
+                                docElem.checked = json[elem];
+                                onSettingModify(docElem);
+                            }
+                        });
                     }
                     else {
                         console.warn("Can't load " + filename);
