@@ -71,13 +71,13 @@ span > p {
     width: 3.5em;
 }
 
-.like {
+.like, .fetish {
     padding: 10px;
     border: 1px black solid;
     margin-bottom: 1em;
 }
 
-#likesArray {
+#likesArray, #fetishesArray {
     display: flex;
     flex-flow: wrap;
 }

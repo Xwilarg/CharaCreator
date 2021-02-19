@@ -155,6 +155,46 @@ function addLike() {
     });
 }
 
+let fetishId = 0;
+function addFetish() {
+    let container = document.getElementById("fetishesArray");
+    let div = document.createElement('div');
+    div.classList.add("fetish");
+    fetishId++;
+    div.innerHTML = `
+    <select value="" type="text" name="fetishNamePart" id="fetishNamePart` + fetishId + `">
+        <option disabled selected value> -- select an option -- </option>
+        <option value="maschalagnia">Armpits</option>
+        <option value="bondage">Bondage</option>
+        <option value="lactophilia">Breast milk</option>
+        <option value="pygophilia">Buttocks</option>
+        <option value="exhibitionism">Exhibitionism</option>
+        <option value="podophilia">Feet</option>
+        <option value="trichophilia">Hair</option>
+        <option value="crurophilia">Legs</option>
+        <option value="algolagnia">Pain</option>
+        <option value="shoes">Shoes</option>
+        <option value="sthenolagnia">Muscles</option>
+        <option value="asphyxiophilia">Strangulation</option>
+        <option value="transvestism">Transvestism</option>
+        <option value="urolagnia">Urination</option>
+        <option value="voyeurism">Voyeurism</option>
+        <option value="other">Other</option>
+    </select>
+    <br/>
+    <span id="fetishNamePart` + fetishId + `Container" class="hidden">
+        <input type="text" name="fetishNamePartOther" placeholder="Name"/>
+    </span>
+    <br/>
+    <button onclick="remove(this)">Delete</button>
+    `;
+    // innerHtml += get rid of input value so we need to use appendChild instead
+    container.appendChild(div);
+    document.getElementById("fetishNamePart" + fetishId).addEventListener("change", function (e) {
+        selectChange(e.originalTarget.id);
+    });
+}
+
 function getName(json) {
     if (json.firstName == "" && json.lastName == "") {
         return "Empty";

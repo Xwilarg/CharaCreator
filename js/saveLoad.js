@@ -299,6 +299,7 @@ function loadCurrent(json) {
 }
 
 function loadCurrentInternal(json) {
+    let arr;
     for (key in json) {
         let nodes = document.getElementsByName(key); // TODO: Don't do that on whole document
         let n;
@@ -315,10 +316,19 @@ function loadCurrentInternal(json) {
         if (n.nodeName === "DIV" && n.id.endsWith("Array")) { // Array nodes must be saved as an array
             switch (n.id) {
                 case "likesArray":
-                    let arr = json[n.id];
+                    arr = json[n.id];
                     if (arr === undefined || arr.length === 0) break;
                     arr.forEach(function(e) {
                         addLike();
+                        loadCurrentInternal(e);
+                    });
+                    break;
+
+                case "fetishesArray":
+                    arr = json[n.id];
+                    if (arr === undefined || arr.length === 0) break;
+                    arr.forEach(function(e) {
+                        addFetish();
                         loadCurrentInternal(e);
                     });
                     break;
