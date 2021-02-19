@@ -32,23 +32,39 @@ function addLike() {
             <option value="snake">Snake</option>
         </optgroup>
         <optgroup label="Art">
+            <option value="acting">Acting</option>
             <option value="calligraphy">Calligraphy</option>
             <option value="cinephile">Cinephile</option>
             <option value="calligraphy">Dancing</option>
             <option value="drawing">Drawing</option>
             <option value="gardening">Gardening</option>
-            <option value="knitting">Knitting</option>
             <option value="language_learning">Language learning</option>
+            <option value="language_learning">Listening Music</option>
             <option value="movie_making">Moving making</option>
             <option value="painting">Painting</option>
             <option value="photography">Photography</option>
+            <option value="reading">Reading</option>
+            <option value="writing">Writing</option>
+        </optgroup>
+        <optgroup label="Book and Movie Genres">
+            <option value="genre_biography">Biography Genre</option>
+            <option value="genre_detective">Detective Genre</option>
+            <option value="genre_fantasy">Fantasy Genre</option>
+            <option value="genre_horror">Horror Genre</option>
+            <option value="genre_humour">Humour Genre</option>
+            <option value="genre_journalism">Journalism Genre</option>
+            <option value="genre_mythology">Mythology Genre</option>
+            <option value="genre_romance">Romance Genre</option>
+            <option value="genre_satire">Satire Genre</option>
+            <option value="genre_scientifical_articles">Scientifical Articles Genre</option>
+            <option value="genre_tragedy">Tragedy Genre</option>
+        </optgroup>
+        <optgroup label="Craft">
+            <option value="knitting">Knitting</option>
             <option value="pottery">Pottery</option>
             <option value="origami">Origami</option>
-            <option value="reading">Reading</option>
             <option value="sewing">Sewing</option>
             <option value="sculpting">Sculpting</option>
-            <option value="writing">Writing</option>
-            <option value="acting">Acting</option>
         </optgroup>
         <optgroup label="Collections">
             <option value="philately">Philately</option>
