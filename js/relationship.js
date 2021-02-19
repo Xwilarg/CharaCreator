@@ -49,20 +49,36 @@ function getContainedHobbies(hobbies, myHobbies, myId) {
     return values;
 }
 
-function getCharactersWithCommonHobbies(hobbies, myHobbies, myId) {
-    let values = [];
+function getCharactersWithCommonHobbies(allLinks, hobbies, myHobbies, myId) {
+    if (allLinks[myId] === undefined) {
+        allLinks[myId] = {};
+    }
     for (const [id, content] of Object.entries(hobbies)) {
         if (id == myId) {
             continue;
         }
         for (const e of myHobbies) {
             if (content.hobbies.includes(e)) {
-                values.push(id);
-                break;
+                if (allLinks[id] !== undefined) {
+                    if (allLinks[id][myId] !== undefined) {
+                        allLinks[id][myId]++;
+                    } else {
+                        allLinks[id][myId] = 0;
+                    }
+                } else {
+                    if (allLinks[myId][id] !== undefined) {
+                        allLinks[myId][id]++;
+                    } else {
+                        allLinks[myId][id] = 0;
+                    }
+                }
             }
         }
     }
-    return values;
+}
+
+function padNumber(nb) {
+    return (nb < 10 ? "0" : "") + nb;
 }
 
 function loadRelationship() {
@@ -83,13 +99,29 @@ function loadRelationship() {
             filteredHobbies[id] = { hobbies: common, name: json.name };
         }
     }
+
+    let allLinks = {};
     for (const [id, json] of Object.entries(filteredHobbies)) {
         nodes.push({ id: id, label: json.name, color: "lightgrey" });
-        getCharactersWithCommonHobbies(hobbies, json.hobbies, id).forEach(e => {
-            if (!links.some(x => x.from === e && x.to === id)) {
-                links.push({from: id, to: e, width: 4, selectionWidth: 6});
+        getCharactersWithCommonHobbies(allLinks, hobbies, json.hobbies, id);
+    }
+
+    let maxValue = 0; // Biggest number of common hobby we can find
+    for (const [id1, json] of Object.entries(allLinks)) {
+        for (const [id2, value] of Object.entries(json)) {
+            if (value > maxValue) {
+                maxValue = value;
             }
-        });
+        }
+    }
+
+    for (const [id1, json] of Object.entries(allLinks)) {
+        for (const [id2, value] of Object.entries(json)) {
+            let hexVal = padNumber((255 - (value * 255 / maxValue)).toString(16));
+            let color = "" + hexVal + hexVal + "ff";
+            links.push({from: id1, to: id2, width: 4, selectionWidth: 6,
+                color: { color: color, highlight: color}});
+        }
     }
     createNetwork(nodes, links);
 }
