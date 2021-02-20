@@ -34,14 +34,14 @@ function createNetwork(argNodes, argEdges) {
 let nodes = [];
 let links = [];
 
-function getContainedHobbies(hobbies, myHobbies, myId) {
+function getContainedArray(array, myArray, myId) {
     let values = [];
-    for (const [id, content] of Object.entries(hobbies)) {
+    for (const [id, content] of Object.entries(array)) {
         if (id == myId) {
             continue;
         }
-        myHobbies.forEach(e => {
-            if (!values.includes(e) && content.hobbies.includes(e)) {
+        myArray.forEach(e => {
+            if (!values.includes(e) && content.elems.includes(e)) {
                 values.push(e);
             }
         });
@@ -49,16 +49,16 @@ function getContainedHobbies(hobbies, myHobbies, myId) {
     return values;
 }
 
-function getCharactersWithCommonHobbies(allLinks, hobbies, myHobbies, myId) {
+function getCharactersWithCommonArray(allLinks, array, myArray, myId) {
     if (allLinks[myId] === undefined) {
         allLinks[myId] = {};
     }
-    for (const [id, content] of Object.entries(hobbies)) {
+    for (const [id, content] of Object.entries(array)) {
         if (id == myId) {
             continue;
         }
-        for (const e of myHobbies) {
-            if (content.hobbies.includes(e)) {
+        for (const e of myArray) {
+            if (content.elems.includes(e)) {
                 if (allLinks[id] !== undefined) {
                     if (allLinks[id][myId] !== undefined) {
                         allLinks[id][myId]++;
@@ -84,26 +84,34 @@ function padNumber(nb) {
 function loadRelationship() {
     nodes = [];
     links = [];
-    let hobbies = {};
-    let filteredHobbies = {};
+    loadRelationshipInternal("likesArray", "likeNamePart", "blue"); // Hopefully someone don't create more than 10000 characters
+    loadRelationshipInternal("fetishesArray", "fetishNamePart", "red");
+    createNetwork(nodes, links);
+}
+
+function loadRelationshipInternal(arrayName, partName, c, prefix) {
+    let elems = {};
+    let filteredElems = {};
     // Create hobbies array
     for (const [id, json] of Object.entries(allProfiles)) {
-        if (json.likesArray !== undefined && json.likesArray.length > 0) {
-            hobbies[id] = { hobbies: json.likesArray.map(x => x.likeNamePart), name: getName(json) };
+        if (json[arrayName] !== undefined && json[arrayName].length > 0) {
+            elems[id] = { elems: json[arrayName].map(x => x[partName]), name: getName(json) };
         }
     }
     // Filter them
-    for (const [id, json] of Object.entries(hobbies)) {
-        let common = getContainedHobbies(hobbies, json.hobbies, id);
+    for (const [id, json] of Object.entries(elems)) {
+        let common = getContainedArray(elems, json.elems, id);
         if (common.length > 0) { // If the character have at least one hobby in common with someone else
-            filteredHobbies[id] = { hobbies: common, name: json.name };
+            filteredElems[id] = { elems: common, name: json.name };
         }
     }
 
     let allLinks = {};
-    for (const [id, json] of Object.entries(filteredHobbies)) {
-        nodes.push({ id: id, label: json.name, color: "lightgrey" });
-        getCharactersWithCommonHobbies(allLinks, hobbies, json.hobbies, id);
+    for (const [id, json] of Object.entries(filteredElems)) {
+        if (!nodes.some(x => x.id === id)) {
+            nodes.push({ id: id, label: json.name, color: "lightgrey" });
+        }
+        getCharactersWithCommonArray(allLinks, elems, json.elems, id);
     }
 
     let maxValue = 0; // Biggest number of common hobby we can find
@@ -118,10 +126,12 @@ function loadRelationship() {
     for (const [id1, json] of Object.entries(allLinks)) {
         for (const [id2, value] of Object.entries(json)) {
             let hexVal = padNumber((255 - (value * 255 / maxValue)).toString(16));
-            let color = "" + hexVal + hexVal + "ff";
+            let color;
+            if (c === "red") color = "ff" + hexVal + hexVal;
+            else if (c === "blue") color = "" + hexVal + hexVal + "ff";
+            else color = "000000";
             links.push({from: id1, to: id2, width: 4, selectionWidth: 6,
                 color: { color: color, highlight: color}});
         }
     }
-    createNetwork(nodes, links);
 }
