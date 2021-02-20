@@ -84,8 +84,10 @@ function padNumber(nb) {
 function loadRelationship() {
     nodes = [];
     links = [];
-    loadRelationshipInternal("likesArray", "likeNamePart", "blue"); // Hopefully someone don't create more than 10000 characters
-    loadRelationshipInternal("fetishesArray", "fetishNamePart", "red");
+    loadRelationshipInternal("likesArray", "likeNamePart", "blue");
+    if (settings.nsfw) {
+        loadRelationshipInternal("fetishesArray", "fetishNamePart", "red");
+    }
     createNetwork(nodes, links);
 }
 
