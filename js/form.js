@@ -176,6 +176,7 @@ function addFetish() {
         <option value="algolagnia">Pain</option>
         <option value="shoes">Shoes</option>
         <option value="sthenolagnia">Muscles</option>
+        <option value="olfactophilia">Odors</option>
         <option value="asphyxiophilia">Strangulation</option>
         <option value="transvestism">Transvestism</option>
         <option value="uniform">Uniforms</option>
