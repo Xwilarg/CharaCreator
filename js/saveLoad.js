@@ -263,7 +263,13 @@ function saveCurrent(nodes = document.getElementById("mainSection").childNodes, 
             saveCurrent(n.childNodes, json);
         }
         switch (n.nodeName) {
-            case "INPUT": case "TEXTAREA":
+            case "INPUT":
+                if (n.type === "checkbox") {
+                    if (arr === undefined) json[n.name] = n.checked;
+                    else arr[n.name] = n.checked;
+                    break;
+                }
+            case "TEXTAREA":
                 if (n.name.length > 0 && !n.name.endsWith("Other")) { // We ignore "other" input field since they are associated with a select
                     if (arr === undefined) json[n.name] = n.value;
                     else arr[n.name] = n.value;
@@ -301,9 +307,6 @@ function loadCurrent(json) {
 function loadCurrentInternal(json) {
     let arr;
     for (key in json) {
-        if (key == "isExport") {
-            continue;
-        }
         let nodes = document.getElementsByName(key); // TODO: Don't do that on whole document
         let n;
         if (nodes.length === 0) {
@@ -319,9 +322,6 @@ function loadCurrentInternal(json) {
         if (n == null) {
             console.warn("Invalid JSON element: " + key);
             continue;
-        }
-        if (json.isExport) {
-            n.disabled = "disabled";
         }
         if (n.nodeName === "DIV" && n.id.endsWith("Array")) { // Array nodes must be saved as an array
             switch (n.id) {
@@ -347,6 +347,10 @@ function loadCurrentInternal(json) {
         switch (n.nodeName) {
             case "INPUT": case "TEXTAREA":
                 if (n.type === "color") break;
+                if (n.type === "checkbox") {
+                    n.checked = json[n.name];
+                    break;
+                }
                 if (json[n.name] !== undefined) {
                     n.value = json[n.name];
                     let container = document.getElementById(n.name + "Container");

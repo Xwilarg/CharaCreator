@@ -206,9 +206,7 @@ function getName(json) {
 }
 
 function save() {
-    let isExport = allProfiles[currId].isExport === true;
     allProfiles[currId] = saveCurrent();
-    allProfiles[currId].isExport = isExport;
     let names = [];
     let zip = new JSZip();
     for (const [_, val] of Object.entries(allProfiles)) {
