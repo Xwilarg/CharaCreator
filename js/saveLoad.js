@@ -301,6 +301,9 @@ function loadCurrent(json) {
 function loadCurrentInternal(json) {
     let arr;
     for (key in json) {
+        if (key == "isExport") {
+            continue;
+        }
         let nodes = document.getElementsByName(key); // TODO: Don't do that on whole document
         let n;
         if (nodes.length === 0) {
@@ -312,6 +315,13 @@ function loadCurrentInternal(json) {
         }
         else {
             n = nodes[nodes.length - 1];
+        }
+        if (n == null) {
+            console.warn("Invalid JSON element: " + key);
+            continue;
+        }
+        if (json.isExport) {
+            n.disabled = "disabled";
         }
         if (n.nodeName === "DIV" && n.id.endsWith("Array")) { // Array nodes must be saved as an array
             switch (n.id) {
