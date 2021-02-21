@@ -5,11 +5,13 @@ function displaySection(id) {
     document.getElementById("buttonComparatorSection").classList.remove("selected");
     document.getElementById("buttonRelationshipSection").classList.remove("selected");
     document.getElementById("buttonSettingsSection").classList.remove("selected");
+    document.getElementById("buttonRepartitionSection").classList.remove("selected");
 
     document.getElementById("mainSection").classList.add("hidden");
     document.getElementById("comparatorSection").classList.add("hidden");
     document.getElementById("relationshipSection").classList.add("hidden");
     document.getElementById("settingsSection").classList.add("hidden");
+    document.getElementById("repartitionSection").classList.add("hidden");
 
     switch (id) {
         case "main":
@@ -27,6 +29,12 @@ function displaySection(id) {
             document.getElementById("buttonRelationshipSection").classList.add("selected");
             document.getElementById("relationshipSection").classList.remove("hidden");
             loadRelationship();
+            break;
+
+        case "repartition":
+            document.getElementById("buttonRepartitionSection").classList.add("selected");
+            document.getElementById("repartitionSection").classList.remove("hidden");
+            loadRepartition();
             break;
 
         case "settings":

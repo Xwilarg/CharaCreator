@@ -150,6 +150,6 @@ input[type="number"] { /* Firefox*/
    -moz-appearance: textfield;
 }
 
-#settingsContainer {
+#settingsContainer, #repartitionContainer {
     margin: 2em;
 }

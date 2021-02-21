@@ -10,6 +10,7 @@
         <script type="text/javascript" src="js/autocalculation.js"></script>
         <script type="text/javascript" src="js/saveLoad.js"></script>
         <script type="text/javascript" src="js/form.js"></script>
+        <script type="text/javascript" src="js/repartition.js"></script>
         <script type="text/javascript" src="js/characterInit.js"></script>
         <script type="text/javascript" src="js/sectionManager.js"></script>
         <script type="text/javascript" src="js/comparator.js"></script>
@@ -24,6 +25,7 @@
             <button id="buttonMainSection" onclick="displaySection('main')" class="selected">Profiles</button>
             <button id="buttonComparatorSection" onclick="displaySection('comparator')">Comparator</button>
             <button id="buttonRelationshipSection" onclick="displaySection('relationship')">Relationship</button>
+            <button id="buttonRepartitionSection" onclick="displaySection('repartition')">Repartition</button>
             <button id="buttonSettingsSection" onclick="displaySection('settings')">Settings</button>
             <a id="github" target="_blank" href="https://github.com/Xwilarg/CharaCreator/">GitHub</a>
         </div>
@@ -177,6 +179,18 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <!-- #endregion -->
+        <!-- #region relationship -->
+        <div id="repartitionSection" class="objectContainer backgroundContainer hidden">
+            <div id="repartitionContainer">
+                <h4>Gender repartition:</h4>
+                <div id="repartitionGender"></div>
+                <span id="repartitionNsfw">
+                    <h4>Orientation repartition:</h4>
+                    <div id="repartitionSexuality"></div>
+                </span>
             </div>
         </div>
         <!-- #endregion -->
