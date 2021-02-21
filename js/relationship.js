@@ -97,21 +97,32 @@ function loadRelationshipInternal(arrayName, partName, c, prefix) {
     // Create hobbies array
     for (const [id, json] of Object.entries(allProfiles)) {
         if (json[arrayName] !== undefined && json[arrayName].length > 0) {
-            elems[id] = { elems: json[arrayName].map(x => x[partName]), name: getName(json) };
+            elems[id] = { elems: json[arrayName].map(function(x) {
+                if (json.isExport) {
+                    return x[partName];
+                }
+                return x[partName].hashCode().toString();
+            }), name: getName(json), isExport: json.isExport === true };
         }
     }
     // Filter them
     for (const [id, json] of Object.entries(elems)) {
         let common = getContainedArray(elems, json.elems, id);
         if (common.length > 0) { // If the character have at least one hobby in common with someone else
-            filteredElems[id] = { elems: common, name: json.name };
+            filteredElems[id] = { elems: common, name: json.name, isExport: json.isExport };
         }
     }
 
     let allLinks = {};
     for (const [id, json] of Object.entries(filteredElems)) {
         if (!nodes.some(x => x.id === id)) {
-            nodes.push({ id: id, label: json.name, color: "lightgrey" });
+            let color;
+            if (json.isExport) {
+                color = "lightgreen";
+            } else {
+                color = "lightgrey";
+            }
+            nodes.push({ id: id, label: json.name, color: color });
         }
         getCharactersWithCommonArray(allLinks, elems, json.elems, id);
     }

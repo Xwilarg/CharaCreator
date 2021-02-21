@@ -1,4 +1,6 @@
 function displaySection(id) {
+    allProfiles[currId] = saveCurrent();
+
     document.getElementById("buttonMainSection").classList.remove("selected");
     document.getElementById("buttonComparatorSection").classList.remove("selected");
     document.getElementById("buttonRelationshipSection").classList.remove("selected");

@@ -262,13 +262,13 @@ function exportData() {
     let current = allProfiles[currId];
     newJson.firstName = current.firstName;
     newJson.lastName = current.lastName;
-    newJson.fetishExport = [];
+    newJson.fetishesArray = [];
     current.fetishesArray.forEach(function(e) {
-        newJson.fetishExport.push(e.fetishNamePart.hashCode());
+        newJson.fetishesArray.push({ fetishNamePart: e.fetishNamePart.hashCode().toString() });
     });
-    newJson.hobbiesExport = [];
+    newJson.likesArray = [];
     current.likesArray.forEach(function(e) {
-        newJson.hobbiesExport.push(e.likeNamePart.hashCode());
+        newJson.likesArray.push({ likeNamePart: e.likeNamePart.hashCode().toString() });
     });
     zip.file("characters/" + getName(newJson) + ".json", JSON.stringify(newJson));
     zip.file("settings.json", JSON.stringify(settings));
@@ -277,63 +277,64 @@ function exportData() {
     });
 }
 
+function loadZipInternal(zip, isExport) {
+    if (!isExport) { // We don't reset everything when importing exported data
+        resetProfiles();
+    }
+    let isFirst = true;
+    Object.keys(zip.files).forEach(function (filename) {
+        // Load all files
+        if (filename === "characters/") return; // Folder
+        if (filename.startsWith("characters/")) {
+            zip.files[filename].async('string').then(function (fileData) {
+                if (isFirst) {
+                    isFirst = false;
+                } else {
+                    addProfile();
+                }
+                let json = JSON.parse(fileData);
+                json.isExport = isExport;
+                allProfiles[currId] = json;
+                loadCurrent(json);
+            });
+        }
+        else if (filename === "settings.json") {
+            zip.files[filename].async('string').then(function (fileData) {
+                let json = JSON.parse(fileData);
+                for (let elem in json) {
+                    if (elem === "isExport") {
+                        continue;
+                    }
+                    let docElem = document.getElementById("settings_" + elem);
+                    if (docElem === null) {
+                        console.warn("Invalid setting option: " + elem);
+                    } else {
+                        docElem.checked = json[elem];
+                        onSettingModify(docElem);
+                    }
+                }
+            });
+        }
+        else {
+            console.warn("Can't load " + filename);
+        }
+    });
+    window.scrollTo(0, 0);
+}
+
 function loadZip(file) {
     let reader = new FileReader();
     reader.onload = function(val) {
         let zip = new JSZip();
         zip.loadAsync(val.target.result) // Unzip
         .then(function() {
-            let isExport = false;
-            // TODO: Find better way to do that
-            Object.keys(zip.files).forEach(function (filename) { // Checking for "export" info
-                if (filename === "settings.json") {
-                    zip.files[filename].async('string').then(function (fileData) {
-                        isExport = JSON.parse(fileData).isExport;
-                    });
-                }
-            });
-            if (!isExport) { // We don't reset everything when importing exported data
-                resetProfiles();
+            if (zip.files["settings.json"] !== undefined) {
+                zip.files["settings.json"].async('string').then(function (fileData) {
+                    loadZipInternal(zip, JSON.parse(fileData).isExport === true);
+                });
+            } else {
+                loadZipInternal(zip, false);
             }
-            let isFirst = true;
-            Object.keys(zip.files).forEach(function (filename) {
-                // Load all files
-                if (filename === "characters/") return; // Folder
-                if (filename.startsWith("characters/")) {
-                    zip.files[filename].async('string').then(function (fileData) {
-                        if (isFirst) {
-                            isFirst = false;
-                        } else {
-                            addProfile();
-                        }
-                        let json = JSON.parse(fileData);
-                        json.isExport = isExport;
-                        allProfiles[currId] = json;
-                        loadCurrent(json);
-                    });
-                }
-                else if (filename === "settings.json") {
-                    zip.files[filename].async('string').then(function (fileData) {
-                        let json = JSON.parse(fileData);
-                        for (let elem in json) {
-                            if (elem === "isExport") {
-                                continue;
-                            }
-                            let docElem = document.getElementById("settings_" + elem);
-                            if (docElem === null) {
-                                console.warn("Invalid setting option: " + elem);
-                            } else {
-                                docElem.checked = json[elem];
-                                onSettingModify(docElem);
-                            }
-                        }
-                    });
-                }
-                else {
-                    console.warn("Can't load " + filename);
-                }
-            });
-            window.scrollTo(0, 0);
         });
     };
     reader.readAsBinaryString(file);
