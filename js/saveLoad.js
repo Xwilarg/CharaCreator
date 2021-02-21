@@ -128,7 +128,7 @@ function groupByCompletion() {
 
         for (key in json) {
             let docElem = document.getElementById(key);
-            if (docElem === null || json[key] === "" || docElem.classList.contains("hidden"))
+            if (docElem === null || docElem.classList.contains("hidden"))
                 continue;
             max++;
             if (Object.prototype.toString.call(json[key]) === '[object Array]') {
