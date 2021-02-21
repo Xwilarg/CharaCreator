@@ -54,6 +54,7 @@ function addLike() {
             <option value="genre_humour">Humour Genre</option>
             <option value="genre_journalism">Journalism Genre</option>
             <option value="genre_mythology">Mythology Genre</option>
+            <option value="genre_realistic_fantasy">Realistic Fiction Genre</option>
             <option value="genre_romance">Romance Genre</option>
             <option value="genre_satire">Satire Genre</option>
             <option value="genre_scientifical_articles">Scientifical Articles Genre</option>
