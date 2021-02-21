@@ -31,12 +31,18 @@ function dontGroup() {
     sortProfiles();
 }
 
-function groupByFamilyName() {
+function groupByRemoveAll() {
     document.getElementById("dontGroup").classList.remove("selected");
-    document.getElementById("groupFamilyName").classList.add("selected");
+    document.getElementById("groupFamilyName").classList.remove("selected");
     document.getElementById("groupRace").classList.remove("selected");
     document.getElementById("groupOrientation").classList.remove("selected");
     document.getElementById("groupCompletion").classList.remove("selected");
+    document.getElementById("groupBloodType").classList.remove("selected");
+}
+
+function groupByFamilyName() {
+    groupByRemoveAll();
+    document.getElementById("groupFamilyName").classList.add("selected");
 
     let str = "";
     let names = {};
@@ -60,11 +66,8 @@ function groupByFamilyName() {
 }
 
 function groupByRace() {
-    document.getElementById("dontGroup").classList.remove("selected");
-    document.getElementById("groupFamilyName").classList.remove("selected");
+    groupByRemoveAll();
     document.getElementById("groupRace").classList.add("selected");
-    document.getElementById("groupOrientation").classList.remove("selected");
-    document.getElementById("groupCompletion").classList.remove("selected");
 
     let str = "";
     let races = {};
@@ -87,11 +90,8 @@ function groupByRace() {
 }
 
 function groupByOrientation() {
-    document.getElementById("dontGroup").classList.remove("selected");
-    document.getElementById("groupFamilyName").classList.remove("selected");
-    document.getElementById("groupRace").classList.remove("selected");
+    groupByRemoveAll();
     document.getElementById("groupOrientation").classList.add("selected");
-    document.getElementById("groupCompletion").classList.remove("selected");
 
     let str = "";
     let orientations = {};
@@ -113,11 +113,32 @@ function groupByOrientation() {
     sortProfiles();
 }
 
+function groupByBloodType() {
+    groupByRemoveAll();
+    document.getElementById("groupBloodType").classList.add("selected");
+
+    let str = "";
+    let bloodTypes = {};
+    for (const [id, json] of Object.entries(allProfiles)) {
+        if (bloodTypes[json.bloodType] === undefined) bloodTypes[json.bloodType] = [id];
+        else bloodTypes[json.bloodType].push(id);
+    }
+    for (const [bloodType, ids] of Object.entries(bloodTypes)) {
+        str += '<nothing id="categoryGroupBloodType' + bloodType + '"><h4>' + (bloodType.charAt(0).toUpperCase() + bloodType.substr(1)) + '</h4><div id="GroupBloodType' + bloodType + '">';
+        ids.forEach(function(id) {
+            str += '<button id="chara' + id + '" onclick="loadTab(' + id + ')" class="' + (id.toString() === currId.toString() ? "selected" : "") + '">' + getNameFromJson(allProfiles[id]) + '</button>';
+        });
+        str += "</div></nothing>";
+    }
+    document.getElementById("profileList").innerHTML = str;
+
+    doesGroup = 3;
+    sortGroupedProfiles();
+    sortProfiles();
+}
+
 function groupByCompletion() {
-    document.getElementById("dontGroup").classList.remove("selected");
-    document.getElementById("groupFamilyName").classList.remove("selected");
-    document.getElementById("groupRace").classList.remove("selected");
-    document.getElementById("groupOrientation").classList.remove("selected");
+    groupByRemoveAll();
     document.getElementById("groupCompletion").classList.add("selected");
 
     let str = "";

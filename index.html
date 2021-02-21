@@ -43,6 +43,7 @@
                     <button id="groupFamilyName" onclick="groupByFamilyName()">Group by Family Name</button>
                     <button id="groupRace" onclick="groupByRace()">Group by Race</button>
                     <button id="groupOrientation" onclick="groupByOrientation()">Group by Sexual Orientation</button>
+                    <button id="groupBloodType" onclick="groupByBloodType()">Group by Blood Type</button>
                     <button id="groupCompletion" onclick="groupByCompletion()">Group by Profile Completion</button>
                 </p>
             </div>
@@ -106,6 +107,20 @@
                     <input type="color" class="colorPreview" id="leftEyeColorPreview"/><br/>
                     Right Eye Color: <input type="text" class="colorText" id="rightEyeColor" name="rightEyeColor" placeholder="Hex value"/>
                     <input type="color" class="colorPreview" id="rightEyeColorPreview"/><br/>
+                </span>
+                <hr/>
+                <h3>Medical</h3>
+                Blood type:
+                <select id="bloodType" name="bloodType">
+                    <option disabled selected value> -- select an option -- </option>
+                    <option value="ab">AB</option>
+                    <option value="a">A</option>
+                    <option value="b">B</option>
+                    <option value="o">O</option>
+                    <option value="other">Other</option>
+                </select>
+                <span id="bloodTypeContainer" class="hidden">
+                    <input type="text" name="bloodTypeOther" placeholder="Specify your blood type"/>
                 </span>
                 <hr/>
                 <h3>Sexuality</h3>
@@ -187,6 +202,8 @@
             <div id="repartitionContainer">
                 <h4>Gender repartition:</h4>
                 <div id="repartitionGender"></div>
+                <h4>Blood type repartition:</h4>
+                <div id="repartitionBloodType"></div>
                 <span id="repartitionNsfw">
                     <h4>Orientation repartition:</h4>
                     <div id="repartitionSexuality"></div>
