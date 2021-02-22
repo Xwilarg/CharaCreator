@@ -1,6 +1,7 @@
 let comparatorTable = undefined;
 let hobbyTable = undefined;
 let fetishTable = undefined;
+let diseaseTable = undefined;
 
 let last = "main";
 
@@ -16,6 +17,7 @@ function displayComparator(id) {
     document.getElementById("generalComparationTable").classList.add("hidden");
     document.getElementById("hobbyComparationTable").classList.add("hidden");
     document.getElementById("fetishComparationTable").classList.add("hidden");
+    document.getElementById("diseaseComparationTable").classList.add("hidden");
 
     switch (id) {
         case "main":
@@ -37,6 +39,13 @@ function displayComparator(id) {
             document.getElementById("fetishComparationTable").classList.remove("hidden");
             last = "fetish";
             loadComparatorFetish();
+            break;
+
+        case "disease":
+            document.getElementById("buttonDiseaseComparator").classList.add("selected");
+            document.getElementById("diseaseComparationTable").classList.remove("hidden");
+            last = "disease";
+            loadComparatorDisease();
             break;
     }
 }
@@ -155,6 +164,48 @@ function loadComparatorFetish() {
         data: data,
         rowHeaders: true,
         colHeaders: ["Fetish", "Characters"],
+        editor: false,
+        dropdownMenu: true,
+        filters: true,
+        dropdownMenu: ['filter_by_condition', 'filter_by_value', 'filter_action_bar'],
+        columnSorting: true
+    });
+}
+
+function loadComparatorDisease() {
+    if (diseaseTable !== undefined) {
+        diseaseTable.destroy();
+    }
+
+    let data = [];
+
+    // DISEASE ELEMENTS: Disease name, all names
+    let diseases = {};
+    for (const [_, json] of Object.entries(allProfiles)) {
+        if (json.diseasesArray !== undefined) {
+            json.diseasesArray.forEach(e => {
+                if (diseases[e.diseaseNamePart] === undefined) {
+                    diseases[e.diseaseNamePart] = [ getName(json) ];
+                } else {
+                    diseases[e.diseaseNamePart].push(getName(json));
+                }
+            });
+        }
+    }
+
+    for (const [hobby, names] of Object.entries(diseases)) {
+        data.push([hobby, names.join(", ")]);
+    }
+
+    if (data.length === 0) {
+        data.push(["", ""]);
+    }
+
+    diseaseTable = new Handsontable(document.getElementById("diseaseComparationTable"), {
+        licenseKey: "non-commercial-and-evaluation",
+        data: data,
+        rowHeaders: true,
+        colHeaders: ["Disease", "Characters"],
         editor: false,
         dropdownMenu: true,
         filters: true,
