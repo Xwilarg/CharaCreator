@@ -195,6 +195,7 @@ function addDisease() {
         <option disabled selected value> -- select an option -- </option>
         <option value="other">Other</option>
         <optgroup label="Haematology">
+            <option value="anemia">Anemia</option>
             <option value="haemophilia">Haemophilia</option>
         </optgroup>
         <optgroup label="Neurology and Psychiatry">
@@ -209,6 +210,10 @@ function addDisease() {
         </optgroup>
         <optgroup label="Oncology">
             <option value="cancer">Cancer</option>
+        </optgroup>
+        <optgroup label="Psychiatry">
+            <option value="did">Dissociative identity disorder</option>
+            <option value="schizophrenia">Schizophrenia</option>
         </optgroup>
         <optgroup label="Pulmonology">
             <option value="asthma">Asthma</option>
