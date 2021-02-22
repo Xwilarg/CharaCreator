@@ -195,20 +195,23 @@ function addDisease() {
         <option disabled selected value> -- select an option -- </option>
         <option value="other">Other</option>
         <optgroup label="Haematology">
-            <option value="haemophilia" title="Easy and prolonged bleeding">Haemophilia</option>
+            <option value="haemophilia">Haemophilia</option>
         </optgroup>
         <optgroup label="Neurology and Psychiatry">
-            <option value="dementia" title="Decreased ability to think and remember, emotional problems, problems with language, decreased motivation">Dementia</option>
-            <option value="depression" title="Low mood, low self-esteem, loss of interest in normally enjoyable activities, low energy, pain without a clear cause">Depression</option>
-            <option value="epilepsy" title="Periods of vigorous shaking, nearly undetectable spells">Epilepsy</option>
+            <option value="dementia">Dementia</option>
+            <option value="epilepsy">Epilepsy</option>
+            <option value="panic_disorder">Panic Disorder</option>
         </optgroup>
         <optgroup label="Ophthalmology">
-            <option value="cataract" title="Faded colors, blurry vision, halos around light, trouble with bright lights, trouble seeing at night">Cataract</option>
-            <option value="glaucoma" title="Vision loss, eye pain, mid-dilated pupil, redness of the eye, nausea">Glaucoma</option>
-            <option value="refactive_error" title="Blurry vision, double vision, headaches, eye strain">Refractive error</option>
+            <option value="cataract">Cataract</option>
+            <option value="hyperopia">Hyperopia</option>
+            <option value="myopia">Myopia</option>
+        </optgroup>
+        <optgroup label="Oncology">
+            <option value="cancer">Cancer</option>
         </optgroup>
         <optgroup label="Pulmonology">
-            <option value="asthma" title="Recurring episodes of wheezing, coughing, chest tightness, shortness of breath">Asthma</option>
+            <option value="asthma">Asthma</option>
         </optgroup>
     </select>
     <br/>

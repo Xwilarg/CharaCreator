@@ -5,6 +5,9 @@ function loadRepartition() {
         document.getElementById("repartitionNsfw").classList.add("hidden");
     }
 
+    let races = { };
+    let raceLength = 0;
+
     let genders = { male: 0, female: 0 };
     let genderLength = 0;
 
@@ -15,9 +18,15 @@ function loadRepartition() {
     let sexualityLength = 0;
 
     for (const [_, val] of Object.entries(allProfiles)) {
+        let race = val.race;
         let gender = val.gender;
         let sexuality = val.orientation;
         let bloodType = val.bloodType;
+        if (race !== "") {
+            if (races[race] === undefined) races[race] = 1;
+            else races[race]++;
+            raceLength++;
+        }
         if (gender !== "") {
             if (genders[gender] === undefined) genders[gender] = 1;
             else genders[gender]++;
@@ -45,6 +54,11 @@ function loadRepartition() {
     }
 
     let str = "";
+    for (const [name, val] of Object.entries(races)) {
+        str += name + ": " + (val * 100 / raceLength).toFixed(2) + "%<br/>";
+    }
+    document.getElementById("repartitionRace").innerHTML = str;
+    str = "";
     for (const [name, val] of Object.entries(genders)) {
         str += name + ": " + (val * 100 / genderLength).toFixed(2) + "%<br/>";
     }
