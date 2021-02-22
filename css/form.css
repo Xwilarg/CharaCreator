@@ -22,16 +22,6 @@ button, #github {
     transition-duration: 0.4s;
 }
 
-button:hover, #github:hover {
-    background-color: #777;
-    color: white;
-}
-
-.selected:hover {
-    background-color: rgb(255, 85, 85);
-    color: white;
-}
-
 img {
     width: 80px;
     height: 100px;
@@ -92,8 +82,27 @@ textarea {
     font-size: .8em;
 }
 
+.favorite {
+    border: gold solid;
+}
+
 .selected {
     border: red solid;
+}
+
+button:hover, #github:hover {
+    background-color: #777;
+    color: white;
+}
+
+.favorite:hover {
+    background-color: rgb(211, 201, 68);
+    color: white;
+}
+
+.selected:hover {
+    background-color: rgb(255, 85, 85);
+    color: white;
 }
 
 #profileDisplay {

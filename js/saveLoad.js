@@ -15,11 +15,7 @@ function getNameFromJson(json) {
 }
 
 function dontGroup() {
-    document.getElementById("dontGroup").classList.add("selected");
-    document.getElementById("groupFamilyName").classList.remove("selected");
-    document.getElementById("groupRace").classList.remove("selected");
-    document.getElementById("groupOrientation").classList.remove("selected");
-    document.getElementById("groupCompletion").classList.remove("selected");
+    groupByRemoveAll();
 
     let str = "";
     for (const [id, json] of Object.entries(allProfiles)) {
@@ -33,11 +29,35 @@ function dontGroup() {
 
 function groupByRemoveAll() {
     document.getElementById("dontGroup").classList.remove("selected");
+    document.getElementById("groupFavorite").classList.remove("selected");
     document.getElementById("groupFamilyName").classList.remove("selected");
     document.getElementById("groupRace").classList.remove("selected");
     document.getElementById("groupOrientation").classList.remove("selected");
     document.getElementById("groupCompletion").classList.remove("selected");
     document.getElementById("groupBloodType").classList.remove("selected");
+}
+
+function groupByFavorite() {
+    groupByRemoveAll();
+    document.getElementById("groupFavorite").classList.add("selected");
+
+    let str = "";
+    let names = { Favorite: [], Other: [] };
+    for (const [id, json] of Object.entries(allProfiles)) {
+        names[json.favorite ? "Favorite" : "Other"].push(id);
+    }
+    for (const [lastName, ids] of Object.entries(names)) {
+        str += '<nothing id="categoryGroupFavorite' + lastName + '"><h4>' + lastName + '</h4><div id="GroupFavorite' + lastName + '">';
+        ids.forEach(function(id) {
+            str += '<button id="chara' + id + '" onclick="loadTab(' + id + ')" class="' + (id.toString() === currId.toString() ? "selected" : "") + '">' + getNameFromJson(allProfiles[id]) + '</button>';
+        });
+        str += "</div></nothing>";
+    }
+    document.getElementById("profileList").innerHTML = str;
+
+    doesGroup = 6;
+    sortGroupedProfiles();
+    sortProfiles();
 }
 
 function groupByFamilyName() {
@@ -132,7 +152,7 @@ function groupByBloodType() {
     }
     document.getElementById("profileList").innerHTML = str;
 
-    doesGroup = 3;
+    doesGroup = 4;
     sortGroupedProfiles();
     sortProfiles();
 }
@@ -174,7 +194,7 @@ function groupByCompletion() {
     }
     document.getElementById("profileList").innerHTML = str;
 
-    doesGroup = 4;
+    doesGroup = 5;
     sortGroupedProfiles();
     sortProfiles();
 }
@@ -197,6 +217,10 @@ function sortProfiles(id = "profileList") {
         return aInner > bInner ? 1 : -1;
     }).forEach(function(div) {
         div.parentElement.appendChild(div);
+        let elem = div.id.substr(5);
+        if (allProfiles[elem] !== undefined && allProfiles[elem].favorite) {
+            div.classList.add("favorite");
+        }
     });
 }
 
@@ -261,12 +285,16 @@ function clearCurrentInternal(nodes) {
         }
         switch (n.nodeName) {
             case "INPUT": case "TEXTAREA": case "SELECT":
-                n.value = "";
-                let container = document.getElementById(n.name + "Container");
-                // We put the "hidden" attribute back
-                if (container !== null) {
-                    container.classList.remove("wasHidden");
-                    container.classList.add("hidden");
+                if (n.type === "checkbox") {
+                    n.checked = false;
+                } else {
+                    n.value = "";
+                    let container = document.getElementById(n.name + "Container");
+                    // We put the "hidden" attribute back
+                    if (container !== null) {
+                        container.classList.remove("wasHidden");
+                        container.classList.add("hidden");
+                    }
                 }
                 break;
         }
@@ -288,6 +316,13 @@ function saveCurrent(nodes = document.getElementById("mainSection").childNodes, 
                 if (n.type === "checkbox") {
                     if (arr === undefined) json[n.name] = n.checked;
                     else arr[n.name] = n.checked;
+                    if (n.name === "favorite") {
+                        if (n.checked) {
+                            document.getElementById("chara" + currId).classList.add("favorite");
+                        } else {
+                            document.getElementById("chara" + currId).classList.remove("favorite");
+                        }
+                    }
                     break;
                 }
             case "TEXTAREA":
