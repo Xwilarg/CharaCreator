@@ -7,6 +7,7 @@
         <link rel="stylesheet" type="text/css" href="css/relationship.css"/>
         <link href="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.css" rel="stylesheet"/>
         <script type="text/javascript" src="js/settings.js"></script>
+        <script type="text/javascript" src="js/addArray.js"></script>
         <script type="text/javascript" src="js/autocalculation.js"></script>
         <script type="text/javascript" src="js/saveLoad.js"></script>
         <script type="text/javascript" src="js/form.js"></script>
@@ -119,8 +120,15 @@
                     <option value="o">O</option>
                     <option value="other">Other</option>
                 </select>
+                <br/><br/>
+                Medical conditions:<br/>
                 <span id="bloodTypeContainer" class="hidden">
                     <input type="text" name="bloodTypeOther" placeholder="Specify your blood type"/>
+                </span>
+                <span>
+                    <div id="diseasesArray"></div>
+                    <br/>
+                    <button onclick="addDisease()">Add</button>
                 </span>
                 <hr/>
                 <h3>Sexuality</h3>

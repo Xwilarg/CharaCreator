@@ -363,6 +363,15 @@ function loadCurrentInternal(json) {
                         loadCurrentInternal(e);
                     });
                     break;
+
+                case "diseasesArray":
+                    arr = json[n.id];
+                    if (arr === undefined || arr.length === 0) break;
+                    arr.forEach(function(e) {
+                        addDisease();
+                        loadCurrentInternal(e);
+                    });
+                    break;
             }
         }
         switch (n.nodeName) {
