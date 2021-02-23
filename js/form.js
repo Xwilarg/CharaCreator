@@ -81,6 +81,7 @@ function exportData() {
     let current = allProfiles[currId];
     newJson.firstName = current.firstName;
     newJson.lastName = current.lastName;
+    newJson.pfp = current.pfp;
     newJson.fetishesArray = [];
     current.fetishesArray.forEach(function(e) {
         newJson.fetishesArray.push({ fetishNamePart: e.fetishNamePart.hashCode().toString() });
