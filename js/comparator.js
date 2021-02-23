@@ -57,7 +57,7 @@ function loadComparatorMain() {
 
     let data = [];
 
-    // GENERAL ELEMENTS: Name, Age, Height, Weight, BMI, Description
+    // GENERAL ELEMENTS: Name, Age, Height, Weight, BMI, Blood type, Description
     for (const [_, json] of Object.entries(allProfiles)) {
         let arr = [];
         arr.push(getName(json));
@@ -66,19 +66,20 @@ function loadComparatorMain() {
         arr.push(json.weight);
         let bmi = (json.weight / ((json.height / 100) * (json.height / 100))).toFixed(2);
         arr.push(isNaN(bmi) ? "" : bmi);
+        arr.push(json.bloodType);
         arr.push(json.shortDescription);
         data.push(arr);
     }
 
     if (data.length === 0) {
-        data.push(["", "", "", "", "", ""]);
+        data.push(["", "", "", "", "", "", ""]);
     }
 
     comparatorTable = new Handsontable(document.getElementById("generalComparationTable"), {
         licenseKey: "non-commercial-and-evaluation",
         data: data,
         rowHeaders: true, // Row headers (1, 2, 3...)
-        colHeaders: ["Name", "Age", "Height", "Weight", "BMI", "Description"], // Column headers
+        colHeaders: ["Name", "Age", "Height", "Weight", "BMI", "Blood Type", "Description"], // Column headers
         editor: false, // Can't edit cells
         dropdownMenu: true, // Drop down menu to display filters
         filters: true, // Enable filters
