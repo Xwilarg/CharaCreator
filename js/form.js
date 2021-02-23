@@ -164,7 +164,7 @@ function formCtor() {
     // Add check when a select is changed
     Array.prototype.slice.call(document.getElementsByTagName("select")).forEach(elem => {
         elem.addEventListener("change", function (e) {
-            selectChange(e.originalTarget.id);
+            selectChange(e.target.id);
         });
     });
     // We recalculate the BMI when the user change the height or weight
