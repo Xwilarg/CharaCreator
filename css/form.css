@@ -22,12 +22,6 @@ button, #github {
     transition-duration: 0.4s;
 }
 
-img {
-    width: 80px;
-    height: 100px;
-    position: absolute;
-}
-
 html {
     background-color: #ddd;
 }
@@ -37,7 +31,18 @@ html, input, textarea, button {
 }
 
 #introContainer {
-    margin-left: 7em;
+    margin-left: 8em;
+}
+
+img {
+    width: 7em;
+    height: 7em;
+    border-radius: 50%;
+    position: absolute;
+}
+
+img:hover {
+    cursor: pointer;
 }
 
 span {

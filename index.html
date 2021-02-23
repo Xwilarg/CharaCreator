@@ -50,7 +50,7 @@
                 </p>
             </div>
             <div class="objectContainer">
-                <img href=""/>
+                <img name="pfp" onclick="uploadPfp()"/>
                 <div id="introContainer">
                     <span>
                         <input type="text" name="firstName" placeholder="First Name"/>
@@ -182,7 +182,8 @@
                 <button onclick="upload()">Upload</button>
                 <h4>Export</h4>
                 <button onclick="exportData()">Export Anonymous Data</button>
-                <input type="file" id="uploadInternal" accept=".zip" hidden/>
+                <input type="file" id="uploadInternal" accept="application/zip" hidden/>
+                <input type="file" id="uploadPfpInternal" accept="image/png,image/jpeg" hidden/>
             </div>
             <input type="checkbox" name="isExport" hidden/>
         </div>

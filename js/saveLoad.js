@@ -284,6 +284,10 @@ function clearCurrentInternal(nodes) {
             clearCurrentInternal(n.childNodes);
         }
         switch (n.nodeName) {
+            case "IMG":
+                n.src = "";
+                break;
+
             case "INPUT": case "TEXTAREA": case "SELECT":
                 if (n.type === "checkbox") {
                     n.checked = false;
@@ -312,6 +316,11 @@ function saveCurrent(nodes = document.getElementById("mainSection").childNodes, 
             saveCurrent(n.childNodes, json);
         }
         switch (n.nodeName) {
+            case "IMG":
+                if (arr === undefined) json[n.name] = n.src;
+                else arr[n.name] = n.src;
+                break;
+
             case "INPUT":
                 if (n.type === "checkbox") {
                     if (arr === undefined) json[n.name] = n.checked;
@@ -325,6 +334,7 @@ function saveCurrent(nodes = document.getElementById("mainSection").childNodes, 
                     }
                     break;
                 }
+
             case "TEXTAREA":
                 if (n.name.length > 0 && !n.name.endsWith("Other")) { // We ignore "other" input field since they are associated with a select
                     if (arr === undefined) json[n.name] = n.value;
@@ -410,6 +420,10 @@ function loadCurrentInternal(json) {
             }
         }
         switch (n.nodeName) {
+            case "IMG":
+                n.src = json[n.name];
+                break;
+
             case "INPUT": case "TEXTAREA":
                 if (n.type === "color") break;
                 if (n.type === "checkbox") {

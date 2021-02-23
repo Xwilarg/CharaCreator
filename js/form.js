@@ -57,6 +57,10 @@ function upload() {
     document.getElementById("uploadInternal").click();
 }
 
+function uploadPfp() {
+    document.getElementById("uploadPfpInternal").click();
+}
+
 Object.defineProperty(String.prototype, 'hashCode', { // From https://stackoverflow.com/a/7616484
     value: function() {
         let hash = 0, i, chr;
@@ -160,6 +164,16 @@ function formCtor() {
     document.getElementById("uploadInternal").addEventListener('change', () => {
         let file = document.getElementById("uploadInternal").files[0]; // Get user file
         if (file) loadZip(file);
+    });
+    document.getElementById("uploadPfpInternal").addEventListener('change', () => {
+        let file = document.getElementById("uploadPfpInternal").files[0]; // Get user file
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function(val) {
+                document.getElementsByName("pfp")[0].src = val.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
     });
     // Add check when a select is changed
     Array.prototype.slice.call(document.getElementsByTagName("select")).forEach(elem => {
