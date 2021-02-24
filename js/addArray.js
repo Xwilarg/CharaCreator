@@ -169,6 +169,7 @@ function addFetish() {
         <option value="spanking">Spanking</option>
         <option value="asphyxiophilia">Strangulation</option>
         <option value="transvestism">Transvestism</option>
+        <option value="underwears">Underwears</option>
         <option value="uniform">Uniforms</option>
         <option value="urolagnia">Urination</option>
         <option value="voyeurism">Voyeurism</option>
