@@ -137,7 +137,7 @@ function addLike() {
     // innerHtml += get rid of input value so we need to use appendChild instead
     container.appendChild(div);
     document.getElementById("likeNamePart" + likeId).addEventListener("change", function (e) {
-        selectChange(e.originalTarget.id);
+        selectChange(e.target.id);
     });
 }
 
@@ -150,11 +150,13 @@ function addFetish() {
     div.innerHTML = `
     <select value="" type="text" name="fetishNamePart" id="fetishNamePart` + fetishId + `">
         <option disabled selected value> -- select an option -- </option>
+        <option value="anal">Anal</option>
         <option value="autozoophilia">Animal roleplay</option>
         <option value="maschalagnia">Armpits</option>
         <option value="bondage">Bondage</option>
         <option value="lactophilia">Breast milk</option>
         <option value="pygophilia">Buttocks</option>
+        <option value="domination">Domination</option>
         <option value="exhibitionism">Exhibitionism</option>
         <option value="podophilia">Feet</option>
         <option value="trichophilia">Hair</option>
@@ -163,6 +165,8 @@ function addFetish() {
         <option value="shoes">Shoes</option>
         <option value="sthenolagnia">Muscles</option>
         <option value="olfactophilia">Odors</option>
+        <option value="roleplay">Roleplay</option>
+        <option value="spanking">Spanking</option>
         <option value="asphyxiophilia">Strangulation</option>
         <option value="transvestism">Transvestism</option>
         <option value="uniform">Uniforms</option>
@@ -180,7 +184,7 @@ function addFetish() {
     // innerHtml += get rid of input value so we need to use appendChild instead
     container.appendChild(div);
     document.getElementById("fetishNamePart" + fetishId).addEventListener("change", function (e) {
-        selectChange(e.originalTarget.id);
+        selectChange(e.target.id);
     });
 }
 
@@ -229,6 +233,6 @@ function addDisease() {
     // innerHtml += get rid of input value so we need to use appendChild instead
     container.appendChild(div);
     document.getElementById("diseaseNamePart" + diseaseId).addEventListener("change", function (e) {
-        selectChange(e.originalTarget.id);
+        selectChange(e.target.id);
     });
 }
