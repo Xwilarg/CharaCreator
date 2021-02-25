@@ -93,7 +93,7 @@ function addLike() {
             <option value="chemistry">Chemistry</option>
             <option value="geology">Geology</option>
             <option value="human_biology">Human biology</option>
-            <option value="computer_science">Computer science</option>
+            <option value="computer">Computer</option>
             <option value="mechanics">Mechanics</option>
             <option value="zoology">Zoology</option>
         </optgroup>
