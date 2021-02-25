@@ -100,6 +100,8 @@ function exportData() {
 function loadZipInternal(zip, isExport) {
     if (!isExport) { // We don't reset everything when importing exported data
         resetProfiles();
+    } else {
+        addProfile();
     }
     let isFirst = true;
     Object.keys(zip.files).forEach(function (filename) {
