@@ -15,6 +15,7 @@
         <script type="text/javascript" src="js/characterInit.js"></script>
         <script type="text/javascript" src="js/sectionManager.js"></script>
         <script type="text/javascript" src="js/comparator.js"></script>
+        <script type="text/javascript" src="js/intro.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.5.0/jszip.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.js"></script>
@@ -22,224 +23,231 @@
         <script type="text/javascript" src="js/relationship.js"></script>
     </head>
     <body>
-        <div class="objectContainer">
-            <button id="buttonMainSection" onclick="displaySection('main')" class="selected">Profiles</button>
-            <button id="buttonComparatorSection" onclick="displaySection('comparator')">Comparator</button>
-            <button id="buttonRelationshipSection" onclick="displaySection('relationship')">Relationship</button>
-            <button id="buttonRepartitionSection" onclick="displaySection('repartition')">Repartition</button>
-            <button id="buttonSettingsSection" onclick="displaySection('settings')">Settings</button>
-            <a id="github" target="_blank" href="https://github.com/Xwilarg/CharaCreator/">GitHub</a>
+        <div id="introPopup">
+            CharaCreator is a website that allow you to easily create characters and use different tools to compare them.
+            <h3>What do you want to do?</h3>
+            <button onclick="introNewProfile()">New Profile</button> <button onclick="introLoadProfile()">Load Saved Profile</button>
         </div>
-        <!-- #region main -->
-        <div id="mainSection" class="objectContainer backgroundContainer">
+        <span id="mainContent" class="hidden">
             <div class="objectContainer">
-                <div id="profileList">
-                    <button id="chara0" onclick="loadTab(0)" class="selected">Empty</button>
-                </div>
-                <button onclick="addProfile()">+</button>
-                <hr/>
-                <p id="profileDisplay">
-                    Display Setting:<br/>
-                    <button id="dontGroup" class="selected" onclick="dontGroup()">Don't Group</button>
-                    <button id="groupFavorite" onclick="groupByFavorite()">Group by Favorite</button>
-                    <button id="groupFamilyName" onclick="groupByFamilyName()">Group by Family Name</button>
-                    <button id="groupRace" onclick="groupByRace()">Group by Race</button>
-                    <button id="groupOrientation" onclick="groupByOrientation()">Group by Sexual Orientation</button>
-                    <button id="groupBloodType" onclick="groupByBloodType()">Group by Blood Type</button>
-                    <button id="groupCompletion" onclick="groupByCompletion()">Group by Profile Completion</button>
-                </p>
+                <button id="buttonMainSection" onclick="displaySection('main')" class="selected">Profiles</button>
+                <button id="buttonComparatorSection" onclick="displaySection('comparator')">Comparator</button>
+                <button id="buttonRelationshipSection" onclick="displaySection('relationship')">Relationship</button>
+                <button id="buttonRepartitionSection" onclick="displaySection('repartition')">Repartition</button>
+                <button id="buttonSettingsSection" onclick="displaySection('settings')">Settings</button>
+                <a id="github" target="_blank" href="https://github.com/Xwilarg/CharaCreator/">GitHub</a>
             </div>
-            <div class="objectContainer">
-                <img name="pfp" onclick="uploadPfp()"/>
-                <div id="introContainer">
-                    <span>
-                        <input type="text" name="firstName" placeholder="First Name"/>
-                    </span>
-                    <span id="middleNameContainer" class="hidden">
-                        <input type="text" name="middleName" placeholder="Middle Name"/>
-                    </span>
-                    <span>
-                        <input type="text" name="lastName" placeholder="Last Name"/>
-                    </span>
-                    <button onclick="display('middleName')">Toggle<br/>Middle Name</button>
-                    <button onclick="display('alias')">Toggle<br/>Alias</button>
-                    <br/>
-                    <span id="aliasContainer" class="hidden">
-                        <input type="text" name="alias" placeholder="Is there any other way your character is called?" class="long"/>
-                    </span>
-                    <br/>
-                    <span>
-                        Gender:
-                        <select id="gender" name="gender">
-                            <option disabled selected value> -- select an option -- </option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
-                        <span id="genderContainer" class="hidden">
-                            <input type="text" name="genderOther" placeholder="Specify your gender"/>
+            <!-- #region main -->
+            <div id="mainSection" class="objectContainer backgroundContainer">
+                <div class="objectContainer">
+                    <div id="profileList">
+                        <button id="chara0" onclick="loadTab(0)" class="selected">Empty</button>
+                    </div>
+                    <button onclick="addProfile()">+</button>
+                    <hr/>
+                    <p id="profileDisplay">
+                        Display Setting:<br/>
+                        <button id="dontGroup" class="selected" onclick="dontGroup()">Don't Group</button>
+                        <button id="groupFavorite" onclick="groupByFavorite()">Group by Favorite</button>
+                        <button id="groupFamilyName" onclick="groupByFamilyName()">Group by Family Name</button>
+                        <button id="groupRace" onclick="groupByRace()">Group by Race</button>
+                        <button id="groupOrientation" onclick="groupByOrientation()">Group by Sexual Orientation</button>
+                        <button id="groupBloodType" onclick="groupByBloodType()">Group by Blood Type</button>
+                        <button id="groupCompletion" onclick="groupByCompletion()">Group by Profile Completion</button>
+                    </p>
+                </div>
+                <div class="objectContainer">
+                    <img name="pfp" onclick="uploadPfp()"/>
+                    <div id="introContainer">
+                        <span>
+                            <input type="text" name="firstName" placeholder="First Name"/>
+                        </span>
+                        <span id="middleNameContainer" class="hidden">
+                            <input type="text" name="middleName" placeholder="Middle Name"/>
+                        </span>
+                        <span>
+                            <input type="text" name="lastName" placeholder="Last Name"/>
+                        </span>
+                        <button onclick="display('middleName')">Toggle<br/>Middle Name</button>
+                        <button onclick="display('alias')">Toggle<br/>Alias</button>
+                        <br/>
+                        <span id="aliasContainer" class="hidden">
+                            <input type="text" name="alias" placeholder="Is there any other way your character is called?" class="long"/>
                         </span>
                         <br/>
                         <span>
-                            <input type="text" name="race" placeholder="Race (Human? Elf?)"/>
+                            Gender:
+                            <select id="gender" name="gender">
+                                <option disabled selected value> -- select an option -- </option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <span id="genderContainer" class="hidden">
+                                <input type="text" name="genderOther" placeholder="Specify your gender"/>
+                            </span>
+                            <br/>
+                            <span>
+                                <input type="text" name="race" placeholder="Race (Human? Elf?)"/>
+                            </span>
+                            <span>
+                                <input type="date" id="birthdate" name="birthdate" placeholder="Birth date"/>
+                            </span>
+                            - <span id="age"></span> years old
                         </span>
-                        <span>
-                            <input type="date" id="birthdate" name="birthdate" placeholder="Birth date"/>
-                        </span>
-                        - <span id="age"></span> years old
-                    </span>
-                    <textarea class="shortTextArea" name="shortDescription" placeholder="Sum up of the most important information about this character."></textarea>
-                    Favorite? <input name="favorite" type="checkbox"/>
-                </div>
-                <hr/>
-                <h3>Body type</h3>
-                <span>
-                    <input type="number" id="height" name="height" placeholder="Height" class="small"/>
-                </span> cm
-                <span>
-                    <input type="number" id="weight" name="weight" placeholder="Weight" class="small"/>
-                </span> kg
-                <br/>
-                BMI: <span id="bmi"></span> - <span id="bmiText"></span>
-                <hr/>
-                <h3>Appearance</h3>
-                <span>
-                    Hair Color: <input type="text" class="colorText" id="hairColor" name="hairColor" placeholder="Hex value"/>
-                    <input type="color" class="colorPreview" id="hairColorPreview"/><br/>
-                    Left Eye Color: <input type="text" class="colorText" id="leftEyeColor" name="leftEyeColor" placeholder="Hex value"/>
-                    <input type="color" class="colorPreview" id="leftEyeColorPreview"/><br/>
-                    Right Eye Color: <input type="text" class="colorText" id="rightEyeColor" name="rightEyeColor" placeholder="Hex value"/>
-                    <input type="color" class="colorPreview" id="rightEyeColorPreview"/><br/>
-                </span>
-                <hr/>
-                <h3>Medical</h3>
-                Blood type:
-                <select id="bloodType" name="bloodType">
-                    <option disabled selected value> -- select an option -- </option>
-                    <option value="ab">AB</option>
-                    <option value="a">A</option>
-                    <option value="b">B</option>
-                    <option value="o">O</option>
-                    <option value="other">Other</option>
-                </select>
-                <br/>
-                <span id="bloodTypeContainer" class="hidden">
-                    <input type="text" name="bloodTypeOther" placeholder="Specify your blood type"/>
-                </span>
-                <br/>
-                Medical conditions:<br/>
-                <span>
-                    <div id="diseasesArray"></div>
+                        <textarea class="shortTextArea" name="shortDescription" placeholder="Sum up of the most important information about this character."></textarea>
+                        Favorite? <input name="favorite" type="checkbox"/>
+                    </div>
+                    <hr/>
+                    <h3>Body type</h3>
+                    <span>
+                        <input type="number" id="height" name="height" placeholder="Height" class="small"/>
+                    </span> cm
+                    <span>
+                        <input type="number" id="weight" name="weight" placeholder="Weight" class="small"/>
+                    </span> kg
                     <br/>
-                    <button onclick="addDisease()">Add</button>
-                </span>
-                <hr/>
-                <h3>Sexuality</h3>
-                <span id="nsfwEnabled" class="hidden">
-                    Orientation:
-                    <select id="orientation" name="orientation">
+                    BMI: <span id="bmi"></span> - <span id="bmiText"></span>
+                    <hr/>
+                    <h3>Appearance</h3>
+                    <span>
+                        Hair Color: <input type="text" class="colorText" id="hairColor" name="hairColor" placeholder="Hex value"/>
+                        <input type="color" class="colorPreview" id="hairColorPreview"/><br/>
+                        Left Eye Color: <input type="text" class="colorText" id="leftEyeColor" name="leftEyeColor" placeholder="Hex value"/>
+                        <input type="color" class="colorPreview" id="leftEyeColorPreview"/><br/>
+                        Right Eye Color: <input type="text" class="colorText" id="rightEyeColor" name="rightEyeColor" placeholder="Hex value"/>
+                        <input type="color" class="colorPreview" id="rightEyeColorPreview"/><br/>
+                    </span>
+                    <hr/>
+                    <h3>Medical</h3>
+                    Blood type:
+                    <select id="bloodType" name="bloodType">
                         <option disabled selected value> -- select an option -- </option>
-                        <option value="heterosexual">Heterosexual</option>
-                        <option value="homosexual">Homosexual</option>
-                        <option value="bisexual">Bisexual</option>
-                        <option value="asexual">Asexual</option>
+                        <option value="ab">AB</option>
+                        <option value="a">A</option>
+                        <option value="b">B</option>
+                        <option value="o">O</option>
                         <option value="other">Other</option>
                     </select>
-                    <span id="orientationContainer" class="hidden">
-                        <input type="text" name="orientationOther" placeholder="Sexual orientation"/>
-                    </span>
-                    <h3>Fetichisms</h3>
-                    <span>
-                        <div id="fetishesArray"></div>
-                        <br/>
-                        <button onclick="addFetish()">Add</button>
-                    </span>
-                </span>
-                <span id="nsfwDisabled">
-                    NSFW need to be enabled in the settings
-                </span>
-                <hr/>
-                <h3>Center of Interests</h3>
-                <span>
-                    <div id="likesArray"></div>
                     <br/>
-                    <button onclick="addLike()">Add</button>
-                </span>
-                <hr/>
-                <h3>Trivia</h3>
-                Favorite drink: <input type="text" name="favoriteDrink"/><br/>
-                Favorite meal: <input type="text" name="favoriteMeal"/><br/>
-                Favorite dessert: <input type="text" name="favoriteDessert"/><br/>
-                Favorite smell: <input type="text" name="favoriteSmell"/><br/>
-                Favorite animal: <input type="text" name="favoriteAnimal"/>
-                <hr/>
-                <h3>Others</h3>
-                <textarea name="otherInfos" placeholder="Any other information that didn't fit anywhere? Insert them here"></textarea>
+                    <span id="bloodTypeContainer" class="hidden">
+                        <input type="text" name="bloodTypeOther" placeholder="Specify your blood type"/>
+                    </span>
+                    <br/>
+                    Medical conditions:<br/>
+                    <span>
+                        <div id="diseasesArray"></div>
+                        <br/>
+                        <button onclick="addDisease()">Add</button>
+                    </span>
+                    <hr/>
+                    <h3>Sexuality</h3>
+                    <span id="nsfwEnabled" class="hidden">
+                        Orientation:
+                        <select id="orientation" name="orientation">
+                            <option disabled selected value> -- select an option -- </option>
+                            <option value="heterosexual">Heterosexual</option>
+                            <option value="homosexual">Homosexual</option>
+                            <option value="bisexual">Bisexual</option>
+                            <option value="asexual">Asexual</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <span id="orientationContainer" class="hidden">
+                            <input type="text" name="orientationOther" placeholder="Sexual orientation"/>
+                        </span>
+                        <h3>Fetichisms</h3>
+                        <span>
+                            <div id="fetishesArray"></div>
+                            <br/>
+                            <button onclick="addFetish()">Add</button>
+                        </span>
+                    </span>
+                    <span id="nsfwDisabled">
+                        NSFW need to be enabled in the settings
+                    </span>
+                    <hr/>
+                    <h3>Center of Interests</h3>
+                    <span>
+                        <div id="likesArray"></div>
+                        <br/>
+                        <button onclick="addLike()">Add</button>
+                    </span>
+                    <hr/>
+                    <h3>Trivia</h3>
+                    Favorite drink: <input type="text" name="favoriteDrink"/><br/>
+                    Favorite meal: <input type="text" name="favoriteMeal"/><br/>
+                    Favorite dessert: <input type="text" name="favoriteDessert"/><br/>
+                    Favorite smell: <input type="text" name="favoriteSmell"/><br/>
+                    Favorite animal: <input type="text" name="favoriteAnimal"/>
+                    <hr/>
+                    <h3>Others</h3>
+                    <textarea name="otherInfos" placeholder="Any other information that didn't fit anywhere? Insert them here"></textarea>
+                </div>
+                <div class="objectContainer">
+                    <h4>Save / Upload</h4>
+                    <button onclick="save()">Save and Download</button>
+                    <button onclick="upload()">Upload</button>
+                    <h4>Export</h4>
+                    <button onclick="exportData()">Export Anonymous Data</button>
+                    <input type="file" id="uploadInternal" accept="application/zip" hidden/>
+                    <input type="file" id="uploadPfpInternal" accept="image/png,image/jpeg" hidden/>
+                </div>
+                <input type="checkbox" name="isExport" hidden/>
             </div>
-            <div class="objectContainer">
-                <h4>Save / Upload</h4>
-                <button onclick="save()">Save and Download</button>
-                <button onclick="upload()">Upload</button>
-                <h4>Export</h4>
-                <button onclick="exportData()">Export Anonymous Data</button>
-                <input type="file" id="uploadInternal" accept="application/zip" hidden/>
-                <input type="file" id="uploadPfpInternal" accept="image/png,image/jpeg" hidden/>
+            <!-- #endregion -->
+            <!-- #region comparator -->
+            <div id="comparatorSection" class="objectContainer backgroundContainer hidden">
+                <div class="objectContainer">
+                    <button id="buttonGeneralComparator" onclick="displayComparator('main')" class="selected">General</button>
+                    <button id="buttonHobbyComparator" onclick="displayComparator('hobby')">Hobbies</button>
+                    <button id="buttonFetishComparator" onclick="displayComparator('fetish')" class="hidden">Fetishes</button>
+                    <button id="buttonDiseaseComparator" onclick="displayComparator('disease')">Diseases</button>
+                </div>
+                <div class="objectContainer">
+                    <div id="generalComparationTable"></div>
+                    <div id="hobbyComparationTable" class="hidden"></div>
+                    <div id="fetishComparationTable" class="hidden"></div>
+                    <div id="diseaseComparationTable" class="hidden"></div>
+                </div>
             </div>
-            <input type="checkbox" name="isExport" hidden/>
-        </div>
-        <!-- #endregion -->
-        <!-- #region comparator -->
-        <div id="comparatorSection" class="objectContainer backgroundContainer hidden">
-            <div class="objectContainer">
-                <button id="buttonGeneralComparator" onclick="displayComparator('main')" class="selected">General</button>
-                <button id="buttonHobbyComparator" onclick="displayComparator('hobby')">Hobbies</button>
-                <button id="buttonFetishComparator" onclick="displayComparator('fetish')" class="hidden">Fetishes</button>
-                <button id="buttonDiseaseComparator" onclick="displayComparator('disease')">Diseases</button>
-            </div>
-            <div class="objectContainer">
-                <div id="generalComparationTable"></div>
-                <div id="hobbyComparationTable" class="hidden"></div>
-                <div id="fetishComparationTable" class="hidden"></div>
-                <div id="diseaseComparationTable" class="hidden"></div>
-            </div>
-        </div>
-        <!-- #endregion -->
-        <!-- #region relationship -->
-        <div id="relationshipSection" class="objectContainer backgroundContainer hidden">
-            <div id="nodes">
-                <div id="network"></div>
-                <div id="loadingBar">
-                    <div id="outerBorder">
-                        <div id="border">
-                            <div id="bar"></div>
+            <!-- #endregion -->
+            <!-- #region relationship -->
+            <div id="relationshipSection" class="objectContainer backgroundContainer hidden">
+                <div id="nodes">
+                    <div id="network"></div>
+                    <div id="loadingBar">
+                        <div id="outerBorder">
+                            <div id="border">
+                                <div id="bar"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- #endregion -->
-        <!-- #region relationship -->
-        <div id="repartitionSection" class="objectContainer backgroundContainer hidden">
-            <div id="repartitionContainer">
-                <h4>Race repartition:</h4>
-                <div id="repartitionRace"></div>
-                <h4>Gender repartition:</h4>
-                <div id="repartitionGender"></div>
-                <h4>Blood type repartition:</h4>
-                <div id="repartitionBloodType"></div>
-                <span id="repartitionNsfw">
-                    <h4>Orientation repartition:</h4>
-                    <div id="repartitionSexuality"></div>
-                </span>
+            <!-- #endregion -->
+            <!-- #region relationship -->
+            <div id="repartitionSection" class="objectContainer backgroundContainer hidden">
+                <div id="repartitionContainer">
+                    <h4>Race repartition:</h4>
+                    <div id="repartitionRace"></div>
+                    <h4>Gender repartition:</h4>
+                    <div id="repartitionGender"></div>
+                    <h4>Blood type repartition:</h4>
+                    <div id="repartitionBloodType"></div>
+                    <span id="repartitionNsfw">
+                        <h4>Orientation repartition:</h4>
+                        <div id="repartitionSexuality"></div>
+                    </span>
+                </div>
             </div>
-        </div>
-        <!-- #endregion -->
-        <!-- #region settings -->
-        <div id="settingsSection" class="objectContainer backgroundContainer hidden">
-            <div id="settingsContainer">
-                Display NSFW fields: <input id="settings_nsfw" name="nsfw" type="checkbox"/>
+            <!-- #endregion -->
+            <!-- #region settings -->
+            <div id="settingsSection" class="objectContainer backgroundContainer hidden">
+                <div id="settingsContainer">
+                    Display NSFW fields: <input id="settings_nsfw" name="nsfw" type="checkbox"/>
+                </div>
             </div>
-        </div>
-        <!-- #endregion -->
+            <!-- #endregion -->
+        </span>
     </body>
 </html>

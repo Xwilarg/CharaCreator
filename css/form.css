@@ -167,3 +167,21 @@ input[type="number"] { /* Firefox*/
 #settingsContainer, #repartitionContainer {
     margin: 2em;
 }
+
+#introPopup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    background-color: white;
+    border: 1px solid black;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+    padding: 1em;
+}
+
+#mainContent {
+    width: 100%;
+}
