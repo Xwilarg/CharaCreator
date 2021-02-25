@@ -85,6 +85,7 @@ function loadRelationship() {
     nodes = [];
     links = [];
     loadRelationshipInternal("likesArray", "likeNamePart", "blue");
+    loadRelationshipInternal("diseasesArray", "diseaseNamePart", "green");
     if (settings.nsfw) {
         loadRelationshipInternal("fetishesArray", "fetishNamePart", "red");
     }
@@ -142,6 +143,7 @@ function loadRelationshipInternal(arrayName, partName, c, prefix) {
             let color;
             if (c === "red") color = "ff" + hexVal + hexVal;
             else if (c === "blue") color = "" + hexVal + hexVal + "ff";
+            else if (c === "green") color = "" + hexVal + "ff" + hexVal;
             else color = "000000";
             links.push({from: id1, to: id2, width: 4, selectionWidth: 6,
                 color: { color: color, highlight: color}});
