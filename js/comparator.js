@@ -13,6 +13,7 @@ function displayComparator(id) {
     document.getElementById("buttonGeneralComparator").classList.remove("selected");
     document.getElementById("buttonHobbyComparator").classList.remove("selected");
     document.getElementById("buttonFetishComparator").classList.remove("selected");
+    document.getElementById("buttonDiseaseComparator").classList.remove("selected");
 
     document.getElementById("generalComparationTable").classList.add("hidden");
     document.getElementById("hobbyComparationTable").classList.add("hidden");
