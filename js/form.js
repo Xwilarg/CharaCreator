@@ -82,13 +82,18 @@ function exportData() {
     newJson.firstName = current.firstName;
     newJson.lastName = current.lastName;
     newJson.pfp = current.pfp;
+    newJson.favoriteDrink = current.favoriteDrink.toLowerCase().hashCode().toString();
+    newJson.favoriteMeal = current.favoriteMeal.toLowerCase().hashCode().toString();
+    newJson.favoriteDessert = current.favoriteDessert.toLowerCase().hashCode().toString();
+    newJson.favoriteSmell = current.favoriteSmell.toLowerCase().hashCode().toString();
+    newJson.favoriteAnimal = current.favoriteAnimal.toLowerCase().hashCode().toString();
     newJson.fetishesArray = [];
     current.fetishesArray.forEach(function(e) {
-        newJson.fetishesArray.push({ fetishNamePart: e.fetishNamePart.hashCode().toString() });
+        newJson.fetishesArray.push({ fetishNamePart: e.fetishNamePart.toLowerCase().hashCode().toString() });
     });
     newJson.likesArray = [];
     current.likesArray.forEach(function(e) {
-        newJson.likesArray.push({ likeNamePart: e.likeNamePart.hashCode().toString() });
+        newJson.likesArray.push({ likeNamePart: e.likeNamePart.toLowerCase().hashCode().toString() });
     });
     zip.file("characters/" + getName(newJson) + ".json", JSON.stringify(newJson));
     zip.file("settings.json", JSON.stringify(settings));

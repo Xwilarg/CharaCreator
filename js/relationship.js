@@ -84,17 +84,21 @@ function padNumber(nb) {
 function loadRelationship() {
     nodes = [];
     links = [];
-    loadRelationshipInternal("likesArray", "likeNamePart", "blue");
-    loadRelationshipInternal("diseasesArray", "diseaseNamePart", "green");
+    loadRelationshipInternalFromArray("likesArray", "likeNamePart", "blue");
+    loadRelationshipInternalFromArray("diseasesArray", "diseaseNamePart", "green");
     if (settings.nsfw) {
-        loadRelationshipInternal("fetishesArray", "fetishNamePart", "red");
+        loadRelationshipInternalFromArray("fetishesArray", "fetishNamePart", "red");
     }
+    loadRelationshipInternalFromField("favoriteDrink", "yellow");
+    loadRelationshipInternalFromField("favoriteMeal", "yellow");
+    loadRelationshipInternalFromField("favoriteDessert", "yellow");
+    loadRelationshipInternalFromField("favoriteSmell", "yellow");
+    loadRelationshipInternalFromField("favoriteAnimal", "yellow");
     createNetwork(nodes, links);
 }
 
-function loadRelationshipInternal(arrayName, partName, c) {
+function loadRelationshipInternalFromArray(arrayName, partName, c) {
     let elems = {};
-    let filteredElems = {};
     // Create hobbies array
     for (const [id, json] of Object.entries(allProfiles)) {
         if (json[arrayName] !== undefined && json[arrayName].length > 0) {
@@ -102,10 +106,29 @@ function loadRelationshipInternal(arrayName, partName, c) {
                 if (json.isExport) {
                     return x[partName];
                 }
-                return x[partName].hashCode().toString();
+                return x[partName].toLowerCase().hashCode().toString();
             }), name: getName(json), isExport: json.isExport === true };
         }
     }
+    filterRelationshipInternal(elems, c);
+}
+
+function loadRelationshipInternalFromField(name, c) {
+    let elems = {};
+    // Create hobbies array
+    for (const [id, json] of Object.entries(allProfiles)) {
+        if (json[name] !== undefined && json[name] !== "" && json[name] !== "0") {
+            let rName;
+            if (json.isExport) rName = json[name];
+            else rName = json[name].toLowerCase().hashCode().toString();
+            elems[id] = { elems: [rName], name: getName(json), isExport: json.isExport === true };
+        }
+    }
+    filterRelationshipInternal(elems, c);
+}
+
+function filterRelationshipInternal(elems, c) {
+    let filteredElems = {};
     // Filter them
     for (const [id, json] of Object.entries(elems)) {
         let common = getContainedArray(elems, json.elems, id);
@@ -144,6 +167,7 @@ function loadRelationshipInternal(arrayName, partName, c) {
             if (c === "red") color = "ff" + hexVal + hexVal;
             else if (c === "blue") color = "" + hexVal + hexVal + "ff";
             else if (c === "green") color = "" + hexVal + "ff" + hexVal;
+            else if (c === "yellow") color = "ffff" + hexVal;
             else color = "000000";
             links.push({from: id1, to: id2, width: 4, selectionWidth: 6,
                 color: { color: color, highlight: color}});
