@@ -205,11 +205,18 @@ function addDisease() {
         <optgroup label="Haematology">
             <option value="anemia">Anemia</option>
             <option value="haemophilia">Haemophilia</option>
+            <option value="leukemia">Leukemia</option>
+            <option value="leukopenia">Leukopenia</option>
         </optgroup>
         <optgroup label="Neurology and Psychiatry">
             <option value="dementia">Dementia</option>
             <option value="epilepsy">Epilepsy</option>
             <option value="panic_disorder">Panic Disorder</option>
+        </optgroup>
+        <optgroup label="Neurosurgery">
+            <option value="paraplegia">Paraplegia</option>
+            <option value="spinal_cord_injury">Spinal cord injury</option>
+            <option value="tetraplegia">Tetraplegia</option>
         </optgroup>
         <optgroup label="Ophthalmology">
             <option value="cataract">Cataract</option>
@@ -218,6 +225,9 @@ function addDisease() {
         </optgroup>
         <optgroup label="Oncology">
             <option value="cancer">Cancer</option>
+        </optgroup>
+        <optgroup label="Orhopedics">
+            <option value="scoliosis">Scoliosis</option>
         </optgroup>
         <optgroup label="Psychiatry">
             <option value="did">Dissociative identity disorder</option>
