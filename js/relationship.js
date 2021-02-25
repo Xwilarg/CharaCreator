@@ -92,7 +92,7 @@ function loadRelationship() {
     createNetwork(nodes, links);
 }
 
-function loadRelationshipInternal(arrayName, partName, c, prefix) {
+function loadRelationshipInternal(arrayName, partName, c) {
     let elems = {};
     let filteredElems = {};
     // Create hobbies array
@@ -139,7 +139,7 @@ function loadRelationshipInternal(arrayName, partName, c, prefix) {
 
     for (const [id1, json] of Object.entries(allLinks)) {
         for (const [id2, value] of Object.entries(json)) {
-            let hexVal = padNumber((255 - (value * 255 / maxValue)).toString(16));
+            let hexVal = padNumber(Math.ceil((255 - (value * 255 / maxValue))).toString(16));
             let color;
             if (c === "red") color = "ff" + hexVal + hexVal;
             else if (c === "blue") color = "" + hexVal + hexVal + "ff";
