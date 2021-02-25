@@ -225,6 +225,24 @@ function loadZip(file) {
 }
 
 function formCtor() {
+    // Checkbox that allow to say that the character have no disease/fetish/etc...
+    document.getElementsByName("diseasesArrayNone")[0].addEventListener('change', (e) => {
+        if (e.target.checked) {
+            document.getElementById("diseasesArray").innerHTML = "";
+            document.getElementById("diseasesAddButton").disabled = true;
+        } else {
+            document.getElementById("diseasesAddButton").disabled = false;
+        }
+    });
+    document.getElementsByName("fetishesArrayNone")[0].addEventListener('change', (e) => {
+        if (e.target.checked) {
+            document.getElementById("fetishesArray").innerHTML = "";
+            document.getElementById("fetishesAddButton").disabled = true;
+        } else {
+            document.getElementById("fetishesAddButton").disabled = false;
+        }
+    });
+
     // Upload a file from the user computer and put all the values on the page
     document.getElementById("uploadInternal").addEventListener('change', () => {
         let file = document.getElementById("uploadInternal").files[0]; // Get user file

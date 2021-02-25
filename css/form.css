@@ -100,6 +100,11 @@ button:hover, #github:hover {
     color: white;
 }
 
+button:disabled {
+    background-color: #777;
+    color: white;
+}
+
 .favorite:hover {
     background-color: rgb(211, 201, 68);
     color: white;

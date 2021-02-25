@@ -172,9 +172,14 @@ function groupByCompletion() {
             if (docElem === null || docElem.classList.contains("hidden"))
                 continue;
             max++;
-            if (Object.prototype.toString.call(json[key]) === '[object Array]') {
+            if (Object.prototype.toString.call(json[key]) === '[object Array]') { // Array containing data (fetishes, diseases)
                 if (json[key].length > 0) {
                     count++;
+                } else {
+                    let checkbox = document.getElementsByName(key + "None");
+                    if (checkbox.length > 0 && checkbox[0].checked) { // The user ticked a checkbox to say that it's normal that the array is null
+                        count++;
+                    }
                 }
             } else if (json[key] !== "") {
                 count++;
