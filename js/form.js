@@ -84,14 +84,14 @@ function exportData() {
         if (r.checked) {
             switch (r.value) {
                 case "onlyThis":
-                    if (!allProfiles[currId].isExport) {
+                    if (!allProfiles[currId].isExport && !allProfiles[currId].dontExport) {
                         toExport = [allProfiles[currId]];
                     }
                     break;
 
                 case "onlyFavorites":
                     for (const [id, json] of Object.entries(allProfiles)) {
-                        if (!json.isExport && json.favorite) {
+                        if (!json.isExport && json.favorite && !json.dontExport) {
                             toExport.push(json);
                         }
                     }
@@ -99,7 +99,7 @@ function exportData() {
 
                 case "everything":
                     for (const [id, json] of Object.entries(allProfiles)) {
-                        if (!json.isExport) {
+                        if (!json.isExport && !json.dontExport) {
                             toExport.push(json);
                         }
                     }
