@@ -73,6 +73,12 @@ function addLike() {
             <option value="singing">Singing</option>
             <option value="violon">Violon</option>
         </optgroup>
+        <optgroup label="IT">
+            <option value="it_security">IT (Security)</option>
+            <option value="it_software">IT (Software)</option>
+            <option value="it_video_games">IT (Video Games)</option>
+            <option value="it_web">IT (Web)</option>
+        </optgroup>
         <optgroup label="Music">
             <option value="disco">Disco</option>
             <option value="gospel">Gospel</option>
@@ -86,11 +92,8 @@ function addLike() {
             <option value="botany">Botany</option>
             <option value="chemistry">Chemistry</option>
             <option value="geology">Geology</option>
-            <option value="humanBiology">Human biology</option>
-            <option value="it_security">IT (Security)</option>
-            <option value="it_software">IT (Software)</option>
-            <option value="it_videoGames">IT (Video Games)</option>
-            <option value="it_web">IT (Web)</option>
+            <option value="human_biology">Human biology</option>
+            <option value="computer_science">Computer science</option>
             <option value="mechanics">Mechanics</option>
             <option value="zoology">Zoology</option>
         </optgroup>
