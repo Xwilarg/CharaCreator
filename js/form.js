@@ -73,29 +73,87 @@ Object.defineProperty(String.prototype, 'hashCode', { // From https://stackoverf
     }
 });
 
+// Export all data
 function exportData() {
-    allProfiles[currId] = saveCurrent();
+    allProfiles[currId] = saveCurrent(); // Save current profile
+
+    let toExport = []; // Everything we need to export
+    var radios = document.getElementsByName('exportContent');
+
+    Array.apply(null, radios).forEach(r => {
+        if (r.checked) {
+            switch (r.value) {
+                case "onlyThis":
+                    if (!allProfiles[currId].isExport) {
+                        toExport = [allProfiles[currId]];
+                    }
+                    break;
+
+                case "onlyFavorites":
+                    for (const [id, json] of Object.entries(allProfiles)) {
+                        if (!json.isExport && json.favorite) {
+                            toExport.push(json);
+                        }
+                    }
+                    break;
+
+                case "everything":
+                    for (const [id, json] of Object.entries(allProfiles)) {
+                        if (!json.isExport) {
+                            toExport.push(json);
+                        }
+                    }
+                    break;
+            }
+        }
+    });
+
     let zip = new JSZip();
     let newJson = {};
     let settings = { isExport: true };
-    let current = allProfiles[currId];
-    newJson.firstName = current.firstName;
-    newJson.lastName = current.lastName;
-    newJson.pfp = current.pfp;
-    newJson.favoriteDrink = current.favoriteDrink.toLowerCase().hashCode().toString();
-    newJson.favoriteMeal = current.favoriteMeal.toLowerCase().hashCode().toString();
-    newJson.favoriteDessert = current.favoriteDessert.toLowerCase().hashCode().toString();
-    newJson.favoriteSmell = current.favoriteSmell.toLowerCase().hashCode().toString();
-    newJson.favoriteAnimal = current.favoriteAnimal.toLowerCase().hashCode().toString();
-    newJson.fetishesArray = [];
-    current.fetishesArray.forEach(function(e) {
-        newJson.fetishesArray.push({ fetishNamePart: e.fetishNamePart.toLowerCase().hashCode().toString() });
+
+    let toCheck = Array.apply(null, document.getElementsByName('exportField')).filter(x => x.checked).map(x => x.value);
+
+    toExport.forEach(current => {
+        console.log(toCheck);
+        // For each element, we export what the player ticked
+        if (toCheck.includes("firstName")) {
+            newJson.firstName = current.firstName;
+        }
+        if (toCheck.includes("lastName")) {
+            newJson.lastName = current.lastName;
+        }
+        if (toCheck.includes("pfp")) {
+            newJson.pfp = current.pfp;
+        }
+        if (toCheck.includes("trivia")) {
+            newJson.favoriteDrink = current.favoriteDrink.toLowerCase().hashCode().toString();
+            newJson.favoriteMeal = current.favoriteMeal.toLowerCase().hashCode().toString();
+            newJson.favoriteDessert = current.favoriteDessert.toLowerCase().hashCode().toString();
+            newJson.favoriteSmell = current.favoriteSmell.toLowerCase().hashCode().toString();
+            newJson.favoriteAnimal = current.favoriteAnimal.toLowerCase().hashCode().toString();
+        }
+        if (toCheck.includes("hobbies")) {
+            newJson.likesArray = [];
+            current.likesArray.forEach(function(e) {
+                newJson.likesArray.push({ likeNamePart: e.likeNamePart.toLowerCase().hashCode().toString() });
+            });
+        }
+        if (toCheck.includes("fetishes")) {
+            newJson.fetishesArray = [];
+            current.fetishesArray.forEach(function(e) {
+                newJson.fetishesArray.push({ fetishNamePart: e.fetishNamePart.toLowerCase().hashCode().toString() });
+            });
+        }
+        if (toCheck.includes("diseases")) {
+            newJson.diseasesArray = [];
+            current.diseasesArray.forEach(function(e) {
+                newJson.diseasesArray.push({ diseaseNamePart: e.diseaseNamePart.toLowerCase().hashCode().toString() });
+            });
+        }
+        zip.file("characters/" + getName(newJson) + ".json", JSON.stringify(newJson));
     });
-    newJson.likesArray = [];
-    current.likesArray.forEach(function(e) {
-        newJson.likesArray.push({ likeNamePart: e.likeNamePart.toLowerCase().hashCode().toString() });
-    });
-    zip.file("characters/" + getName(newJson) + ".json", JSON.stringify(newJson));
+
     zip.file("settings.json", JSON.stringify(settings));
     zip.generateAsync({type:"blob"}).then(function(content) {
         saveAs(content, "CharaExport.zip");

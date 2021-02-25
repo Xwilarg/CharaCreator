@@ -278,6 +278,9 @@ function clearCurrent() {
 
 function clearCurrentInternal(nodes) {
     nodes.forEach(n => {
+        if (n.name !== undefined && n.name.startsWith("export")) {
+            return;
+        }
         if (n.nodeName === "DIV" && n.id.endsWith("Array")) {
             n.innerHTML = "";
         } else {
@@ -309,6 +312,9 @@ function clearCurrentInternal(nodes) {
 function saveCurrent(nodes = document.getElementById("mainSection").childNodes, json = new Object()) {
     let arr = Object.prototype.toString.call(json) === '[object Array]' ? new Object() : undefined;
     nodes.forEach(n => {
+        if (n.name !== undefined && n.name.startsWith("export")) {
+            return;
+        }
         if (n.nodeName === "DIV" && n.id.endsWith("Array")) { // Array nodes must be saved as an array
             json[n.id] = [];
             saveCurrent(n.childNodes, json[n.id]);

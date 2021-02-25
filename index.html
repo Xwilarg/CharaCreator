@@ -188,7 +188,21 @@
                     <button onclick="save()">Save and Download</button>
                     <button onclick="upload()">Upload</button>
                     <h4>Export</h4>
-                    <button onclick="exportData()">Export Anonymous Data</button>
+                    <label for="exportContent">What do you want to export?</label><br/>
+                    <input type="radio" name="exportContent" value="onlyThis" checked="checked">Only this profile</input><br/>
+                    <input type="radio" name="exportContent" value="onlyFavorites">Only favorites</input><br/>
+                    <input type="radio" name="exportContent" value="everything">Everything</input><br/>
+                    <br/>
+                    What fields do you want to export?<br/>
+                    <input type="checkbox" name="exportField" value="firstName" checked="checked">First name</input><br/>
+                    <input type="checkbox" name="exportField" value="lastName" checked="checked">Last name</input><br/>
+                    <input type="checkbox" name="exportField" value="pfp" checked="checked">Picture profile</input><br/>
+                    <input type="checkbox" name="exportField" value="hobbies" checked="checked">Hobbies (encrypted)</input><br/>
+                    <input type="checkbox" name="exportField" value="fetishes" checked="checked">Fetishes (encrypted)</input><br/>
+                    <input type="checkbox" name="exportField" value="diseases" checked="checked">Diseases (encrypted)</input><br/>
+                    <input type="checkbox" name="exportField" value="trivia" checked="checked">Trivia (encrypted)</input><br/>
+                    <br/>
+                    <button onclick="exportData()">Export Data</button>
                     <input type="file" id="uploadInternal" accept="application/zip" hidden/>
                     <input type="file" id="uploadPfpInternal" accept="image/png,image/jpeg" hidden/>
                 </div>
