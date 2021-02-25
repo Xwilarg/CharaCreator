@@ -115,7 +115,6 @@ function exportData() {
     let toCheck = Array.apply(null, document.getElementsByName('exportField')).filter(x => x.checked).map(x => x.value);
 
     toExport.forEach(current => {
-        console.log(toCheck);
         // For each element, we export what the player ticked
         if (toCheck.includes("firstName")) {
             newJson.firstName = current.firstName;
