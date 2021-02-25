@@ -201,7 +201,7 @@ function groupByCompletion() {
 
     doesGroup = 5;
     sortGroupedProfiles();
-    sortProfiles();
+    sortProfilesNumber();
 }
 // TODO: Merge groupBy functions
 
@@ -213,6 +213,24 @@ function resetProfiles() {
     currId = 0;
     allProfiles = {};
 }
+
+/// SORT BY NUMBER
+
+function sortProfilesNumber(id = "profileList") {
+    Array.prototype.slice.call(document.getElementById(id).children, 0).sort(function(a, b) {
+        let aInner = parseFloat(a.innerHTML.match(/<h4>([0-9\.]+)<\/h4>/)[1]);
+        let bInner = parseFloat(b.innerHTML.match(/<h4>([0-9\.]+)<\/h4>/)[1]);
+        return aInner < bInner ? 1 : -1;
+    }).forEach(function(div) {
+        div.parentElement.appendChild(div);
+        let elem = div.id.substr(5);
+        if (allProfiles[elem] !== undefined && allProfiles[elem].favorite) {
+            div.classList.add("favorite");
+        }
+    });
+}
+
+/// SORT BY ALPHABETIC ORDER
 
 // Order all tabs in alphabetic order
 function sortProfiles(id = "profileList") {
