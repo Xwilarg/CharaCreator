@@ -118,7 +118,7 @@ function loadComparatorInternal(arrayName, partName) {
     let str = "";
     for (const c of conversion) {
         c[1].sort();
-        str += '<div class="comparatorCategory"><h3>' + c[0] + '</h3>' + c[1].join("\n") + '</div>';
+        str += '<div class="comparatorCategory"><h3>' + c[0] + '</h3>' + c[1].join("<br/>") + '</div>';
     }
     document.getElementById("hobbyComparationTable").innerHTML = str;
 }
