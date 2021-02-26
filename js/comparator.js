@@ -1,7 +1,4 @@
 let comparatorTable = undefined;
-let hobbyTable = undefined;
-let fetishTable = undefined;
-let diseaseTable = undefined;
 
 let last = "main";
 
@@ -32,21 +29,21 @@ function displayComparator(id) {
             document.getElementById("buttonHobbyComparator").classList.add("selected");
             document.getElementById("hobbyComparationTable").classList.remove("hidden");
             last = "hobby";
-            loadComparatorHobby();
+            loadComparatorInternal("likesArray", "likeNamePart");
             break;
 
         case "fetish":
             document.getElementById("buttonFetishComparator").classList.add("selected");
             document.getElementById("fetishComparationTable").classList.remove("hidden");
             last = "fetish";
-            loadComparatorFetish();
+            loadComparatorInternal("fetishesArray", "fetishNamePart");
             break;
 
         case "disease":
             document.getElementById("buttonDiseaseComparator").classList.add("selected");
             document.getElementById("diseaseComparationTable").classList.remove("hidden");
             last = "disease";
-            loadComparatorDisease();
+            loadComparatorInternal("diseasesArray", "diseaseNamePart");
             break;
     }
 }
@@ -90,128 +87,38 @@ function loadComparatorMain() {
     });
 }
 
-function loadComparatorHobby() {
-    if (hobbyTable !== undefined) {
-        hobbyTable.destroy();
-    }
+function loadComparatorInternal(arrayName, partName) {
 
+    //hobbyComparationTable
     let data = [];
 
     // HOBBY ELEMENTS: Hobby name, all names
     let hobbies = {};
     for (const [_, json] of Object.entries(allProfiles)) {
-        if (json.likesArray !== undefined) {
-            json.likesArray.forEach(e => {
-                if (hobbies[e.likeNamePart] === undefined) {
-                    hobbies[e.likeNamePart] = [ getName(json) ];
+        if (json[arrayName] !== undefined) {
+            json[arrayName].forEach(e => {
+                if (hobbies[e[partName]] === undefined) {
+                    hobbies[e[partName]] = [ getName(json) ];
                 } else {
-                    hobbies[e.likeNamePart].push(getName(json));
+                    hobbies[e[partName]].push(getName(json));
                 }
             });
         }
     }
 
-    for (const [hobby, names] of Object.entries(hobbies)) {
-        data.push([hobby, names.join(", ")]);
+    let conversion = [];
+    for (const [a, b] of Object.entries(hobbies)) {
+        conversion.push([a.toLowerCase().replaceAll('_', ' '), b]);
     }
 
-    if (data.length === 0) {
-        data.push(["", ""]);
+    conversion.sort(function(a, b) {
+        return a[0] < b[0] ? -1 : 1;
+    })
+
+    let str = "";
+    for (const c of conversion) {
+        c[1].sort();
+        str += '<div class="comparatorCategory"><h3>' + c[0] + '</h3>' + c[1].join("\n") + '</div>';
     }
-
-    hobbyTable = new Handsontable(document.getElementById("hobbyComparationTable"), {
-        licenseKey: "non-commercial-and-evaluation",
-        data: data,
-        rowHeaders: true,
-        colHeaders: ["Hobby", "Characters"],
-        editor: false,
-        dropdownMenu: true,
-        filters: true,
-        dropdownMenu: ['filter_by_condition', 'filter_by_value', 'filter_action_bar'],
-        columnSorting: true
-    });
-}
-
-function loadComparatorFetish() {
-    if (fetishTable !== undefined) {
-        fetishTable.destroy();
-    }
-
-    let data = [];
-
-    // FETISH ELEMENTS: Fetish name, all names
-    let fetishes = {};
-    for (const [_, json] of Object.entries(allProfiles)) {
-        if (json.fetishesArray !== undefined) {
-            json.fetishesArray.forEach(e => {
-                if (fetishes[e.fetishNamePart] === undefined) {
-                    fetishes[e.fetishNamePart] = [ getName(json) ];
-                } else {
-                    fetishes[e.fetishNamePart].push(getName(json));
-                }
-            });
-        }
-    }
-
-    for (const [hobby, names] of Object.entries(fetishes)) {
-        data.push([hobby, names.join(", ")]);
-    }
-
-    if (data.length === 0) {
-        data.push(["", ""]);
-    }
-
-    fetishTable = new Handsontable(document.getElementById("fetishComparationTable"), {
-        licenseKey: "non-commercial-and-evaluation",
-        data: data,
-        rowHeaders: true,
-        colHeaders: ["Fetish", "Characters"],
-        editor: false,
-        dropdownMenu: true,
-        filters: true,
-        dropdownMenu: ['filter_by_condition', 'filter_by_value', 'filter_action_bar'],
-        columnSorting: true
-    });
-}
-
-function loadComparatorDisease() {
-    if (diseaseTable !== undefined) {
-        diseaseTable.destroy();
-    }
-
-    let data = [];
-
-    // DISEASE ELEMENTS: Disease name, all names
-    let diseases = {};
-    for (const [_, json] of Object.entries(allProfiles)) {
-        if (json.diseasesArray !== undefined) {
-            json.diseasesArray.forEach(e => {
-                if (diseases[e.diseaseNamePart] === undefined) {
-                    diseases[e.diseaseNamePart] = [ getName(json) ];
-                } else {
-                    diseases[e.diseaseNamePart].push(getName(json));
-                }
-            });
-        }
-    }
-
-    for (const [hobby, names] of Object.entries(diseases)) {
-        data.push([hobby, names.join(", ")]);
-    }
-
-    if (data.length === 0) {
-        data.push(["", ""]);
-    }
-
-    diseaseTable = new Handsontable(document.getElementById("diseaseComparationTable"), {
-        licenseKey: "non-commercial-and-evaluation",
-        data: data,
-        rowHeaders: true,
-        colHeaders: ["Disease", "Characters"],
-        editor: false,
-        dropdownMenu: true,
-        filters: true,
-        dropdownMenu: ['filter_by_condition', 'filter_by_value', 'filter_action_bar'],
-        columnSorting: true
-    });
+    document.getElementById("hobbyComparationTable").innerHTML = str;
 }

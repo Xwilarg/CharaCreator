@@ -190,3 +190,14 @@ input[type="number"] { /* Firefox*/
 #mainContent {
     width: 100%;
 }
+
+#hobbyComparationTable, #fetishComparationTable #diseaseComparationTable {
+    display: flex;
+    flex-flow: wrap;
+}
+
+.comparatorCategory {
+    border: 1px black solid;
+    width: 10em;
+    padding: .5em;
+}
