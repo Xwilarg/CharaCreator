@@ -168,7 +168,7 @@ function groupByCompletion() {
         let max = 0;
 
         for (key in json) {
-            if (key.endsWith("Export")) {
+            if (key.endsWith("Export") || key === "favorite" || key.endsWith("None")) {
                 continue;
             }
             let docElem = document.getElementById(key);
