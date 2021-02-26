@@ -168,14 +168,15 @@ function groupByCompletion() {
         let max = 0;
 
         for (key in json) {
-            if (key.endsWith("Export") || key === "favorite" || key.endsWith("None")) {
+            if (key.endsWith("Export") || key === "favorite" || key.endsWith("None") || key === "otherInfos") {
                 continue;
             }
             let docElem = document.getElementById(key);
             if (docElem === null) {
                 docElem = document.getElementsByName(key);
             }
-            if (docElem.length === 0 || (docElem.classList !== undefined && docElem.classList.contains("hidden")))
+            let container = document.getElementById(key + "Container");
+            if (docElem.length === 0 || (container !== null && container.classList.contains("hidden")))
                 continue;
             docElem = docElem[0];
             max++;
