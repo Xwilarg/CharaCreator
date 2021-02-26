@@ -403,7 +403,13 @@ function loadCurrent(json) {
     loadCurrentInternal(json);
     calculateAll();
     onNameChange();
-    doesGroup > 0 ? sortProfiles() : sortGroupedProfiles();
+    if (doesGroup === 5) {
+        sortProfilesNumber();
+    } else if (doesGroup > 0) {
+        sortProfiles();
+    } else {
+        sortGroupedProfiles();
+    }
 }
 
 function loadCurrentInternal(json) {
