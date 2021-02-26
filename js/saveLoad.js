@@ -168,9 +168,16 @@ function groupByCompletion() {
         let max = 0;
 
         for (key in json) {
-            let docElem = document.getElementById(key);
-            if (docElem === null || docElem.classList.contains("hidden"))
+            if (key.endsWith("Export")) {
                 continue;
+            }
+            let docElem = document.getElementById(key);
+            if (docElem === null) {
+                docElem = document.getElementsByName(key);
+            }
+            if (docElem.length === 0 || (docElem.classList !== undefined && docElem.classList.contains("hidden")))
+                continue;
+            docElem = docElem[0];
             max++;
             if (Object.prototype.toString.call(json[key]) === '[object Array]') { // Array containing data (fetishes, diseases)
                 if (json[key].length > 0) {
