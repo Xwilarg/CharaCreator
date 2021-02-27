@@ -72,7 +72,7 @@ span > p {
     margin-bottom: 1em;
 }
 
-#likesArray, #fetishesArray, #diseasesArray {
+.array {
     display: flex;
     flex-flow: wrap;
 }
