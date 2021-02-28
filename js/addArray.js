@@ -265,6 +265,22 @@ function addPhobia() {
     <br/>
     <span id="phobiaNamePart` + phobiaId + `Container" class="hidden">
         <input type="text" name="phobiaNamePartOther" placeholder="Name"/>
+        <option value="aerophobia">Fear of aircraft or flying</option>
+        <option value="hemophobia">Fear of blood</option>
+        <option value="achluophobia">Fear of darkness</option>
+        <option value="cynophobia">Fear of dogs</option>
+        <option value="mysophobia">Fear of germs, contamination or dirt</option>
+        <option value="claustrophobia">Fear of having no escape and being closed in</option>
+        <option value="acrophobia">Fear of heights</option>
+        <option value="trypophobia">Fear of holes or textures with a pattern of holes</option>
+        <option value="entomophobia">Fear of insects</option>
+        <option value="autophobia">Fear of isolation</option>
+        <option value="trypanophobia">Fear of needles or injections</option>
+        <option value="agoraphobia">Fear of open places</option>
+        <option value="ophidiophobia">Fear of snakes</option>
+        <option value="arachnophobia">Fear of spiders and other arachnids such as scorpions</option>
+        <option value="sociophobia">Fear of social situations</option>
+        <option value="astraphobia">Fear of thunder and lightning</option>
     </span>
     <br/>
     <button onclick="remove(this)">Delete</button>
