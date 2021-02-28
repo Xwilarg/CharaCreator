@@ -4,18 +4,21 @@ function loadSummary() {
         if (currentSummary === "favorite" && !json.favorite) {
             continue;
         }
-        let content = "<table>";
+        let content = json.shortDescription.replace("\n", "<br/>") + "<br/><br/><table>"; // The element begin with the short description
         for (let key in json) {
-            if (!canJsonExport(key)) {
+            if (!canJsonExport(key) || key === "shortDescription") {
                 continue;
             }
             if (key === "pfp") {
 
-            } else if (key === "shortDescription") {
+            } else if (key.endsWith("Color")) {
+                content += '<tr><td><b>' + (json[key] === "" ? "<br/>" : camelToSentence(key)) + "</b></td><td>" +
+                (json[key] === "" ? "" : '<input type="color" class="colorPreview" disabled="disabled" value="' + json[key] + '"/>') + "</td></tr>";
             } else if (Object.prototype.toString.call(json[key]) === '[object Array]') {
 
             } else {
-                content += '<tr><td><b>' + key + "</b></td><td>" + json[key] + "</td></tr>";
+                // We put blank line if elem is empty so it doesn't mess with the height of the thing
+                content += '<tr><td><b>' + (json[key] === "" ? "<br/>" : camelToSentence(key)) + "</b></td><td>" + json[key] + "</td></tr>";
             }
         }
         content += "</table>"
