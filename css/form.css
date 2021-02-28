@@ -169,7 +169,7 @@ input[type="number"] { /* Firefox*/
    -moz-appearance: textfield;
 }
 
-#settingsContainer, #repartitionContainer {
+.container {
     margin: 2em;
 }
 
@@ -191,7 +191,7 @@ input[type="number"] { /* Firefox*/
     width: 100%;
 }
 
-#hobbyComparationTable, #fetishComparationTable #diseaseComparationTable {
+.compactDisplay {
     display: flex;
     flex-flow: wrap;
 }

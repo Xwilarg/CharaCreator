@@ -12,6 +12,7 @@
         <script type="text/javascript" src="js/saveLoad.js"></script>
         <script type="text/javascript" src="js/form.js"></script>
         <script type="text/javascript" src="js/repartition.js"></script>
+        <script type="text/javascript" src="js/summary.js"></script>
         <script type="text/javascript" src="js/characterInit.js"></script>
         <script type="text/javascript" src="js/sectionManager.js"></script>
         <script type="text/javascript" src="js/comparator.js"></script>
@@ -34,6 +35,7 @@
                 <button id="buttonComparatorSection" onclick="displaySection('comparator')">Comparator</button>
                 <button id="buttonRelationshipSection" onclick="displaySection('relationship')">Relationship</button>
                 <button id="buttonRepartitionSection" onclick="displaySection('repartition')">Repartition</button>
+                <button id="buttonSummarySection" onclick="displaySection('summary')">Summary</button>
                 <button id="buttonSettingsSection" onclick="displaySection('settings')">Settings</button>
                 <a id="github" target="_blank" href="https://github.com/Xwilarg/CharaCreator/">GitHub</a>
             </div>
@@ -232,10 +234,10 @@
                 </div>
                 <div class="objectContainer">
                     <div id="generalComparationTable"></div>
-                    <div id="hobbyComparationTable" class="hidden"></div>
-                    <div id="fetishComparationTable" class="hidden"></div>
-                    <div id="diseaseComparationTable" class="hidden"></div>
-                    <div id="phobiaComparationTable" class="hidden"></div>
+                    <div id="hobbyComparationTable" class="compactDisplay hidden"></div>
+                    <div id="fetishComparationTable" class="compactDisplay hidden"></div>
+                    <div id="diseaseComparationTable" class="compactDisplay hidden"></div>
+                    <div id="phobiaComparationTable" class="compactDisplay hidden"></div>
                 </div>
             </div>
             <!-- #endregion -->
@@ -255,7 +257,7 @@
             <!-- #endregion -->
             <!-- #region relationship -->
             <div id="repartitionSection" class="objectContainer backgroundContainer hidden">
-                <div id="repartitionContainer">
+                <div class="container">
                     <h4>Race repartition:</h4>
                     <div id="repartitionRace"></div>
                     <h4>Gender repartition:</h4>
@@ -269,9 +271,15 @@
                 </div>
             </div>
             <!-- #endregion -->
+            <!-- #region summary -->
+            <div id="summarySection" class="objectContainer backgroundContainer hidden">
+                <div class="container compactDisplay" id="summaryContainer">
+                </div>
+            </div>
+            <!-- #endregion -->
             <!-- #region settings -->
             <div id="settingsSection" class="objectContainer backgroundContainer hidden">
-                <div id="settingsContainer">
+                <div class="container">
                     Display NSFW fields: <input id="settings_nsfw" name="nsfw" type="checkbox"/>
                 </div>
             </div>
