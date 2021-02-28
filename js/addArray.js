@@ -2,7 +2,7 @@ let likeId = 0;
 function addLike() {
     let container = document.getElementById("likesArray");
     let div = document.createElement('div');
-    div.classList.add("like");
+    div.classList.add("arrayBorder");
     likeId++;
     div.innerHTML = `
     <select value="" type="text" name="likeNamePart" id="likeNamePart` + likeId + `">
@@ -148,7 +148,7 @@ let fetishId = 0;
 function addFetish() {
     let container = document.getElementById("fetishesArray");
     let div = document.createElement('div');
-    div.classList.add("fetish");
+    div.classList.add("arrayBorder");
     fetishId++;
     div.innerHTML = `
     <select value="" type="text" name="fetishNamePart" id="fetishNamePart` + fetishId + `">
@@ -196,7 +196,7 @@ let diseaseId = 0;
 function addDisease() {
     let container = document.getElementById("diseasesArray");
     let div = document.createElement('div');
-    div.classList.add("disease");
+    div.classList.add("arrayBorder");
     fetishId++;
     div.innerHTML = `
     <select value="" type="text" name="diseaseNamePart" id="diseaseNamePart` + diseaseId + `">
@@ -255,7 +255,7 @@ let phobiaId = 0;
 function addPhobia() {
     let container = document.getElementById("phobiasArray");
     let div = document.createElement('div');
-    div.classList.add("phobia");
+    div.classList.add("arrayBorder");
     phobiaId++;
     div.innerHTML = `
     <select value="" type="text" name="phobiaNamePart" id="phobiaNamePart` + phobiaId + `">
