@@ -1,6 +1,9 @@
 function loadSummary() {
     let allElems = [];
     for (const [_, json] of Object.entries(allProfiles)) {
+        if (currentSummary === "favorite" && !json.favorite) {
+            continue;
+        }
         let content = "";
         allElems.push([getName(json), content]);
     };
@@ -15,4 +18,24 @@ function loadSummary() {
     }
 
     document.getElementById("summaryContainer").innerHTML = str;
+}
+
+let currentSummary = "all";
+
+function displaySummary(id) {
+    document.getElementById("buttonAllSummary").classList.remove("selected");
+    document.getElementById("buttonFavoriteSummary").classList.remove("selected");
+    currentSummary = id;
+
+    switch (id) {
+        case "all":
+            document.getElementById("buttonAllSummary").classList.add("selected");
+            break;
+
+        case "favorite":
+            document.getElementById("buttonFavoriteSummary").classList.add("selected");
+            break;
+    }
+
+    loadSummary();
 }

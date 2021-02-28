@@ -273,7 +273,11 @@
             <!-- #endregion -->
             <!-- #region summary -->
             <div id="summarySection" class="objectContainer backgroundContainer hidden">
-                <div class="container compactDisplay" id="summaryContainer">
+                <div class="objectContainer">
+                    <button id="buttonAllSummary" onclick="displaySummary('all')" class="selected">Display all</button>
+                    <button id="buttonFavoriteSummary" onclick="displaySummary('favorite')">Only display favorite</button>
+                </div>
+                <div class="objectContainer compactDisplay" id="summaryContainer">
                 </div>
             </div>
             <!-- #endregion -->
