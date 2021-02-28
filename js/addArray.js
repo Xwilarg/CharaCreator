@@ -210,6 +210,7 @@ function addDisease() {
         </optgroup>
         <optgroup label="Neurology and Psychiatry">
             <option value="dementia">Dementia</option>
+            <option value="dyslexia">Dyslexia</option>
             <option value="epilepsy">Epilepsy</option>
             <option value="panic_disorder">Panic Disorder</option>
         </optgroup>
