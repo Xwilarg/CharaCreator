@@ -136,11 +136,20 @@
                     </span>
                     <br/>
                     Medical conditions:<br/>
+                    <h4>Diseases</h4>
                     <input type="checkbox" name="diseasesArrayNone">No disease</input><br/>
                     <span>
                         <div id="diseasesArray" class="array"></div>
                         <br/>
                         <button id="diseasesAddButton" onclick="addDisease()">Add</button>
+                    </span>
+                    <br/>
+                    <h4>Phobias</h4>
+                    <input type="checkbox" name="phobiasArrayNone">No phobia</input><br/>
+                    <span>
+                        <div id="phobiasArray" class="array"></div>
+                        <br/>
+                        <button id="phobiasAddButton" onclick="addPhobia()">Add</button>
                     </span>
                     <hr/>
                     <h3>Sexuality</h3>
@@ -219,12 +228,14 @@
                     <button id="buttonHobbyComparator" onclick="displayComparator('hobby')">Hobbies</button>
                     <button id="buttonFetishComparator" onclick="displayComparator('fetish')" class="hidden">Fetishes</button>
                     <button id="buttonDiseaseComparator" onclick="displayComparator('disease')">Diseases</button>
+                    <button id="buttonPhobiaComparator" onclick="displayComparator('phobia')">Phobias</button>
                 </div>
                 <div class="objectContainer">
                     <div id="generalComparationTable"></div>
                     <div id="hobbyComparationTable" class="hidden"></div>
                     <div id="fetishComparationTable" class="hidden"></div>
                     <div id="diseaseComparationTable" class="hidden"></div>
+                    <div id="phobiaComparationTable" class="hidden"></div>
                 </div>
             </div>
             <!-- #endregion -->

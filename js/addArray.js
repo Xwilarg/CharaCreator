@@ -250,3 +250,28 @@ function addDisease() {
         selectChange(e.target.id);
     });
 }
+
+let phobiaId = 0;
+function addPhobia() {
+    let container = document.getElementById("phobiasArray");
+    let div = document.createElement('div');
+    div.classList.add("phobia");
+    phobiaId++;
+    div.innerHTML = `
+    <select value="" type="text" name="phobiaNamePart" id="phobiaNamePart` + phobiaId + `">
+        <option disabled selected value> -- select an option -- </option>
+        <option value="other">Other</option>
+    </select>
+    <br/>
+    <span id="phobiaNamePart` + phobiaId + `Container" class="hidden">
+        <input type="text" name="phobiaNamePartOther" placeholder="Name"/>
+    </span>
+    <br/>
+    <button onclick="remove(this)">Delete</button>
+    `;
+    // innerHtml += get rid of input value so we need to use appendChild instead
+    container.appendChild(div);
+    document.getElementById("phobiaNamePart" + phobiaId).addEventListener("change", function (e) {
+        selectChange(e.target.id);
+    });
+}

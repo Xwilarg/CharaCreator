@@ -86,6 +86,7 @@ function loadRelationship() {
     links = [];
     loadRelationshipInternalFromArray("likesArray", "likeNamePart", "blue");
     loadRelationshipInternalFromArray("diseasesArray", "diseaseNamePart", "green");
+    loadRelationshipInternalFromArray("diseasesArray", "diseaseNamePart", "lightgreen");
     if (settings.nsfw) {
         loadRelationshipInternalFromArray("fetishesArray", "fetishNamePart", "red");
     }
@@ -162,11 +163,14 @@ function filterRelationshipInternal(elems, c) {
 
     for (const [id1, json] of Object.entries(allLinks)) {
         for (const [id2, value] of Object.entries(json)) {
+            let max = 255;
+            if (c === "lightgreen") c = 127;
             let hexVal = padNumber(Math.ceil((255 - (value * 255 / maxValue))).toString(16));
             let color;
             if (c === "red") color = "ff" + hexVal + hexVal;
             else if (c === "blue") color = "" + hexVal + hexVal + "ff";
             else if (c === "green") color = "" + hexVal + "ff" + hexVal;
+            else if (c === "lightgreen") color = "" + hexVal + "7f" + hexVal;
             else if (c === "yellow") color = "ffff" + hexVal;
             else color = "000000";
             links.push({from: id1, to: id2, width: 4, selectionWidth: 6,

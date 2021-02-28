@@ -11,11 +11,13 @@ function displayComparator(id) {
     document.getElementById("buttonHobbyComparator").classList.remove("selected");
     document.getElementById("buttonFetishComparator").classList.remove("selected");
     document.getElementById("buttonDiseaseComparator").classList.remove("selected");
+    document.getElementById("buttonPhobiaComparator").classList.remove("selected");
 
     document.getElementById("generalComparationTable").classList.add("hidden");
     document.getElementById("hobbyComparationTable").classList.add("hidden");
     document.getElementById("fetishComparationTable").classList.add("hidden");
     document.getElementById("diseaseComparationTable").classList.add("hidden");
+    document.getElementById("phobiaComparationTable").classList.add("hidden");
 
     switch (id) {
         case "main":
@@ -44,6 +46,13 @@ function displayComparator(id) {
             document.getElementById("diseaseComparationTable").classList.remove("hidden");
             last = "disease";
             loadComparatorInternal("diseasesArray", "diseaseNamePart");
+            break;
+
+        case "phobia":
+            document.getElementById("buttonPhobiaComparator").classList.add("selected");
+            document.getElementById("phobiaComparationTable").classList.remove("hidden");
+            last = "phobia";
+            loadComparatorInternal("phobiasArray", "phobiaNamePart");
             break;
     }
 }
