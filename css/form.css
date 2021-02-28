@@ -198,6 +198,13 @@ input[type="number"] { /* Firefox*/
 
 .comparatorCategory {
     border: 1px black solid;
-    width: 10em;
     padding: .5em;
+}
+
+#comparatorSection .comparatorCategory {
+    width: 10em;
+}
+
+#summaryContainer .comparatorCategory {
+    width: 20em;
 }

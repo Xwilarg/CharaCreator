@@ -4,7 +4,21 @@ function loadSummary() {
         if (currentSummary === "favorite" && !json.favorite) {
             continue;
         }
-        let content = "";
+        let content = "<table>";
+        for (let key in json) {
+            if (!canJsonExport(key)) {
+                continue;
+            }
+            if (key === "pfp") {
+
+            } else if (key === "shortDescription") {
+            } else if (Object.prototype.toString.call(json[key]) === '[object Array]') {
+
+            } else {
+                content += '<tr><td><b>' + key + "</b></td><td>" + json[key] + "</td></tr>";
+            }
+        }
+        content += "</table>"
         allElems.push([getName(json), content]);
     };
 
