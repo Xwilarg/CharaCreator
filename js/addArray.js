@@ -260,11 +260,6 @@ function addPhobia() {
     div.innerHTML = `
     <select value="" type="text" name="phobiaNamePart" id="phobiaNamePart` + phobiaId + `">
         <option disabled selected value> -- select an option -- </option>
-        <option value="other">Other</option>
-    </select>
-    <br/>
-    <span id="phobiaNamePart` + phobiaId + `Container" class="hidden">
-        <input type="text" name="phobiaNamePartOther" placeholder="Name"/>
         <option value="aerophobia">Fear of aircraft or flying</option>
         <option value="hemophobia">Fear of blood</option>
         <option value="achluophobia">Fear of darkness</option>
@@ -281,6 +276,11 @@ function addPhobia() {
         <option value="arachnophobia">Fear of spiders and other arachnids such as scorpions</option>
         <option value="sociophobia">Fear of social situations</option>
         <option value="astraphobia">Fear of thunder and lightning</option>
+        <option value="other">Other</option>
+    </select>
+    <br/>
+    <span id="phobiaNamePart` + phobiaId + `Container" class="hidden">
+        <input type="text" name="phobiaNamePartOther" placeholder="Name"/>
     </span>
     <br/>
     <button onclick="remove(this)">Delete</button>
