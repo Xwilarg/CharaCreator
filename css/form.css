@@ -208,3 +208,11 @@ input[type="number"] { /* Firefox*/
 #summaryContainer .comparatorCategory {
     width: 20em;
 }
+
+#repartitionNsfw {
+    width: 100%;
+}
+
+#repartitionSection > .container div {
+    height: 20em;
+}

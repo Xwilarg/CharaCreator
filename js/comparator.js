@@ -4,6 +4,7 @@ let last = "main";
 
 function loadComparator() {
     displayComparator(last);
+
 }
 
 function displayComparator(id) {
