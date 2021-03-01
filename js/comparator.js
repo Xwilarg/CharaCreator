@@ -14,10 +14,7 @@ function displayComparator(id) {
     document.getElementById("buttonPhobiaComparator").classList.remove("selected");
 
     document.getElementById("generalComparationTable").classList.add("hidden");
-    document.getElementById("hobbyComparationTable").classList.add("hidden");
-    document.getElementById("fetishComparationTable").classList.add("hidden");
-    document.getElementById("diseaseComparationTable").classList.add("hidden");
-    document.getElementById("phobiaComparationTable").classList.add("hidden");
+    document.getElementById("arrayComparationTable").classList.add("hidden");
 
     switch (id) {
         case "main":
@@ -29,28 +26,28 @@ function displayComparator(id) {
 
         case "hobby":
             document.getElementById("buttonHobbyComparator").classList.add("selected");
-            document.getElementById("hobbyComparationTable").classList.remove("hidden");
+            document.getElementById("arrayComparationTable").classList.remove("hidden");
             last = "hobby";
             loadComparatorInternal("likesArray", "likeNamePart");
             break;
 
         case "fetish":
             document.getElementById("buttonFetishComparator").classList.add("selected");
-            document.getElementById("fetishComparationTable").classList.remove("hidden");
+            document.getElementById("arrayComparationTable").classList.remove("hidden");
             last = "fetish";
             loadComparatorInternal("fetishesArray", "fetishNamePart");
             break;
 
         case "disease":
             document.getElementById("buttonDiseaseComparator").classList.add("selected");
-            document.getElementById("diseaseComparationTable").classList.remove("hidden");
+            document.getElementById("arrayComparationTable").classList.remove("hidden");
             last = "disease";
             loadComparatorInternal("diseasesArray", "diseaseNamePart");
             break;
 
         case "phobia":
             document.getElementById("buttonPhobiaComparator").classList.add("selected");
-            document.getElementById("phobiaComparationTable").classList.remove("hidden");
+            document.getElementById("arrayComparationTable").classList.remove("hidden");
             last = "phobia";
             loadComparatorInternal("phobiasArray", "phobiaNamePart");
             break;
@@ -97,10 +94,6 @@ function loadComparatorMain() {
 }
 
 function loadComparatorInternal(arrayName, partName) {
-
-    //hobbyComparationTable
-    let data = [];
-
     // HOBBY ELEMENTS: Hobby name, all names
     let hobbies = {};
     for (const [_, json] of Object.entries(allProfiles)) {
@@ -129,5 +122,5 @@ function loadComparatorInternal(arrayName, partName) {
         c[1].sort();
         str += '<div class="comparatorCategory"><h3>' + c[0] + '</h3>' + c[1].join("<br/>") + '</div>';
     }
-    document.getElementById("hobbyComparationTable").innerHTML = str;
+    document.getElementById("arrayComparationTable").innerHTML = str;
 }
