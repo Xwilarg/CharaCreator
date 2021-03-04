@@ -216,3 +216,13 @@ input[type="number"] { /* Firefox*/
 #repartitionSection > .container div {
     height: 20em;
 }
+
+.personnalityValue {
+    position: relative;
+    top: -.5em;
+}
+
+.personnalityDescription {
+    margin-top: -1em;
+    margin-bottom: 1.5em;
+}
