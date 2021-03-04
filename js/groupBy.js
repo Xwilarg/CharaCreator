@@ -2,6 +2,10 @@
 
 let doesGroup = 0;
 
+function groupByCtor() {
+    document.getElementById("groupCustomText").addEventListener("change", groupByCustomCallback);
+}
+
 function dontGroup() { // Don't group anything
     groupByRemoveAll();
 
@@ -24,6 +28,48 @@ function groupByRemoveAll() {
     document.getElementById("groupCompletion").classList.remove("selected");
     document.getElementById("groupBloodType").classList.remove("selected");
     document.getElementById("groupCustom").classList.remove("selected");
+    document.getElementById("groupCustomSpan").classList.add("hidden");
+}
+
+function groupCustomHelp() {
+    alert(`
+    Custom filter allow you to do filter by evaluating Javascript in runtime.
+    You can access the current element with "current"
+
+    Example:
+    current.lastName: Group all elements by their last name
+    current.weight === "": Group all elements by if their weight is set or not
+
+    Note: Do not copy/paste from someone else if you're not sure what you are doing
+    `);
+}
+
+function groupByCustomCallback(elem) {
+    let value = elem.target.value;
+    let str = "";
+    let dict = {};
+    for (const [id, current] of Object.entries(allProfiles)) {
+        if (dict[eval(value)] === undefined) dict[eval(value)] = [id];
+        else dict[eval(value)].push(id);
+    }
+    for (const [e, ids] of Object.entries(dict)) {
+        str += '<nothing id="categoryGroupCustom' + e + '"><h4>' + (e.charAt(0).toUpperCase() + e.substr(1)) + '</h4><div id="GroupCustom' + e + '">';
+        ids.forEach(function(id) {
+            str += '<button id="chara' + id + '" onclick="loadTab(' + id + ')" class="' + (id.toString() === currId.toString() ? "selected" : "") + '">' + getNameFromJson(allProfiles[id]) + '</button>';
+        });
+        str += "</div></nothing>";
+    }
+    document.getElementById("profileList").innerHTML = str;
+
+    sortGroupedProfiles();
+    sortProfiles();
+}
+
+function groupByCustom() { // Group by if you added the characters in favorite or not
+    groupByRemoveAll();
+    document.getElementById("groupCustom").classList.add("selected");
+    document.getElementById("groupCustomSpan").classList.remove("hidden");
+    doesGroup = 7;
 }
 
 function groupByFavorite() { // Group by if you added the characters in favorite or not
