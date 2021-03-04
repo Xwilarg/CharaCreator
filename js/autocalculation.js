@@ -34,7 +34,24 @@ function calculateBMI() {
             else if (bmi < 35) bmiText = "Obese (30.0 - 34.9)";
             else bmiText = "Extremly Obese (> 35.0)";
             document.getElementById("bmiText").innerHTML = bmiText;
+        } else {
+            document.getElementById("bmiText").innerHTML = "";
         }
+    }
+
+    if (h === "") {
+        document.getElementById("devine").innerHTML = "";
+    } else {
+        let baseValue;
+        let gender = document.getElementById("gender").value;
+        if (gender === "male") {
+            baseValue = 50;
+        } else if (gender === "female") {
+            baseValue = 45.5;
+        } else {
+            baseValue = 45.25;
+        }
+        document.getElementById("devine").innerHTML = (baseValue + (0.9 * (document.getElementById("height").value - 152))).toFixed(1);
     }
 }
 
