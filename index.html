@@ -378,12 +378,18 @@
             <!-- #endregion -->
             <!-- #region relationship -->
             <div id="relationshipSection" class="objectContainer backgroundContainer hidden">
-                <div id="nodes">
-                    <div id="network"></div>
-                    <div id="loadingBar">
-                        <div id="outerBorder">
-                            <div id="border">
-                                <div id="bar"></div>
+                <div class="objectContainer">
+                    <button id="buttonGeneralRelationship" onclick="displayRelationship('main')" class="selected">General</button>
+                    <button id="buttonPersonnalityRelationship" onclick="displayRelationship('personnality')">Relationship</button>
+                </div>
+                <div class="objectContainer">
+                    <div id="nodes">
+                        <div id="network"></div>
+                        <div id="loadingBar">
+                            <div id="outerBorder">
+                                <div id="border">
+                                    <div id="bar"></div>
+                                </div>
                             </div>
                         </div>
                     </div>

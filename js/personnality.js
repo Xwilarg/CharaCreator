@@ -1,3 +1,21 @@
+let personnalityTraits = [
+    "sincerity", "fairness", "greed_avoidance", "modesty",
+    "fearfulness", "anxiety", "dependence", "sentimentality",
+    "social_self_esteem", "social_boldness", "sociability", "liveliness",
+    "forgivingness", "gentleness", "flexibility", "patience",
+    "organization", "diligence", "perfectionism", "prudence",
+    "aesthetic_appreciation", "inquisitiveness", "creativity", "unconventionality",
+    "altruism"
+]
+
+// We consider a personnality is set if one of the trait don't have the default value of 3
+function isPersonnalitySet(json) {
+    for (const [_, trait] of Object.entries(personnalityTraits)) {
+        if (json[trait] !== "3") return true;
+    }
+    return false;
+}
+
 function personnalityCtor() {
     Array.prototype.slice.call(document.getElementsByClassName("personnality")).forEach(elem => {
         elem.addEventListener("change", function (e) {

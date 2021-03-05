@@ -30,7 +30,7 @@ function displaySection(id) {
         case "relationship":
             document.getElementById("buttonRelationshipSection").classList.add("selected");
             document.getElementById("relationshipSection").classList.remove("hidden");
-            loadRelationship();
+            displayLastRelationship();
             break;
 
         case "repartition":

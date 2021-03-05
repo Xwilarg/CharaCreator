@@ -1,3 +1,28 @@
+let lastRelationship = "main";
+
+function displayLastRelationship() {
+    displayRelationship(lastRelationship);
+}
+
+function displayRelationship(id) {
+    lastRelationship = id;
+    document.getElementById("buttonGeneralRelationship").classList.remove("selected");
+    document.getElementById("buttonPersonnalityRelationship").classList.remove("selected");
+
+    switch (id) {
+        case "main":
+            document.getElementById("buttonGeneralRelationship").classList.add("selected");
+            loadRelationshipMain();
+            break;
+
+        case "personnality":
+            document.getElementById("buttonPersonnalityRelationship").classList.add("selected");
+            loadRelationshipPersonnality();
+            break;
+    }
+}
+
+
 function createNetwork(argNodes, argEdges) {
     document.getElementById("loadingBar").hidden = false;
     document.getElementById("bar").style.width = 0;
@@ -81,7 +106,7 @@ function padNumber(nb) {
     return (nb < 10 ? "0" : "") + nb;
 }
 
-function loadRelationship() {
+function loadRelationshipMain() {
     nodes = [];
     links = [];
     loadRelationshipInternalFromArray("likesArray", "likeNamePart", "blue");
@@ -95,6 +120,25 @@ function loadRelationship() {
     loadRelationshipInternalFromField("favoriteDessert", "yellow");
     loadRelationshipInternalFromField("favoriteSmell", "yellow");
     loadRelationshipInternalFromField("favoriteAnimal", "yellow");
+    createNetwork(nodes, links);
+}
+
+function loadRelationshipPersonnality() {
+    nodes = [];
+    links = [];
+    profiles = {};
+    for (const [id, json] of Object.entries(allProfiles)) {
+        if (isPersonnalitySet(json)) {
+            profiles[id] = json;
+        }
+    }
+    for (const [id, json] of Object.entries(profiles)) {
+        for (const [id2, json2] of Object.entries(profiles)) {
+            if (id === id2) {
+                continue;
+            }
+        }
+    }
     createNetwork(nodes, links);
 }
 
