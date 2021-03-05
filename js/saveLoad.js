@@ -79,6 +79,9 @@ function clearCurrentInternal(nodes) {
             case "INPUT": case "TEXTAREA": case "SELECT":
                 if (n.type === "checkbox") {
                     n.checked = false;
+                } else if (n.type === "range") {
+                    n.value = "3";
+                    n.dispatchEvent(new Event("change"));
                 } else {
                     n.value = "";
                     let container = document.getElementById(n.name + "Container");
@@ -244,6 +247,9 @@ function loadCurrentInternal(json) {
                         container.classList.remove("hidden");
                         container.classList.add("wasHidden"); // We keep track of attributes that used to be hidden
                     }
+                }
+                if (n.type === "range") {
+                    n.dispatchEvent(new Event("change")); // Update the description of the slider
                 }
                 break;
 
