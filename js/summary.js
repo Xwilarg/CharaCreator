@@ -10,7 +10,7 @@ function loadSummary() {
                 continue;
             }
             if (key === "pfp") {
-
+            } else if (isPersonnalityTrait(key)) {
             } else if (key.endsWith("Color")) {
                 content += '<tr><td><b>' + (json[key] === "" ? "<br/>" : camelToSentence(key)) + "</b></td><td>" +
                 (json[key] === "" ? "" : '<input type="color" class="colorPreview" disabled="disabled" value="' + json[key] + '"/>') + "</td></tr>";

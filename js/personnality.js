@@ -8,6 +8,10 @@ let personnalityTraits = [
     "altruism"
 ]
 
+function isPersonnalityTrait(attribut) {
+    return personnalityTraits.some((x) => attribut.startsWith(x));
+}
+
 // We consider a personnality is set if one of the trait don't have the default value of 3
 function isPersonnalitySet(json) {
     for (const [_, trait] of Object.entries(personnalityTraits)) {
