@@ -130,12 +130,28 @@ function loadRelationshipPersonnality() {
     for (const [id, json] of Object.entries(allProfiles)) {
         if (isPersonnalitySet(json)) {
             profiles[id] = json;
+            let color;
+            if (json.isExport) {
+                color = "lightgreen";
+            } else {
+                color = "lightgrey";
+            }
+            nodes.push({ id: id, label: getName(json), color: color });
         }
     }
-    for (const [id, json] of Object.entries(profiles)) {
+    for (const [id1, json1] of Object.entries(profiles)) {
         for (const [id2, json2] of Object.entries(profiles)) {
-            if (id === id2) {
+            if (id1 === id2) {
                 continue;
+            }
+            let red = calculatePersonnnalityDifference(json1, json2) * 255 / 100;
+            let green = 255 - Math.ceil(red);
+            let redHex = padNumber(Math.ceil(red).toString(16));
+            let greenHex = padNumber(Math.ceil(green).toString(16));
+            let color = redHex + greenHex + "00";
+            if (!links.some((x) => x.from === id2 && x.to === id1)) {
+                links.push({from: id1, to: id2, width: 4, selectionWidth: 6,
+                    color: { color: color, highlight: color}});
             }
         }
     }
@@ -212,9 +228,9 @@ function filterRelationshipInternal(elems, c) {
             let hexVal = padNumber(Math.ceil((max - (value * max / maxValue))).toString(16));
             let color;
             if (c === "red") color = "ff" + hexVal + hexVal;
-            else if (c === "blue") color = "" + hexVal + hexVal + "ff";
-            else if (c === "green") color = "" + hexVal + "ff" + hexVal;
-            else if (c === "lightgreen") color = "" + hexVal + "7f" + hexVal;
+            else if (c === "blue") color = hexVal + hexVal + "ff";
+            else if (c === "green") color = hexVal + "ff" + hexVal;
+            else if (c === "lightgreen") color = hexVal + "7f" + hexVal;
             else if (c === "yellow") color = "ffff" + hexVal;
             else color = "000000";
             links.push({from: id1, to: id2, width: 4, selectionWidth: 6,

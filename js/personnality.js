@@ -16,6 +16,14 @@ function isPersonnalitySet(json) {
     return false;
 }
 
+function calculatePersonnnalityDifference(json1, json2) {
+    let total = 0;
+    for (const [_, trait] of Object.entries(personnalityTraits)) {
+        total += Math.abs(json1[trait] - json2[trait]);
+    }
+    return total;
+}
+
 function personnalityCtor() {
     Array.prototype.slice.call(document.getElementsByClassName("personnality")).forEach(elem => {
         elem.addEventListener("change", function (e) {
