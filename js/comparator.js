@@ -106,7 +106,12 @@ function loadComparatorPersonnality() {
             dropdownMenu: true, // Drop down menu to display filters
             filters: true, // Enable filters
             dropdownMenu: ['filter_by_condition', 'filter_by_value', 'filter_action_bar'], // Filter conditions
-            columnSorting: true // Click a column to sort it
+            columnSorting: {
+                initialConfig: {
+                    column: 1,
+                    sortOrder: 'desc'
+                }
+              }
         }));
     }
 }
