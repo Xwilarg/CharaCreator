@@ -111,6 +111,38 @@ function getReverseHexaco(value, useJson) {
     return 6 - getHexaco(value, useJson);
 }
 
+let personnalityTraits = [
+    "sincerity", "fairness", "greed_avoidance", "modesty",
+    "fearfulness", "anxiety", "dependence", "sentimentality",
+    "social_self_esteem", "social_boldness", "sociability", "liveliness",
+    "forgivingness", "gentleness", "flexibility", "patience",
+    "organization", "diligence", "perfectionism", "prudence",
+    "aesthetic_appreciation", "inquisitiveness", "creativity", "unconventionality",
+    "altruism"
+]
+
+function isPersonnalityTrait(attribut) {
+    return personnalityTraits.some((x) => attribut.startsWith(x));
+}
+
+// We consider a personnality is set if one of the trait don't have the default value of 3
+function isPersonnalitySet(json) {
+    for (const [_, value] of Object.entries(getPersonnality(json))) {
+        if (value !== "3") return true;
+    }
+    return false;
+}
+
+function calculatePersonnnalityDifference(json1, json2) {
+    let total = 0;
+    let resJson1 = getPersonnality(json1);
+    let resJson2 = getPersonnality(json1);
+    for (const [_, trait] of Object.entries(personnalityTraits)) {
+        total += Math.abs(resJson1[trait] - resJson2[trait]);
+    }
+    return total;
+}
+
 function getPersonnality(useJson) {
     let p = { };
 
