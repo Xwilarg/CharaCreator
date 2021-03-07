@@ -1,6 +1,7 @@
 function calculateAll() {
     calculateBMI();
     calculateAge();
+    calculatePersonnality(false);
     Array.from(document.getElementsByClassName("colorText")).forEach(function(e) {
         calculateColorFromText(e);
     });
@@ -13,6 +14,12 @@ function calculateColorFromText(e) {
 
 function calculateColorFromPicker() {
     document.getElementById(this.id.slice(0, -7)).value = this.value;
+}
+
+function calculatePersonnality(useJson) {
+    for (const [key, value] of Object.entries(getPersonnality(useJson))) {
+        document.getElementById(key).innerHTML = value;
+    }
 }
 
 // We calculate the BMI (Body Mass Index)

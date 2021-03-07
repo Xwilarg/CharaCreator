@@ -101,6 +101,54 @@ let hexacoQuestions = {
     100: "People see me as a hard-hearted person."
 };
 
+function getHexaco(value, useJson) {
+    return useJson
+    ? parseInt(allProfiles[currId]["hexaco_" + value])
+    : parseInt(document.getElementsByName("hexaco_" + value)[0].value);
+}
+
+function getReverseHexaco(value, useJson) {
+    return 6 - getHexaco(value, useJson);
+}
+
+function getPersonnality(useJson) {
+    let p = { };
+
+    p["sincerity"] = (getReverseHexaco(6, useJson) + getHexaco(30, useJson) + getReverseHexaco(54, useJson) + getHexaco(78, useJson)) / 4;
+    p["fairness"] = (getReverseHexaco(12, useJson) + getReverseHexaco(36, useJson) + getHexaco(60, useJson) + getReverseHexaco(84, useJson)) / 4;
+    p["greed_avoidance"] = (getHexaco(18, useJson) + getReverseHexaco(42, useJson) + getReverseHexaco(66, useJson) + getReverseHexaco(90, useJson)) / 4;
+    p["modesty"] = (getHexaco(24, useJson) + getHexaco(48, useJson) + getReverseHexaco(72, useJson) + getReverseHexaco(96, useJson)) / 4;
+
+    p["fearfulness"] = (getHexaco(5, useJson) + getReverseHexaco(29, useJson) + getHexaco(53, useJson) + getReverseHexaco(77, useJson)) / 4;
+    p["anxiety"] = (getHexaco(11, useJson) + getReverseHexaco(35, useJson) + getReverseHexaco(59, useJson) + getHexaco(83, useJson)) / 4;
+    p["dependence"] = (getHexaco(17, useJson) + getReverseHexaco(41, useJson) + getHexaco(65, useJson) + getReverseHexaco(89, useJson)) / 4;
+    p["sentimentality"] = (getHexaco(23, useJson) + getHexaco(47, useJson) + getHexaco(71, useJson) + getReverseHexaco(95, useJson)) / 4;
+
+    p["social_self_esteem"] = (getHexaco(4, useJson) + getHexaco(28, useJson) + getReverseHexaco(52, useJson) + getReverseHexaco(76, useJson)) / 4;
+    p["social_boldness"] = (getReverseHexaco(10, useJson) + getHexaco(34, useJson) + getHexaco(58, useJson) + getReverseHexaco(82, useJson)) / 4;
+    p["sociability"] = (getReverseHexaco(16, useJson) + getHexaco(40, useJson) + getHexaco(64, useJson) + getHexaco(88, useJson)) / 4;
+    p["liveliness"] = (getHexaco(22, useJson) + getHexaco(46, useJson) + getReverseHexaco(70, useJson) + getReverseHexaco(94, useJson)) / 4;
+
+    p["forgivingness"] = (getHexaco(3, useJson) + getHexaco(27, useJson) + getReverseHexaco(51, useJson) + getReverseHexaco(75, useJson)) / 4;
+    p["gentleness"] = (getReverseHexaco(9, useJson) + getHexaco(33, useJson) + getHexaco(57, useJson) + getHexaco(81, useJson)) / 4;
+    p["flexibility"] = (getReverseHexaco(15, useJson) + getHexaco(39, useJson) + getReverseHexaco(63, useJson) + getReverseHexaco(87, useJson)) / 4;
+    p["patience"] = (getReverseHexaco(21, useJson) + getHexaco(45, useJson) + getHexaco(69, useJson) + getReverseHexaco(93, useJson)) / 4;
+
+    p["organization"] = (getHexaco(2, useJson) + getHexaco(26, useJson) + getReverseHexaco(50, useJson) + getReverseHexaco(74, useJson)) / 4;
+    p["diligence"] = (getHexaco(8, useJson) + getHexaco(32, useJson) + getReverseHexaco(56, useJson) + getReverseHexaco(80, useJson)) / 4;
+    p["perfectionism"] = (getHexaco(14, useJson) + getReverseHexaco(38, useJson) + getHexaco(62, useJson) + getHexaco(86, useJson)) / 4;
+    p["prudence"] = (getReverseHexaco(20, useJson) + getReverseHexaco(44, useJson) + getHexaco(68, useJson) + getReverseHexaco(92, useJson)) / 4;
+
+    p["aesthetic_appreciation"] = (getReverseHexaco(1, useJson) + getReverseHexaco(25, useJson) + getHexaco(49, useJson) + getHexaco(73, useJson)) / 4;
+    p["inquisitiveness"] = (getHexaco(7, useJson) + getHexaco(31, useJson) + getReverseHexaco(55, useJson) + getReverseHexaco(79, useJson)) / 4;
+    p["creativity"] = (getReverseHexaco(13, useJson) + getHexaco(37, useJson) + getHexaco(61, useJson) + getReverseHexaco(85, useJson)) / 4;
+    p["unconventionality"] = (getReverseHexaco(19, useJson) + getHexaco(43, useJson) + getHexaco(67, useJson) + getReverseHexaco(91, useJson)) / 4;
+
+    p["altruism"] = (getHexaco(97, useJson) + getHexaco(98, useJson) + getReverseHexaco(99, useJson) + getReverseHexaco(100, useJson)) / 4;
+
+    return p;
+}
+
 function personnalityCtor() {
     let str = "";
     for (const [index, question] of Object.entries(hexacoQuestions)) {
@@ -132,6 +180,7 @@ function personnalityCtor() {
                     break;
             }
             document.getElementById("hexacoValue_" + i).innerHTML = value;
+            calculatePersonnality(false);
         });
     };
 }
