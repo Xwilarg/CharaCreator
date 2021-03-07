@@ -4,10 +4,10 @@ let last = "main";
 
 function comparatorCtor() {
     let str = "";
-    for (const [_, trait] of Object.entries(personnalityTraits)) {
+   /* for (const [_, trait] of Object.entries(personnalityTraits)) {
         str += "<h4>" + trait + "</h3>";
         str += '<div id="comparator_' + trait + '"></div>'
-    }
+    }*/
     document.getElementById("personnalityComparationTable").innerHTML = str;
 }
 
