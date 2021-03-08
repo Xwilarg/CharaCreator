@@ -184,7 +184,7 @@ function getPersonnality(useJson) {
 function personnalityCtor() {
     let str = "";
     for (const [index, question] of Object.entries(hexacoQuestions)) {
-        str += question + '<br/><input type="range" name="hexaco_' + index + '" min="1" max="5" value="3"/><span class="personnalityValue" id="hexacoValue_' + index + '">Neutral</span><br/>';
+        str += index + ". " + question + '<br/><input type="range" name="hexaco_' + index + '" min="1" max="5" value="3"/><span class="personnalityValue" id="hexacoValue_' + index + '">Neutral</span><br/>';
     }
     document.getElementById("hexacoQuizz").innerHTML = str;
     for (let i = 1; i <= 100; i++) {
