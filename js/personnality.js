@@ -212,7 +212,7 @@ function personnalityCtor() {
                     break;
             }
             document.getElementById("hexacoValue_" + i).innerHTML = value;
-            calculatePersonnality(false);
+            calculatePersonnality(null);
         });
     };
 }
