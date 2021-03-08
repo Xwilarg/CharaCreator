@@ -101,14 +101,14 @@ let hexacoQuestions = {
     100: "People see me as a hard-hearted person."
 };
 
-function getHexaco(value, useJson) {
-    return useJson
-    ? parseInt(allProfiles[currId]["hexaco_" + value])
+function getHexaco(value, json) {
+    return json !== null
+    ? parseInt(json["hexaco_" + value])
     : parseInt(document.getElementsByName("hexaco_" + value)[0].value);
 }
 
-function getReverseHexaco(value, useJson) {
-    return 6 - getHexaco(value, useJson);
+function getReverseHexaco(value, json) {
+    return 6 - getHexaco(value, json);
 }
 
 let personnalityTraits = [
@@ -128,7 +128,7 @@ function isPersonnalityTrait(attribut) {
 // We consider a personnality is set if one of the trait don't have the default value of 3
 function isPersonnalitySet(json) {
     for (const [_, value] of Object.entries(getPersonnality(json))) {
-        if (value !== "3") return true;
+        if (value !== 3) return true;
     }
     return false;
 }
@@ -136,47 +136,47 @@ function isPersonnalitySet(json) {
 function calculatePersonnnalityDifference(json1, json2) {
     let total = 0;
     let resJson1 = getPersonnality(json1);
-    let resJson2 = getPersonnality(json1);
+    let resJson2 = getPersonnality(json2);
     for (const [_, trait] of Object.entries(personnalityTraits)) {
         total += Math.abs(resJson1[trait] - resJson2[trait]);
     }
     return total;
 }
 
-function getPersonnality(useJson) {
+function getPersonnality(json) {
     let p = { };
 
-    p["sincerity"] = (getReverseHexaco(6, useJson) + getHexaco(30, useJson) + getReverseHexaco(54, useJson) + getHexaco(78, useJson)) / 4;
-    p["fairness"] = (getReverseHexaco(12, useJson) + getReverseHexaco(36, useJson) + getHexaco(60, useJson) + getReverseHexaco(84, useJson)) / 4;
-    p["greed_avoidance"] = (getHexaco(18, useJson) + getReverseHexaco(42, useJson) + getReverseHexaco(66, useJson) + getReverseHexaco(90, useJson)) / 4;
-    p["modesty"] = (getHexaco(24, useJson) + getHexaco(48, useJson) + getReverseHexaco(72, useJson) + getReverseHexaco(96, useJson)) / 4;
+    p["sincerity"] = (getReverseHexaco(6, json) + getHexaco(30, json) + getReverseHexaco(54, json) + getHexaco(78, json)) / 4;
+    p["fairness"] = (getReverseHexaco(12, json) + getReverseHexaco(36, json) + getHexaco(60, json) + getReverseHexaco(84, json)) / 4;
+    p["greed_avoidance"] = (getHexaco(18, json) + getReverseHexaco(42, json) + getReverseHexaco(66, json) + getReverseHexaco(90, json)) / 4;
+    p["modesty"] = (getHexaco(24, json) + getHexaco(48, json) + getReverseHexaco(72, json) + getReverseHexaco(96, json)) / 4;
 
-    p["fearfulness"] = (getHexaco(5, useJson) + getReverseHexaco(29, useJson) + getHexaco(53, useJson) + getReverseHexaco(77, useJson)) / 4;
-    p["anxiety"] = (getHexaco(11, useJson) + getReverseHexaco(35, useJson) + getReverseHexaco(59, useJson) + getHexaco(83, useJson)) / 4;
-    p["dependence"] = (getHexaco(17, useJson) + getReverseHexaco(41, useJson) + getHexaco(65, useJson) + getReverseHexaco(89, useJson)) / 4;
-    p["sentimentality"] = (getHexaco(23, useJson) + getHexaco(47, useJson) + getHexaco(71, useJson) + getReverseHexaco(95, useJson)) / 4;
+    p["fearfulness"] = (getHexaco(5, json) + getReverseHexaco(29, json) + getHexaco(53, json) + getReverseHexaco(77, json)) / 4;
+    p["anxiety"] = (getHexaco(11, json) + getReverseHexaco(35, json) + getReverseHexaco(59, json) + getHexaco(83, json)) / 4;
+    p["dependence"] = (getHexaco(17, json) + getReverseHexaco(41, json) + getHexaco(65, json) + getReverseHexaco(89, json)) / 4;
+    p["sentimentality"] = (getHexaco(23, json) + getHexaco(47, json) + getHexaco(71, json) + getReverseHexaco(95, json)) / 4;
 
-    p["social_self_esteem"] = (getHexaco(4, useJson) + getHexaco(28, useJson) + getReverseHexaco(52, useJson) + getReverseHexaco(76, useJson)) / 4;
-    p["social_boldness"] = (getReverseHexaco(10, useJson) + getHexaco(34, useJson) + getHexaco(58, useJson) + getReverseHexaco(82, useJson)) / 4;
-    p["sociability"] = (getReverseHexaco(16, useJson) + getHexaco(40, useJson) + getHexaco(64, useJson) + getHexaco(88, useJson)) / 4;
-    p["liveliness"] = (getHexaco(22, useJson) + getHexaco(46, useJson) + getReverseHexaco(70, useJson) + getReverseHexaco(94, useJson)) / 4;
+    p["social_self_esteem"] = (getHexaco(4, json) + getHexaco(28, json) + getReverseHexaco(52, json) + getReverseHexaco(76, json)) / 4;
+    p["social_boldness"] = (getReverseHexaco(10, json) + getHexaco(34, json) + getHexaco(58, json) + getReverseHexaco(82, json)) / 4;
+    p["sociability"] = (getReverseHexaco(16, json) + getHexaco(40, json) + getHexaco(64, json) + getHexaco(88, json)) / 4;
+    p["liveliness"] = (getHexaco(22, json) + getHexaco(46, json) + getReverseHexaco(70, json) + getReverseHexaco(94, json)) / 4;
 
-    p["forgivingness"] = (getHexaco(3, useJson) + getHexaco(27, useJson) + getReverseHexaco(51, useJson) + getReverseHexaco(75, useJson)) / 4;
-    p["gentleness"] = (getReverseHexaco(9, useJson) + getHexaco(33, useJson) + getHexaco(57, useJson) + getHexaco(81, useJson)) / 4;
-    p["flexibility"] = (getReverseHexaco(15, useJson) + getHexaco(39, useJson) + getReverseHexaco(63, useJson) + getReverseHexaco(87, useJson)) / 4;
-    p["patience"] = (getReverseHexaco(21, useJson) + getHexaco(45, useJson) + getHexaco(69, useJson) + getReverseHexaco(93, useJson)) / 4;
+    p["forgivingness"] = (getHexaco(3, json) + getHexaco(27, json) + getReverseHexaco(51, json) + getReverseHexaco(75, json)) / 4;
+    p["gentleness"] = (getReverseHexaco(9, json) + getHexaco(33, json) + getHexaco(57, json) + getHexaco(81, json)) / 4;
+    p["flexibility"] = (getReverseHexaco(15, json) + getHexaco(39, json) + getReverseHexaco(63, json) + getReverseHexaco(87, json)) / 4;
+    p["patience"] = (getReverseHexaco(21, json) + getHexaco(45, json) + getHexaco(69, json) + getReverseHexaco(93, json)) / 4;
 
-    p["organization"] = (getHexaco(2, useJson) + getHexaco(26, useJson) + getReverseHexaco(50, useJson) + getReverseHexaco(74, useJson)) / 4;
-    p["diligence"] = (getHexaco(8, useJson) + getHexaco(32, useJson) + getReverseHexaco(56, useJson) + getReverseHexaco(80, useJson)) / 4;
-    p["perfectionism"] = (getHexaco(14, useJson) + getReverseHexaco(38, useJson) + getHexaco(62, useJson) + getHexaco(86, useJson)) / 4;
-    p["prudence"] = (getReverseHexaco(20, useJson) + getReverseHexaco(44, useJson) + getHexaco(68, useJson) + getReverseHexaco(92, useJson)) / 4;
+    p["organization"] = (getHexaco(2, json) + getHexaco(26, json) + getReverseHexaco(50, json) + getReverseHexaco(74, json)) / 4;
+    p["diligence"] = (getHexaco(8, json) + getHexaco(32, json) + getReverseHexaco(56, json) + getReverseHexaco(80, json)) / 4;
+    p["perfectionism"] = (getHexaco(14, json) + getReverseHexaco(38, json) + getHexaco(62, json) + getHexaco(86, json)) / 4;
+    p["prudence"] = (getReverseHexaco(20, json) + getReverseHexaco(44, json) + getHexaco(68, json) + getReverseHexaco(92, json)) / 4;
 
-    p["aesthetic_appreciation"] = (getReverseHexaco(1, useJson) + getReverseHexaco(25, useJson) + getHexaco(49, useJson) + getHexaco(73, useJson)) / 4;
-    p["inquisitiveness"] = (getHexaco(7, useJson) + getHexaco(31, useJson) + getReverseHexaco(55, useJson) + getReverseHexaco(79, useJson)) / 4;
-    p["creativity"] = (getReverseHexaco(13, useJson) + getHexaco(37, useJson) + getHexaco(61, useJson) + getReverseHexaco(85, useJson)) / 4;
-    p["unconventionality"] = (getReverseHexaco(19, useJson) + getHexaco(43, useJson) + getHexaco(67, useJson) + getReverseHexaco(91, useJson)) / 4;
+    p["aesthetic_appreciation"] = (getReverseHexaco(1, json) + getReverseHexaco(25, json) + getHexaco(49, json) + getHexaco(73, json)) / 4;
+    p["inquisitiveness"] = (getHexaco(7, json) + getHexaco(31, json) + getReverseHexaco(55, json) + getReverseHexaco(79, json)) / 4;
+    p["creativity"] = (getReverseHexaco(13, json) + getHexaco(37, json) + getHexaco(61, json) + getReverseHexaco(85, json)) / 4;
+    p["unconventionality"] = (getReverseHexaco(19, json) + getHexaco(43, json) + getHexaco(67, json) + getReverseHexaco(91, json)) / 4;
 
-    p["altruism"] = (getHexaco(97, useJson) + getHexaco(98, useJson) + getReverseHexaco(99, useJson) + getReverseHexaco(100, useJson)) / 4;
+    p["altruism"] = (getHexaco(97, json) + getHexaco(98, json) + getReverseHexaco(99, json) + getReverseHexaco(100, json)) / 4;
 
     return p;
 }

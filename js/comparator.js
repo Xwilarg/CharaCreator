@@ -88,8 +88,8 @@ function loadComparatorPersonnality() {
         for (const [_, json] of Object.entries(profiles)) {
             let arr = [];
             arr.push(getName(json));
-            arr.push(json[trait]);
-            arr.push(json[trait + "_description"]);
+            let p = getPersonnality(json);
+            arr.push(p[trait]);
             data.push(arr);
         }
 
@@ -101,7 +101,7 @@ function loadComparatorPersonnality() {
             licenseKey: "non-commercial-and-evaluation",
             data: data,
             rowHeaders: true, // Row headers (1, 2, 3...)
-            colHeaders: ["Name", "Score", "Description"], // Column headers
+            colHeaders: ["Name", "Score"], // Column headers
             editor: false, // Can't edit cells
             dropdownMenu: true, // Drop down menu to display filters
             filters: true, // Enable filters

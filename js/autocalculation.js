@@ -1,7 +1,7 @@
 function calculateAll() {
     calculateBMI();
     calculateAge();
-    calculatePersonnality(false);
+    calculatePersonnality(null);
     Array.from(document.getElementsByClassName("colorText")).forEach(function(e) {
         calculateColorFromText(e);
     });
