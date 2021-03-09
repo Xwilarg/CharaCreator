@@ -111,7 +111,9 @@ function loadComparatorPersonnality() {
                     column: 1,
                     sortOrder: 'desc'
                 }
-              }
+            },
+            copyPaste: false,
+            fillHandle: false
         }));
     }
 }
@@ -151,7 +153,9 @@ function loadComparatorMain() {
         filters: true, // Enable filters
         dropdownMenu: ['filter_by_condition', 'filter_by_value', 'filter_action_bar'], // Filter conditions
         columnSorting: true, // Click a column to sort it
-        manualColumnMove: true // Drag and drop columns
+        manualColumnMove: true, // Drag and drop columns
+        copyPaste: false,
+        fillHandle: false
     });
 }
 
