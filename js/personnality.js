@@ -186,7 +186,7 @@ function personnalityCtor() {
     for (const [index, question] of Object.entries(hexacoQuestions)) {
         str += index + ". " + question + '<br/><input type="range" name="hexaco_' + index + '" min="1" max="5" value="3"/><span class="personnalityValue" id="hexacoValue_' + index + '">Neutral</span><br/>';
     }
-    document.getElementById("hexacoQuizz").innerHTML = str;
+    document.getElementById("hexacoQuizzContainer").innerHTML = str;
     for (let i = 1; i <= 100; i++) {
         document.getElementsByName("hexaco_" + i)[0].addEventListener("change", function (e) {
             let value;

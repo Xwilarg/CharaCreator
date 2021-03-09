@@ -57,6 +57,9 @@ function saveLoadCtor() {
 
 // Clear all inputs
 function clearCurrent() {
+    // When clearing, we hide the quizz
+    document.getElementById("hexacoQuizzContainer").classList.add("hidden");
+
     clearCurrentInternal(document.getElementById("mainSection").childNodes);
     calculateAll();
 }

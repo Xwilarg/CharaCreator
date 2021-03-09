@@ -138,8 +138,12 @@
                     </span>
                     <hr/>
                     <h3>Personnality</h3>
-                    <span id="hexacoQuizz"></span>
-                    <span id="hexacoResult">
+                    <span>
+                        <button onclick="display('hexacoQuizz')">Toggle<br/>Quizz</button>
+                    </span>
+                    <br/>
+                    <span id="hexacoQuizzContainer" class="hidden"></span>
+                    <span id="hexacoResult" class="hidden">
                         <span>
                             <h4>Honnesty-Humility</h4>
                             Sincerity: <span id="sincerity">3</span><br/>
@@ -211,6 +215,9 @@
                             Altruism: <span id="altruism">3</span><br/>
                             <small>Tendency to be sympathetic and soft-hearted toward others. High scorers avoid causing harm and react with generosity toward those who are weak or in need of help, whereas low scorers are not upset by the prospect of hurting others and may be seen as hard-hearted.</small><br/>
                         </span>
+                    </span>
+                    <span id="hexacoNone">
+                        You must pass the quizz first.
                     </span>
                     <hr/>
                     <h3>Center of Interests</h3>

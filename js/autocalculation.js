@@ -17,8 +17,16 @@ function calculateColorFromPicker() {
 }
 
 function calculatePersonnality(useJson) {
-    for (const [key, value] of Object.entries(getPersonnality(useJson))) {
-        document.getElementById(key).innerHTML = value;
+    // No need to check if we already modified something in the quizz
+    if (!document.getElementById("hexacoQuizzContainer").classList.contains("hidden") || isPersonnalitySet(null)) {
+        for (const [key, value] of Object.entries(getPersonnality(useJson))) {
+            document.getElementById(key).innerHTML = value;
+        }
+        document.getElementById("hexacoResult").classList.remove("hidden");
+        document.getElementById("hexacoNone").classList.add("hidden");
+    } else {
+        document.getElementById("hexacoResult").classList.add("hidden");
+        document.getElementById("hexacoNone").classList.remove("hidden");
     }
 }
 
